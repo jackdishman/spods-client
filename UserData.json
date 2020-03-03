@@ -1,0 +1,63 @@
+{
+  "name": "Jack",
+  "id": "1",
+  "friendsList": [
+    {
+      "name": "Jordan",
+      "id": "2",
+      "friendsList": [],
+      "socialList": []
+    },
+    {
+      "name": "Chris",
+      "id": "3",
+      "friendsList": [],
+      "socialList": []
+    },
+    {
+      "name": "Ian",
+      "id": "4",
+      "friendsList": [],
+      "socialList": []
+    },
+    {
+      "name": "Michael",
+      "id": "5",
+      "friendsList": [],
+      "socialList": []
+    }
+  ],
+  "socialList": [
+    {
+          "platform": "twitter",
+          "username": "twitter_user_name",
+          "id": "twitter_id"
+      
+    },
+    {
+          "platform": "instagram",
+          "username": "instagram_user_name",
+          "id": "instagram_id"
+    },
+    {
+          "platform": "spotify",
+          "username": "spotify_username",
+          "id": "spotify_id"
+    },
+    {
+          "platform": "soundcloud",
+          "username": "soundcloud_user_name",
+          "id": "soundcloud_id"
+    },
+    {
+          "platform": "facebook",
+          "username": "facebook_user_name",
+          "id": "facebook_id"
+    }
+  ]
+}
+
+
+
+
+
