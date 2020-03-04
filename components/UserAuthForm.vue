@@ -184,7 +184,6 @@ export default {
     };
   },
   methods: {
-    
     async verifyUsername() {
       var letters = /^[a-zA-Z\s]*$/;
       if (
@@ -220,13 +219,17 @@ export default {
     },
 
     async submitRegister(userInfo) {
-      let res = await AuthService.register(
-        userInfo.username,
-        userInfo.name,
-        userInfo.password
-      );
-      this.newUser = false;
-      this.$toast.success("Registered!");
+      if (userInfo.password.length < 8) {
+        this.$toast.error("Password must be 8 chars long!");
+      } else {
+        let res = await AuthService.register(
+          userInfo.username,
+          userInfo.name,
+          userInfo.password
+        );
+        this.newUser = false;
+        this.$toast.success("Registered!");
+      }
     }
   }
 };
