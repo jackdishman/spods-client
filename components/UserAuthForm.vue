@@ -221,6 +221,7 @@ export default {
     async submitRegister(userInfo) {
       if (userInfo.password.length < 8) {
         this.$toast.error("Password must be 8 chars long!");
+        return;
       } else {
         let res = await AuthService.register(
           userInfo.username,
