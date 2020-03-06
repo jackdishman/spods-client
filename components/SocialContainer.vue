@@ -20,7 +20,7 @@ export default {
       targetUser: this.user
     }
   },
-  props:
+  props: 
     ['user']
 };
 </script>
