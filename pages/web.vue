@@ -1,6 +1,6 @@
 <template>
   <div v-if="$auth.loggedIn">
-    <Web :user="$auth.user[0]" />
+    <Web :user="$auth.user" />
   </div>
 </template>
 

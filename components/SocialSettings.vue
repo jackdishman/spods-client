@@ -99,7 +99,7 @@ export default {
       this.platform = "";
     },
     login(platform, username, privacy) {
-      const DNA = this.$auth.user[0]._id;
+      const DNA = this.$auth.user._id;
       this.$axios.post("/api/auth/platform", {
         DNA,
         platform,

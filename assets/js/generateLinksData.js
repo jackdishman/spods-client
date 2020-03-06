@@ -35,7 +35,6 @@ export function generateLinksData(user) {
     };
 
     //generate nodes
-    // console.log(u.socialLinks)
 
     for (var i = 0; i < u.socialLinks.length; i++) {
 

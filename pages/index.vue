@@ -7,9 +7,9 @@
         <h2>Add Content</h2>
 
         <!-- Center col -->
-        <nuxt-link :to="$auth.user[0].username">
+        <nuxt-link :to="$auth.user.username">
           <div class="border border-green-500 rounded bg-white p-5">
-            <h2 class="text-4xl text-center spods">{{ $auth.user[0].name }}</h2>
+            <h2 class="text-4xl text-center spods">{{ $auth.user.name }}</h2>
           </div>
         </nuxt-link>
 
@@ -19,7 +19,7 @@
 
       <SocialContainer
         class="animated bounceInUp flex w-full flex-row justify-around fixed bottom-0 border-t border-green-500 bg-white"
-        :user="$auth.user[0]"
+        :user="$auth.user"
       />
     </div>
 

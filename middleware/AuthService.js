@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const url = 'http://localhost:5000/users/';
+const url = 'http://localhost:5000/';
 
 class AuthService {
 
     //check if username is in DB
     static isExistingUser(username) {
-        return axios.get(`${url}${username}`);
+        return axios.get(`${url}users/${username}`);
     }
 
     static login(username, password) {

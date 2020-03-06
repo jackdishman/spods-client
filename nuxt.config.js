@@ -62,7 +62,7 @@ module.exports = {
                 endpoints: {
                     login: { url: '/api/auth/login', method: 'post', propertyName: 'token.accessToken' },
                     logout: { url: '/api/auth/logout', method: 'post' },
-                    user: { url: '/api/auth/user', method: 'get', propertyName: 'authData.u' }
+                    user: { url: '/api/auth/user', method: 'get', propertyName: 'authData.user' }
                 },
                 tokenType: 'Bearer',
             }
