@@ -78,6 +78,12 @@
         >
           Login
         </button>
+        <button
+          @click="remove(platform.name, username)"
+          class="shadow bg-red-500 hover:bg-red-400 focus:shadow-outline focus:outline-none text-white hover:text-black font-bold py-2 px-4 rounded hvr-grow"
+        >
+          Remove
+        </button>
       </div>
     </div>
 
@@ -112,8 +118,13 @@ export default {
         privacy
       });
     },
-    getPlatforms() {
-      return this.$axios.get("/api");
+    remove(platform, username) {
+      const DNA = this.$auth.user._id;
+      this.$axios.post("/api/auth/platform/delete", {
+        DNA,
+        platform,
+        username
+      });
     },
     selectPlatform(platform) {
       this.platform = platform;
