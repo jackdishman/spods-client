@@ -48,7 +48,9 @@
       <!-- Step 2: Username field, privacy settings, add/rem -->
       <div v-if="step === 1">
         <h2 class="text-center pb-2">Add your {{ platform.name }} handle:</h2>
-        <div class="text-lg bg-gray-200 border rounded p-2 text-gray-700 leading-tight border-green-500 m-2">
+        <div
+          class="text-lg bg-gray-200 border rounded p-2 text-gray-700 leading-tight border-green-500 m-2"
+        >
           <span class="">
             {{ this.platform.handle }}
           </span>
@@ -60,7 +62,10 @@
           />
         </div>
         <div class="inline-block">
-          <select v-model="privacy" class="border border-green-500 bg-gray-200 focus:outline-none">
+          <select
+            v-model="privacy"
+            class="border border-green-500 bg-gray-200 focus:outline-none"
+          >
             <option value="0" selected>Public</option>
             <option value="1">Friends of Friends</option>
             <option value="2">Friends Only</option>
@@ -69,7 +74,7 @@
         </div>
         <button
           @click="login(platform.name, username, privacy)"
-            class="shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white hover:text-black font-bold py-2 px-4 rounded hvr-grow"
+          class="shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white hover:text-black font-bold py-2 px-4 rounded hvr-grow"
         >
           Login
         </button>
@@ -94,7 +99,7 @@ export default {
     getColor(hex) {
       return "color:" + hex;
     },
-    handleBack(){
+    handleBack() {
       this.step = 0;
       this.platform = "";
     },
@@ -106,6 +111,9 @@ export default {
         username,
         privacy
       });
+    },
+    getPlatforms() {
+      return this.$axios.get("/api");
     },
     selectPlatform(platform) {
       this.platform = platform;

@@ -70,7 +70,7 @@ module.exports = {
     },
     axios: {
         // proxyHeaders: false
-        baseURL: 'http://localhost:5000/'
+        baseURL: 'http://localhost:5000'
     },
     loading: {
         name: 'chasing-dots',

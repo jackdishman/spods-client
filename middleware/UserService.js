@@ -1,17 +1,17 @@
 import axios from 'axios';
-const url = 'http://localhost:5000/users/';
+import url from "../static/server"
 
 class UserService {
 
   static getUserData(id) {
-    return axios.get(`${url}${id}`);
+    return axios.get(url + `/users/${id}`);
   }
 
   // Get users
   static getUsers() {
-    return new Promise(async(resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       try {
-        const res = await axios.get(url);
+        const res = await axios.get(url + '/users');
         const data = res.data;
         resolve(
           data.map(user => ({
@@ -26,8 +26,8 @@ class UserService {
   }
 
   // Delete user
-   static deleteUser(id) {
-    return axios.delete(`${url}${id}`);
+  static deleteUser(id) {
+    return axios.delete(url + `/users/${id}`);
   }
 
 }

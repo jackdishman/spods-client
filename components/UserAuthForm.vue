@@ -211,7 +211,7 @@ export default {
             password: userInfo.password
           }
         })
-        .then((res) => {
+        .then(res => {
           const u = this.$auth.user;
           this.$store.commit("SETUSER", u);
           this.$toast.success("Logged In!");
