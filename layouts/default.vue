@@ -1,38 +1,88 @@
 <template>
-  <div class="m-0 p-0 h-screen flex flex-col flex-grow">
+  <div class="relative m-0 p-0 h-screen flex flex-col flex-grow">
     <!-- SPODS BRAND HEADER -->
-    <div class="z-50 w-full border-b border-green-500 fixed top-0 bg-white">
-      <div v-if="$auth.loggedIn" class="flex flex-row justify-between">
-        <nuxt-link to="/" class="spods text-center text-4xl hvr-forward pl-3">
-          spods
-        </nuxt-link>
+    <div class="z-50 w-full fixed top-0">
+      <!-- Logged In -->
+      <div v-if="$auth.loggedIn" class="">
+        <div class="flex lg:flex-row justify-between border-b border-green-500 bg-white">
+          <nuxt-link to="/" class="spods text-center text-4xl hvr-forward pl-3">
+            spods
+          </nuxt-link>
+          <font-awesome-icon
+            v-if="!isMobileMenuOpen"
+            class="m-5 lg:hidden"
+            :icon="['fas', 'bars']"
+            size="2xl"
+            style="color:black"
+            @click="toggleMobileNav()"
+          />
+          <font-awesome-icon
+            v-else
+            class="m-5 lg:hidden"
+            :icon="['fas', 'times']"
+            size="2xl"
+            style="color:black"
+            @click="toggleMobileNav()"
+          />
+          <div class="hidden lg:block">
+            <nuxt-link
+              to="/community"
+              class="spods text-lg pr-2 hvr-hang text-green-500"
+            >
+              Community
+            </nuxt-link>
+            <nuxt-link
+              to="/web"
+              class="spods text-lg pr-2 hvr-hang text-green-500"
+            >
+              Web
+            </nuxt-link>
+            <nuxt-link
+              to="/settings"
+              class="spods text-lg pr-2 hvr-hang text-green-500"
+            >
+              Settings
+            </nuxt-link>
+            <button
+              @click="$auth.logout()"
+              class="hvr-grow bg-red-600 text-white font-bold border border-black rounded p-2 m-2 active:bg-red-600 hover:bg-red-400 hover:text-black focus:outline-none"
+            >
+              Log Out
+            </button>
+          </div>
+        </div>
+
         <div>
-          <nuxt-link
-            to="/community"
-            class="spods text-lg pr-2 hvr-hang text-green-500"
-          >
-            Community
-          </nuxt-link>
-          <nuxt-link
-            to="/web"
-            class="spods text-lg pr-2 hvr-hang text-green-500"
-          >
-            Web
-          </nuxt-link>
-          <nuxt-link
-            to="/settings"
-            class="spods text-lg pr-2 hvr-hang text-green-500"
-          >
-            Settings
-          </nuxt-link>
-          <button
-            @click="$auth.logout()"
-            class="hvr-grow bg-red-600 text-white font-bold border border-black rounded p-2 m-2 active:bg-red-600 hover:bg-red-400 hover:text-black focus:outline-none"
-          >
-            Log Out
-          </button>
+          <div v-if="isMobileMenuOpen" class="flex flex-col lg:hidden animated bounceInDown bg-transparent border border-gray-500" @click="toggleMobileNav()">
+            <nuxt-link
+              to="/community"
+              class="w-full spods text-lg text-center p-5 hvr-hang bg-green-500 border-b border-gray-100 font-bold"
+            >
+              Community
+            </nuxt-link>
+            <nuxt-link
+              to="/web"
+              class="w-full spods text-lg text-center p-5 hvr-hang bg-green-500 border-b border-gray-100 font-bold"
+            >
+              Web
+            </nuxt-link>
+            <nuxt-link
+              to="/settings"
+              class="w-full spods text-lg text-center p-5 hvr-hang bg-green-500 border-b border-gray-100 font-bold"
+            >
+              Settings
+            </nuxt-link>
+            <button
+              @click="$auth.logout()"
+              class="w-full spods bg-red-600 text-white text-center p-5 font-bold border border-black"
+            >
+              Log Out
+            </button>
+          </div>
         </div>
       </div>
+
+      <!-- Logged Out -->
       <div v-else>
         <div></div>
         <nuxt-link to="/" class="spods text-center">
@@ -54,7 +104,12 @@ import SearchBar from "@/components/Search";
 import { mapState } from "vuex";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faSearch, faTimes, faUndo } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSearch,
+  faTimes,
+  faUndo,
+  faBars
+} from "@fortawesome/free-solid-svg-icons";
 import {
   faSpotify,
   faFacebook,
@@ -96,7 +151,8 @@ library.add(
   faTwitch,
   faVimeo,
   faXbox,
-  faPlaystation
+  faPlaystation,
+  faBars
 );
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.component("font-awesome-layers", FontAwesomeLayers);
