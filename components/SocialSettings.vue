@@ -76,7 +76,7 @@
           @click="login(platform.name, username, privacy)"
           class="shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white hover:text-black font-bold py-2 px-4 rounded hvr-grow"
         >
-          Login
+          Add
         </button>
         <button
           @click="remove(platform.name, username)"

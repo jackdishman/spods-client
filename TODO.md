@@ -5,8 +5,9 @@
 1. ### Check if valid input fields
 
 ## <u><b> SocialSettings </b></u>
-
+- Describe privacy tiers
 1. ### Custom link
+2. #### Add Email
 
 - #### Add option to add new unidentified link.
 
@@ -23,6 +24,8 @@
 1. ### Responsive header navbar
 
 ## <u><b> Web </b></u>
+- Click profiles
+
 
 - element level, group level, network level. Three groups for web input.
 - Build out some connection functions to output nodes:
