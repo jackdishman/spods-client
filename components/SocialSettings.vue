@@ -4,10 +4,10 @@
       <!-- Header -->
       <div class="flex flex-row justify-between">
         <font-awesome-icon
+          v-if="step !== 0"
           class="m-2"
           :icon="['fas', 'undo']"
           style="color:black"
-          v-if="step !== 0"
           @click="handleBack()"
         />
         <div v-else></div>
@@ -103,7 +103,7 @@ export default {
   },
   methods: {
     getColor(hex) {
-      return "color:" + hex;
+      return "color: " + hex;
     },
     handleBack() {
       this.step = 0;

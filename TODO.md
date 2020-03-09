@@ -2,19 +2,15 @@
 
 ## <u><b>UserAuthForm </b></u>
 
-2. ### Check if valid input fields
+1. ### Check if valid input fields
 
 ## <u><b> SocialSettings </b></u>
 
-1. ### Delete functionality
-
-- ##### Client: button on SocialSettings component with @click method that sends an API request to server
-
-2. ### Custom link
+1. ### Custom link
 
 - #### Add option to add new unidentified link.
 
-3. ### Platform Verification / callback Authentication
+2. ### Platform Verification / callback Authentication
 
 ## <u><b> Friends List </b></u>
 

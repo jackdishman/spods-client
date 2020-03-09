@@ -3,13 +3,13 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _e86c8e66 = () => interopDefault(import('../pages/community.vue' /* webpackChunkName: "pages/community" */))
-const _cb1451e0 = () => interopDefault(import('../pages/login/index.vue' /* webpackChunkName: "pages/login/index" */))
-const _254f28ef = () => interopDefault(import('../pages/settings.vue' /* webpackChunkName: "pages/settings" */))
-const _37d4a090 = () => interopDefault(import('../pages/web.vue' /* webpackChunkName: "pages/web" */))
-const _ef8f4994 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
-const _2864eb21 = () => interopDefault(import('../pages/_id/index.vue' /* webpackChunkName: "pages/_id/index" */))
-const _1291e59d = () => interopDefault(import('../pages/_id/graph.vue' /* webpackChunkName: "pages/_id/graph" */))
+const _603f5754 = () => interopDefault(import('../pages/community.vue' /* webpackChunkName: "pages/community" */))
+const _3353b459 = () => interopDefault(import('../pages/login/index.vue' /* webpackChunkName: "pages/login/index" */))
+const _a8bb0f74 = () => interopDefault(import('../pages/settings.vue' /* webpackChunkName: "pages/settings" */))
+const _93f433fe = () => interopDefault(import('../pages/web.vue' /* webpackChunkName: "pages/web" */))
+const _c217b982 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _6c7b86aa = () => interopDefault(import('../pages/_id/index.vue' /* webpackChunkName: "pages/_id/index" */))
+const _56a88126 = () => interopDefault(import('../pages/_id/graph.vue' /* webpackChunkName: "pages/_id/graph" */))
 
 // TODO: remove in Nuxt 3
 const emptyFn = () => {}
@@ -29,31 +29,31 @@ export const routerOptions = {
 
   routes: [{
     path: "/community",
-    component: _e86c8e66,
+    component: _603f5754,
     name: "community"
   }, {
     path: "/login",
-    component: _cb1451e0,
+    component: _3353b459,
     name: "login"
   }, {
     path: "/settings",
-    component: _254f28ef,
+    component: _a8bb0f74,
     name: "settings"
   }, {
     path: "/web",
-    component: _37d4a090,
+    component: _93f433fe,
     name: "web"
   }, {
     path: "/",
-    component: _ef8f4994,
+    component: _c217b982,
     name: "index"
   }, {
     path: "/:id",
-    component: _2864eb21,
+    component: _6c7b86aa,
     name: "id"
   }, {
     path: "/:id/graph",
-    component: _1291e59d,
+    component: _56a88126,
     name: "id-graph"
   }],
 
