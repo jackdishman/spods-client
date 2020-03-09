@@ -1,7 +1,7 @@
 <template>
   <div class="relative m-0 p-0 h-screen flex flex-col flex-grow">
     <!-- SPODS BRAND HEADER -->
-    <div class="z-50 w-full fixed top-0">
+    <div class="z-50 w-full fixed top-0 border-b border-green-500 bg-white">
       <!-- Logged In -->
       <div v-if="$auth.loggedIn" class="">
         <div class="flex lg:flex-row justify-between border-b border-green-500 bg-white">
