@@ -48,6 +48,20 @@ export const state = () => ({
             handle: "soundcloud.com/"
         },
         {
+            name: "tiktok",
+            url: "",
+            color: "#69C9D0",
+            hanndle: "@",
+            svg: true
+        },
+        {
+            name: "venmo",
+            url: "https://venmo.com/",
+            color: "#3d95ce",
+            handle: "@",
+            svg: true
+        },
+        {
             name: "github",
             url: "https://github.com/",
             color: "#6e5494",
@@ -60,10 +74,44 @@ export const state = () => ({
             handle: "quora.com/profile/"
         },
         {
+            name: "yelp",
+            url: "",
+            color: "#c41200",
+            handle: "User ID:",
+            svg: true
+        },
+        {
+            name: "skype",
+            url: "",
+            color: "#00aff0",
+            handle: "User ID:",
+            svg: true
+        },
+        {
+            name: "pinterest",
+            url: "",
+            color: "#c8232c",
+            handle: "@",
+            svg: true
+        },
+        {
             name: "reddit",
             url: "https://reddit.com/user/",
             color: "#FF5700",
             handle: "reddit.com/user/"
+        },
+        {
+            name: "youtube",
+            url: "https://youtube.com/user/",
+            color: "#c4302b",
+            handle: "YouTube.com/user/"
+        },
+        {
+            name: "vsco",
+            url: "https://vsco.co/",
+            color: "#000000",
+            handle: "vsco.co/",
+            svg: true
         },
         {
             name: "steam",

@@ -194,6 +194,7 @@ export default {
         return;
       } else {
         this.userInfo.username = this.userInfo.username.replace(/ /g, "-");
+        this.userInfo.username = this.userInfo.username.toLowerCase();
         var res = await AuthService.isExistingUser(this.userInfo.username);
         if (res.data.length === 0) {
           this.newUser = true;
@@ -204,6 +205,7 @@ export default {
     },
 
     async submitLogin(userInfo) {
+      userInfo.username = userInfo.username.toLowerCase();
       this.$auth
         .loginWith("local", {
           data: {
@@ -219,6 +221,7 @@ export default {
     },
 
     async submitRegister(userInfo) {
+      userInfo.username = userInfo.username.toLowerCase();
       if (userInfo.password.length < 8) {
         this.$toast.error("Password must be 8 chars long!");
         return;

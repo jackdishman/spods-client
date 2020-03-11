@@ -125,7 +125,8 @@ import {
   faTwitch,
   faVimeo,
   faXbox,
-  faPlaystation
+  faPlaystation,
+  faYoutube
 } from "@fortawesome/free-brands-svg-icons";
 import {
   FontAwesomeIcon,
@@ -152,7 +153,8 @@ library.add(
   faVimeo,
   faXbox,
   faPlaystation,
-  faBars
+  faBars,
+  faYoutube
 );
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.component("font-awesome-layers", FontAwesomeLayers);
@@ -177,6 +179,64 @@ export default {
 
 <style>
 .spods {
-  /* font-family: "Comfortaa", cursive; */
+  /* font-family: 'Orbitron', sans-serif; */
+  font-family: "Comfortaa", cursive;
+}
+.facebook {
+  color: #3b5998;
+}
+.twitter {
+  color: #00acee;
+}
+.linkedin {
+  color: #0072b1;
+}
+.spotify {
+  color: #1db954;
+}
+.snapchat {
+  color: #fffc00;
+}
+.instagram {
+  color: #3f729b;
+}
+.soundcloud {
+  color: #ff7700;
+}
+.github {
+  color: #6e5494;
+}
+.quora {
+  color: #aa2200;
+}
+.reddit {
+  color: #ff5700;
+}
+.steam {
+  color: #171a21;
+}
+.vimeo {
+  color: #86c9ef;
+}
+.xbox {
+  color: #0e7a0d;
+}
+.playstation {
+  color: #003791;
+}
+.youtube {
+  color: #c4302b;
+}
+.steam {
+  color: #9cbbc7;
+}
+.yelp {
+  color: #c41200;
+}
+.skype {
+  color: #00aff0;
+}
+.pinterest{
+  color: #c8232c;
 }
 </style>

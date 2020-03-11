@@ -13,14 +13,7 @@
         <div v-else></div>
         <h1 class="text-2xl text-center spods p-5">Update your Profile</h1>
         <div>
-          <font-awesome-icon
-            v-if="platform !== ''"
-            :icon="['fab', platform.name]"
-            size="2x"
-            :style="getColor(platform.color)"
-            class=""
-            @click="selectPlatform(platform)"
-          />
+
         </div>
       </div>
       <!-- Step 1: Choose platform -->
@@ -33,14 +26,11 @@
           <div
             v-for="platform in this.$store.state.platforms"
             :key="platform.name"
+             @click="selectPlatform(platform)"
+             class="p-1"
           >
-            <font-awesome-icon
-              :icon="['fab', platform.name]"
-              size="3x"
-              :style="getColor(platform.color)"
-              class="mr-5 hvr-pulse"
-              @click="selectPlatform(platform)"
-            />
+            <Spod :platform="platform.name" :username="username" />
+            <h4 class="text-md"> {{platform.name}}</h4>
           </div>
         </div>
       </div>
@@ -92,6 +82,8 @@
 </template>
 
 <script>
+import Spod from "../components/spod";
+
 export default {
   data() {
     return {
@@ -100,6 +92,9 @@ export default {
       username: "",
       privacy: ""
     };
+  },
+  components: {
+    Spod
   },
   methods: {
     getColor(hex) {

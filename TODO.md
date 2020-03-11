@@ -5,7 +5,9 @@
 1. ### Check if valid input fields
 
 ## <u><b> SocialSettings </b></u>
+
 - Describe privacy tiers
+
 1. ### Custom link
 2. #### Add Email
 
@@ -18,17 +20,15 @@
 - Add Friend Component
 
 ## <u><b> Content </b></u>
+
 - AddContentComponent
 
-## <u><b> Mobile Friendly </b></u>
-1. ### Responsive header navbar
-
 ## <u><b> Web </b></u>
+
 - Click profiles
 
-
-- element level, group level, network level. Three groups for web input.
-- Build out some connection functions to output nodes:
+* element level, group level, network level. Three groups for web input.
+* Build out some connection functions to output nodes:
   -- Friends
   -- Friends + their Friends
   -- just their friends

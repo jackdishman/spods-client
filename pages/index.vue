@@ -8,19 +8,17 @@
 
         <!-- Center col -->
         <nuxt-link :to="$auth.user.username">
-          <div class="border border-green-500 rounded bg-white p-5">
+          <div class="border border-green-500 rounded bg-white p-5 hvr-grow">
             <h2 class="text-4xl text-center spods">{{ $auth.user.name }}</h2>
+            <p class="text-md text-center spods text-green-500">
+              View your Profile
+            </p>
           </div>
         </nuxt-link>
 
         <!-- Right col -->
         <h2>Add Social Link</h2>
       </div>
-
-      <SocialContainer
-        class="animated bounceInUp flex w-full flex-row justify-around fixed bottom-0 border-t border-green-500 bg-white"
-        :user="$auth.user"
-      />
     </div>
 
     <!-- Logged out / unregistered user -->
@@ -89,16 +87,9 @@ import { mapState } from "vuex";
 import UserAuthForm from "../components/UserAuthForm";
 import Logo from "../components/Logo";
 import Search from "@/components/Search";
-import SocialContainer from "../components/SocialContainer";
 
 export default {
-  data() {
-    return {
-      userId: ""
-    };
-  },
   components: {
-    SocialContainer,
     Logo,
     UserAuthForm,
     Search
@@ -108,51 +99,4 @@ export default {
 };
 </script>
 
-<style>
-.spods {
-  /* font-family: 'Orbitron', sans-serif; */
-  font-family: "Comfortaa", cursive;
-}
-.facebook {
-  color: #3b5998;
-}
-.twitter {
-  color: #00acee;
-}
-.linkedin {
-  color: #0072b1;
-}
-.spotify {
-  color: #1db954;
-}
-.snapchat {
-  color: #fffc00;
-}
-.instagram {
-  color: #3f729b;
-}
-.soundcloud {
-  color: #ff7700;
-}
-.github {
-  color: #6e5494;
-}
-.quora {
-  color: #aa2200;
-}
-.reddit {
-  color: #ff5700;
-}
-.steam {
-  color: #171a21;
-}
-.vimeo {
-  color: #86c9ef;
-}
-.xbox {
-  color: #0e7a0d;
-}
-.playstation {
-  color: #003791;
-}
-</style>
+
