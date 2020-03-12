@@ -185,7 +185,7 @@ export default {
   },
   methods: {
     async verifyUsername() {
-      var letters = /^[a-zA-Z\s]*$/;
+      var letters = /^[a-zA-Z\s\-]*$/;
       if (
         this.userInfo.username === "" ||
         !letters.test(this.userInfo.username)
@@ -206,18 +206,23 @@ export default {
 
     async submitLogin(userInfo) {
       userInfo.username = userInfo.username.toLowerCase();
-      this.$auth
-        .loginWith("local", {
-          data: {
-            username: userInfo.username,
-            password: userInfo.password
-          }
-        })
-        .then(res => {
-          const u = this.$auth.user;
-          this.$store.commit("SETUSER", u);
-          this.$toast.success("Logged In!");
-        });
+      try {
+        await this.$auth
+          .loginWith("local", {
+            data: {
+              username: userInfo.username,
+              password: userInfo.password
+            }
+          })
+          .then(res => {
+            const u = this.$auth.user;
+            this.$store.commit("SETUSER", u);
+            this.$toast.success("Logged In!");
+          });
+      } catch (err) {
+        this.$toast.error("Invalid Credentials!");
+        console.log(err);
+      }
     },
 
     async submitRegister(userInfo) {

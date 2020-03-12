@@ -4,7 +4,7 @@
     <div class="z-50 w-full fixed top-0 border-b border-green-500 bg-white">
       <!-- Logged In -->
       <div v-if="$auth.loggedIn" class="">
-        <div class="flex lg:flex-row justify-between border-b border-green-500 bg-white">
+        <div class="flex lg:flex-row justify-between">
           <nuxt-link to="/" class="spods text-center text-4xl hvr-forward pl-3">
             spods
           </nuxt-link>
@@ -53,7 +53,11 @@
         </div>
 
         <div>
-          <div v-if="isMobileMenuOpen" class="flex flex-col lg:hidden animated bounceInDown bg-transparent border border-gray-500" @click="toggleMobileNav()">
+          <div
+            v-if="isMobileMenuOpen"
+            class="flex flex-col lg:hidden animated bounceInDown bg-transparent border border-gray-500"
+            @click="toggleMobileNav()"
+          >
             <nuxt-link
               to="/community"
               class="w-full spods text-lg text-center p-5 hvr-hang bg-green-500 border-b border-gray-100 font-bold"
@@ -227,6 +231,9 @@ export default {
 .youtube {
   color: #c4302b;
 }
+.venmo {
+  color: #3d95ce;
+}
 .steam {
   color: #9cbbc7;
 }
@@ -236,7 +243,7 @@ export default {
 .skype {
   color: #00aff0;
 }
-.pinterest{
+.pinterest {
   color: #c8232c;
 }
 </style>

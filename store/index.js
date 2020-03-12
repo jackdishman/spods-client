@@ -5,7 +5,15 @@ export const state = () => ({
     "token": '',
     'user': [],
     'isMobileMenuOpen': false,
-    "platforms": [{
+    "platforms": [
+        {
+            name: "email",
+            url: "mailto:",
+            color: "#000000",
+            handle: "Email:",
+            svg: true
+        },
+        {
             name: "facebook",
             url: "https://facebook.com/",
             color: "#3b5998",
