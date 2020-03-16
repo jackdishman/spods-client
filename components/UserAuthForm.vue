@@ -221,7 +221,6 @@ export default {
           });
       } catch (err) {
         this.$toast.error("Invalid Credentials!");
-        console.log(err);
       }
     },
 

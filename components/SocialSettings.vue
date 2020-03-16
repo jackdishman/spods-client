@@ -12,25 +12,21 @@
         />
         <div v-else></div>
         <h1 class="text-2xl text-center spods p-5">Update your Profile</h1>
-        <div>
-
-        </div>
+        <div></div>
       </div>
       <!-- Step 1: Choose platform -->
       <div v-if="step === 0">
-        <h2 class="text-center pb-2">
-          Choose the platform you wish to modify:
-        </h2>
+        <h2 class="text-center pb-2">Choose the platform you wish to modify:</h2>
         <div class="flex flex-row flex-wrap justify-center p-3">
           <!-- Dynamic -->
           <div
             v-for="platform in this.$store.state.platforms"
             :key="platform.name"
-             @click="selectPlatform(platform)"
-             class="p-1"
+            @click="selectPlatform(platform)"
+            class="p-1"
           >
             <Spod :platform="platform.name" :username="username" />
-            <h4 class="text-md"> {{platform.name}}</h4>
+            <h4 class="text-md">{{ platform.name }}</h4>
           </div>
         </div>
       </div>
@@ -96,6 +92,9 @@ export default {
   components: {
     Spod
   },
+  props: {
+    existingProfileList: Array
+  },
   methods: {
     getColor(hex) {
       return "color: " + hex;
@@ -104,22 +103,41 @@ export default {
       this.step = 0;
       this.platform = "";
     },
-    login(platform, username, privacy) {
+    async login(platform, username, privacy) {
       const DNA = this.$auth.user._id;
-      this.$axios.post("/api/auth/platform", {
-        DNA,
-        platform,
-        username,
-        privacy
-      });
+      try {
+        await this.$axios.post("/api/auth/platform", {
+            DNA,
+            platform,
+            username,
+            privacy
+          })
+          .then(res => {
+            const u = this.$auth.user;
+            this.$store.commit("SETUSER", u);
+            this.$toast.success("Platform Added!");
+            this.$router.push("/");
+          });
+      } catch (err) {
+        this.$toast.error("Couldn't add Platform");
+      }
     },
-    remove(platform, username) {
+    async remove(platform, username) {
       const DNA = this.$auth.user._id;
-      this.$axios.post("/api/auth/platform/delete", {
-        DNA,
-        platform,
-        username
-      });
+      try {
+        await this.$axios.post("/api/auth/platform/delete", {
+          DNA,
+          platform,
+          username
+        }).then(res => {
+          const u = this.$auth.user;
+          this.$store.commit("SETUSER", u);
+          this.$toast.success("Platform removed!");
+          this.$router.push("/");
+        });
+      } catch (err) {
+        this.$toast.error("Couldn't remove Platform")
+      }
     },
     selectPlatform(platform) {
       this.platform = platform;

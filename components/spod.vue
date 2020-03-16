@@ -1,12 +1,5 @@
 <template>
   <div>
-    <a
-      v-if="platformConfig.url && username"
-      :href="link"
-      target="_blank"
-      rel="noreferrer"
-      >View Profile</a
-    >
     <div v-if="platformConfig.svg">
       <svg
         v-if="platform === 'email'"
@@ -129,7 +122,16 @@
         :class="platform"
       />
     </div>
-    <h2 class="text-center">{{ username }}</h2>
+    <h2 class="text-center">
+      <a
+        v-if="platformConfig.url && username"
+        :href="link"
+        target="_blank"
+        rel="noreferrer"
+      >
+        {{ username }}
+      </a>
+    </h2>
   </div>
 </template>
 

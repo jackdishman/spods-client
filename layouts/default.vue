@@ -12,7 +12,6 @@
             v-if="!isMobileMenuOpen"
             class="m-5 lg:hidden"
             :icon="['fas', 'bars']"
-            size="2xl"
             style="color:black"
             @click="toggleMobileNav()"
           />
@@ -20,7 +19,6 @@
             v-else
             class="m-5 lg:hidden"
             :icon="['fas', 'times']"
-            size="2xl"
             style="color:black"
             @click="toggleMobileNav()"
           />

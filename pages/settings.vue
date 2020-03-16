@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-100">
     <div class="flex flex-row justify-center m-10 ">
-      <SocialSettings />
+      <SocialSettings :existingProfileList="$auth.user.socialLinks" />
     </div>
   </div>
 </template>

@@ -8,11 +8,9 @@
 
 <script>
   import Web from '~/components/Web.vue'
-
   export default {
     components: {
       Web,
   }
-
 }
 </script>

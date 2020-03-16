@@ -85,14 +85,10 @@
 <script>
 import { mapState } from "vuex";
 import UserAuthForm from "../components/UserAuthForm";
-import Logo from "../components/Logo";
-import Search from "@/components/Search";
 
 export default {
   components: {
-    Logo,
     UserAuthForm,
-    Search
   },
   computed: mapState(["user", "isLoggedIn"])
   // middleware:['index']
