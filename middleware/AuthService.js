@@ -5,7 +5,7 @@ class AuthService {
 
     //check if username is in DB
     static isExistingUser(username) {
-        return axios.get(url + `/users/${username}`);
+        return axios.get(url + `/users/isExistingUser/${username}`);
     }
 
     static login(username, password) {

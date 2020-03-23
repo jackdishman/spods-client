@@ -8,7 +8,7 @@ export function generateConfig(user) {
       nodes: [
         {
           "data": {
-            "id": user.id,
+            "id": user.username,
             "label": user.name,
             "socialList": user.socialList
           }
@@ -41,10 +41,10 @@ export function generateConfig(user) {
 
   //generate nodes
   console.log(user);
-  for (var i = 0; i < user.friendsList.length; i++) {
-    console.log(user.friendsList[i].name);
-    res.elements.nodes.push({ "data": { "id": user.friendsList[i].id, "label": user.friendsList[i].name, "socialList": user.friendsList[i].socialList } });
-    res.elements.edges.push({ "data": { "id": "e-" + user.friendsList[i].id, "source": user.friendsList[i].id, "target": user.id } });
+  for (var i = 0; i < user.connections.length; i++) {
+    console.log(user.connections[i].name);
+    res.elements.nodes.push({ "data": { "id": user.connections[i].username, "label": user.connections[i].name, "socialList": user.connections[i].socialList } });
+    res.elements.edges.push({ "data": { "id": "e-" + user.connections[i].username, "source": user.connections[i].username, "target": user.username } });
   }
   return res;
 }

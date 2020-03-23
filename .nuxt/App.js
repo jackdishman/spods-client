@@ -15,6 +15,8 @@ import '../assets/css/animate.css'
 
 import '../assets/css/hover.css'
 
+import '../assets/css/platforms.css'
+
 import _6f6c098b from '../layouts/default.vue'
 import _1a3b339e from '../layouts/web.vue'
 

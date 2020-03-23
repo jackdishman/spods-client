@@ -166,6 +166,7 @@
 
 <script>
 import AuthService from "@/middleware/AuthService";
+import UserService from "@/middleware/UserService";
 import { mapState } from "vuex";
 
 export default {
@@ -195,15 +196,17 @@ export default {
       } else {
         this.userInfo.username = this.userInfo.username.replace(/ /g, "-");
         this.userInfo.username = this.userInfo.username.toLowerCase();
-        var res = await AuthService.isExistingUser(this.userInfo.username);
-        if (res.data.length === 0) {
-          this.newUser = true;
-        } else {
-          this.newUser = false;
-        }
+        var res = await AuthService.isExistingUser(this.userInfo.username).then(
+          res => {
+            if (res.data) {
+              this.newUser = false;
+            } else {
+              this.newUser = true;
+            }
+          }
+        );
       }
     },
-
     async submitLogin(userInfo) {
       userInfo.username = userInfo.username.toLowerCase();
       try {
@@ -215,29 +218,33 @@ export default {
             }
           })
           .then(res => {
-            const u = this.$auth.user;
-            this.$store.commit("SETUSER", u);
+            this.updateUser();
             this.$toast.success("Logged In!");
           });
+        
       } catch (err) {
         this.$toast.error("Invalid Credentials!");
       }
     },
-
     async submitRegister(userInfo) {
       userInfo.username = userInfo.username.toLowerCase();
       if (userInfo.password.length < 8) {
         this.$toast.error("Password must be 8 chars long!");
         return;
       } else {
-        let res = await AuthService.register(
+        await AuthService.register(
           userInfo.username,
           userInfo.name,
           userInfo.password
-        );
+        )
         this.newUser = false;
         this.$toast.success("Registered!");
       }
+    },
+    async updateUser(){
+      await UserService.getUserData(this.$auth.user.username).then(res => {
+        this.$store.commit("SETUSER", res.data);
+      });
     }
   }
 };

@@ -1,25 +1,18 @@
 <template>
-  <div class="w-100 h-100">
-    <div class="flex flex-row">
-      <!-- Left sidebar -->
-      <div class="md:w-1/4 bg-green-100"></div>
-
-      <!-- Web -->
-      <div class="border w-full md:w-1/2">
-        <cytoscape
-          :config="generateLinksData(user)"
-          :preConfig="preConfig"
-          :afterCreated="afterCreated"
-        ></cytoscape>
-      </div>
-      <!-- Right sidebar -->
-      <div class="md:w-1/4 bg-blue-100"></div>
-    </div>
-
-    <div class="flex flex-row justify-center w-full">
-      <button class="border rounded p-5 w-1/2 md:w-1/4">Social Links</button>
-      <button class="border rounded p-5 w-1/2 md:w-1/4">Friends</button>
-    </div>
+  <div class="border border-green-500 rounded">
+    <!-- Web -->
+      <cytoscape
+        v-if="toggle"
+        :config="generateLinksData(user)"
+        :preConfig="preConfig"
+        :afterCreated="afterCreated"
+      ></cytoscape>
+      <cytoscape
+        v-else
+        :config="generateConfig(user)"
+        :preConfig="preConfig"
+        :afterCreated="afterCreated"
+      ></cytoscape>
   </div>
 </template>
 
@@ -34,10 +27,15 @@ import { mapState } from "vuex";
 export default {
   name: "Web",
   components: {
-    MenuIcon
+    MenuIcon,
   },
   props: {
-    user: Object
+    user: Object,
+  },
+  data (){
+    return {
+      toggle: false,
+    }
   },
   // computed: mapState(["user"]),
   methods: {
@@ -45,6 +43,7 @@ export default {
       // cytoscape: this is the cytoscape constructor
       cytoscape.use(cola);
     },
+    generateConfig,
     generateLinksData,
     afterCreated(cy) {
       cy.resize();

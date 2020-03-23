@@ -5,8 +5,7 @@ export const state = () => ({
     "token": '',
     'user': [],
     'isMobileMenuOpen': false,
-    "platforms": [
-        {
+    "platforms": [{
             name: "email",
             url: "mailto:",
             color: "#000000",
@@ -141,9 +140,11 @@ export const state = () => ({
         },
         {
             name: "xbox",
+            url: "",
             handle: "Gamertag:"
         },
         {
+            url: "",
             name: "playstation",
             handle: "Gamertag:"
         }
@@ -170,5 +171,5 @@ export const mutations = {
     },
     SETUSER(state, list) {
         state.user = list
-    }
+    },
 }

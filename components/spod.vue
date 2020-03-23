@@ -122,21 +122,22 @@
         :class="platform"
       />
     </div>
-    <h2 class="text-center">
-      <a
-        v-if="platformConfig.url && username"
-        :href="link"
-        target="_blank"
-        rel="noreferrer"
-      >
+    <a
+      v-if="platformConfig.url && username"
+      :href="link"
+      target="_blank"
+      rel="noreferrer"
+    >
+      <h2 class="text-center">
         {{ username }}
-      </a>
-    </h2>
+      </h2>
+    </a>
   </div>
 </template>
 
 <script>
 export default {
+  name: "spod",
   props: {
     platform: String,
     username: String,

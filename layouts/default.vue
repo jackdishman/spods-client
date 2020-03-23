@@ -2,6 +2,7 @@
   <div class="relative m-0 p-0 h-screen flex flex-col flex-grow">
     <!-- SPODS BRAND HEADER -->
     <div class="z-50 w-full fixed top-0 border-b border-green-500 bg-white">
+
       <!-- Logged In -->
       <div v-if="$auth.loggedIn" class="">
         <div class="flex lg:flex-row justify-between">
@@ -104,7 +105,6 @@ import Logo from "@/components/Logo";
 import Vue from "vue";
 import SearchBar from "@/components/Search";
 import { mapState } from "vuex";
-
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faSearch,
@@ -180,68 +180,4 @@ export default {
 </script>
 
 <style>
-.spods {
-  /* font-family: 'Orbitron', sans-serif; */
-  font-family: "Comfortaa", cursive;
-}
-.facebook {
-  color: #3b5998;
-}
-.twitter {
-  color: #00acee;
-}
-.linkedin {
-  color: #0072b1;
-}
-.spotify {
-  color: #1db954;
-}
-.snapchat {
-  color: #fffc00;
-}
-.instagram {
-  color: #3f729b;
-}
-.soundcloud {
-  color: #ff7700;
-}
-.github {
-  color: #6e5494;
-}
-.quora {
-  color: #aa2200;
-}
-.reddit {
-  color: #ff5700;
-}
-.steam {
-  color: #171a21;
-}
-.vimeo {
-  color: #86c9ef;
-}
-.xbox {
-  color: #0e7a0d;
-}
-.playstation {
-  color: #003791;
-}
-.youtube {
-  color: #c4302b;
-}
-.venmo {
-  color: #3d95ce;
-}
-.steam {
-  color: #9cbbc7;
-}
-.yelp {
-  color: #c41200;
-}
-.skype {
-  color: #00aff0;
-}
-.pinterest {
-  color: #c8232c;
-}
 </style>

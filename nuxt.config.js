@@ -25,7 +25,8 @@ module.exports = {
      */
     css: [
         "~/assets/css/animate.css",
-        "~/assets/css/hover.css"
+        "~/assets/css/hover.css",
+        "~/assets/css/platforms.css"
     ],
     /*
      ** Plugins to load before mounting the App

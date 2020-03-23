@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="border border-green-500 rounded bg-white p-5">
+    <div class="">
       <!-- Header -->
       <div class="flex flex-row justify-between">
         <font-awesome-icon
@@ -16,7 +16,9 @@
       </div>
       <!-- Step 1: Choose platform -->
       <div v-if="step === 0">
-        <h2 class="text-center pb-2">Choose the platform you wish to modify:</h2>
+        <h2 class="text-center pb-2 text-green-500 bold text-2xl">
+          Add Platform:
+        </h2>
         <div class="flex flex-row flex-wrap justify-center p-3">
           <!-- Dynamic -->
           <div
@@ -25,8 +27,30 @@
             @click="selectPlatform(platform)"
             class="p-1"
           >
-            <Spod :platform="platform.name" :username="username" />
-            <h4 class="text-md">{{ platform.name }}</h4>
+            <span v-if="platformNotEnrolled(platform.name)">
+              <Spod :platform="platform.name" :username="username" />
+              <h4 class="text-md">{{ platform.name }}</h4>
+            </span>
+          </div>
+        </div>
+        <div>
+          <h2 class="text-center pb-2 text-green-500 bold text-2xl">Existing Platforms:</h2>
+          <div class="flex flex-col lg:flex-row flex-wrap justify-center">
+            <div
+              v-for="platform in this.$store.state.user.socialLinks"
+              :key="platform.name"
+              class="flex flex-row lg:flex-col bg-gray-100 p-1 m-1 border border-green-500 rounded justify-between"
+            >
+              <h6 class="">{{ platform.platform }}</h6>
+              <h6>{{ platform.username }}</h6>
+              <h6>[ {{ platform.privacy }} ]</h6>
+              <button
+                @click="remove(platform.platform, platform.username)"
+                class="shadow bg-red-500 hover:bg-red-400 focus:shadow-outline focus:outline-none text-white hover:text-black font-bold py-2 px-4 rounded hvr-grow"
+              >
+                Remove
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -64,12 +88,6 @@
         >
           Add
         </button>
-        <button
-          @click="remove(platform.name, username)"
-          class="shadow bg-red-500 hover:bg-red-400 focus:shadow-outline focus:outline-none text-white hover:text-black font-bold py-2 px-4 rounded hvr-grow"
-        >
-          Remove
-        </button>
       </div>
     </div>
 
@@ -79,8 +97,11 @@
 
 <script>
 import Spod from "../components/spod";
+import SocialContainer from "../components/SocialContainer";
+import UserService from "@/middleware/UserService";
 
 export default {
+  name: "SocialSettings",
   data() {
     return {
       step: 0,
@@ -90,7 +111,8 @@ export default {
     };
   },
   components: {
-    Spod
+    Spod,
+    SocialContainer
   },
   props: {
     existingProfileList: Array
@@ -103,19 +125,28 @@ export default {
       this.step = 0;
       this.platform = "";
     },
+    platformNotEnrolled(platform) {
+      for (const x in this.existingProfileList) {
+        if (this.existingProfileList[x].platform === platform) {
+          return false;
+        }
+      }
+      return true;
+    },
     async login(platform, username, privacy) {
       const DNA = this.$auth.user._id;
       try {
-        await this.$axios.post("/api/auth/platform", {
+        await this.$axios
+          .post("/api/auth/platform", {
             DNA,
             platform,
             username,
             privacy
           })
           .then(res => {
-            const u = this.$auth.user;
-            this.$store.commit("SETUSER", u);
+            this.updateUser();
             this.$toast.success("Platform Added!");
+            this.step = 0;
             this.$router.push("/");
           });
       } catch (err) {
@@ -123,25 +154,32 @@ export default {
       }
     },
     async remove(platform, username) {
+      console.log(platform);
+      console.log(username);
       const DNA = this.$auth.user._id;
       try {
-        await this.$axios.post("/api/auth/platform/delete", {
-          DNA,
-          platform,
-          username
-        }).then(res => {
-          const u = this.$auth.user;
-          this.$store.commit("SETUSER", u);
-          this.$toast.success("Platform removed!");
-          this.$router.push("/");
-        });
+        await this.$axios
+          .post("/api/auth/platform/delete", {
+            DNA,
+            platform,
+            username
+          })
+          .then(res => {
+            this.updateUser();
+            this.$toast.success("Platform removed!");
+          });
       } catch (err) {
-        this.$toast.error("Couldn't remove Platform")
+        this.$toast.error("Couldn't remove Platform");
       }
     },
     selectPlatform(platform) {
       this.platform = platform;
       this.step = 1;
+    },
+    async updateUser() {
+      await UserService.getUserData(this.$auth.user.username).then(res => {
+        this.$store.commit("SETUSER", res.data);
+      });
     }
   }
 };

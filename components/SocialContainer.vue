@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-wrap flex-row justify-center p-2">
     <span v-for="x in this.user.socialLinks" :key="x.platform">
-      <Spod class="hvr-pulse" :platform="x.platform" :username="x.username" :privacy="x.privacy" />
+      <Spod class="hvr-pulse pl-1 pr-1" :platform="x.platform" :username="x.username" :privacy="x.privacy" />
     </span>
   </div>
 </template>

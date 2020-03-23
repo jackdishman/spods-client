@@ -1,9 +1,9 @@
 <template>
-  <div class="border border-green-500 bg-white rounded p-5">
+  <div class="">
     <h2 class="text-2xl">Friends List</h2>
-    <div v-for="x in user.connections" :key="x.id" class="hvr-forward">
-      <nuxt-link :to="x.username">
-        {{ x.username }}
+    <div v-for="x in user.connections" :key="x.id">
+      <nuxt-link :to="x.username" class="hvr-forward">
+          {{ x.username }}
       </nuxt-link>
     </div>
   </div>
