@@ -1,4 +1,6 @@
 # TO-DO
+- spod privacy tiers - describe on SOcialSettings and also reflect the privacy on the profile page
+- 
 
 ## <u><b>UserAuthForm </b></u>
 
@@ -9,15 +11,12 @@
 - Describe privacy tiers
 
 1. ### Custom link
-2. #### Add Email
 
 - #### Add option to add new unidentified link.
 
 2. ### Platform Verification / callback Authentication
 
-## <u><b> Friends List </b></u>
 
-- Add Friend Component
 
 ## <u><b> Content </b></u>
 

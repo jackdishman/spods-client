@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full spods bg-gray-100">
+  <div class="w-full h-full spods">
     <div v-if="userData">
       <div class="flex flex-col lg:flex-row lg:justify-around">
 
@@ -8,12 +8,13 @@
         </div>
 
         <div class="w-full lg:w-1/3 p-3 order-first mt-5">
-          <div class="  p-5">
+          <div class="p-5">
             <h1 class="text-4xl text-center spodslg:order-2">
               {{ userData.data.name }}
             </h1>
             <AddFriend :user="userData.data" :status="isFollowing()" />
           </div>
+          
         </div>
 
         <div class="w-full order-3 lg:w-1/3 h-20 mb-24 mt-5 p-3">

@@ -40,9 +40,7 @@ export function generateConfig(user) {
   };
 
   //generate nodes
-  console.log(user);
   for (var i = 0; i < user.connections.length; i++) {
-    console.log(user.connections[i].name);
     res.elements.nodes.push({ "data": { "id": user.connections[i].username, "label": user.connections[i].name, "socialList": user.connections[i].socialList } });
     res.elements.edges.push({ "data": { "id": "e-" + user.connections[i].username, "source": user.connections[i].username, "target": user.username } });
   }

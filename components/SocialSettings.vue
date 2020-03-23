@@ -28,7 +28,7 @@
             class="p-1"
           >
             <span v-if="platformNotEnrolled(platform.name)">
-              <Spod :platform="platform.name" :username="username" />
+              <Spod :platform="platform.name" />
               <h4 class="text-md">{{ platform.name }}</h4>
             </span>
           </div>
@@ -41,12 +41,12 @@
               :key="platform.name"
               class="flex flex-row lg:flex-col bg-gray-100 p-1 m-1 border border-green-500 rounded justify-between"
             >
-              <h6 class="">{{ platform.platform }}</h6>
-              <h6>{{ platform.username }}</h6>
-              <h6>[ {{ platform.privacy }} ]</h6>
+              <h6 class="text-xs text-center">{{ platform.platform }}</h6>
+              <h6 class="text-xs">{{ platform.username }}</h6>
+              <h6 class="text-xs text-center">[ {{ platform.privacy }} ]</h6>
               <button
                 @click="remove(platform.platform, platform.username)"
-                class="shadow bg-red-500 hover:bg-red-400 focus:shadow-outline focus:outline-none text-white hover:text-black font-bold py-2 px-4 rounded hvr-grow"
+                class="shadow bg-red-500 hover:bg-red-400 focus:shadow-outline focus:outline-none text-white hover:text-black font-bold py-1 px-2 rounded hvr-grow"
               >
                 Remove
               </button>
@@ -154,8 +154,6 @@ export default {
       }
     },
     async remove(platform, username) {
-      console.log(platform);
-      console.log(username);
       const DNA = this.$auth.user._id;
       try {
         await this.$axios

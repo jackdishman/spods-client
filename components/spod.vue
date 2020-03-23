@@ -129,7 +129,7 @@
       rel="noreferrer"
     >
       <h2 class="text-center">
-        {{ username }}
+        <!-- {{ username }} -->
       </h2>
     </a>
   </div>

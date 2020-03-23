@@ -86,7 +86,6 @@ export default {
     async updateUser(){
       const u = await UserService.getUserData(this.$auth.user.username);
       this.$store.commit("SETUSER", u.data);
-      console.log(u.data);
     }
   }
 };

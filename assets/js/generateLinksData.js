@@ -40,7 +40,6 @@ export function generateLinksData(user) {
 
         var key = Object.keys(u.socialLinks[i])[0]
         var value = u.socialLinks[i][key]
-        console.log(key + " " + value)
 
         var backgroundColor, label;
         switch (key) {
