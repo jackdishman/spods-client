@@ -135,6 +135,11 @@ export default {
     },
     async login(platform, username, privacy) {
       const DNA = this.$auth.user._id;
+      if(platform === 'spotify'){
+        // await this.$axios.post("/api/spotify").then(res =>{
+        //   console.log(res);
+        // })
+      }
       try {
         await this.$axios
           .post("/api/auth/platform", {

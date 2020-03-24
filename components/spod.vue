@@ -128,8 +128,8 @@
       target="_blank"
       rel="noreferrer"
     >
-      <h2 class="text-center">
-        <!-- {{ username }} -->
+      <h2 class="text-center text-green-500">
+        View
       </h2>
     </a>
   </div>

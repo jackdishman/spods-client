@@ -99,10 +99,17 @@ export default {
     SocialSettings
   },
   async created(){
+    if(this.$auth.loggedIn){
+    try{
       await UserService.getUserData(this.$auth.user.username).then(res => {
         this.$store.commit("SETUSER", res.data);
       });
-    },
+    }catch(err) {
+      console.log(err);
+    }
+
+    }
+  },
   computed: mapState(["user", "isLoggedIn"]),
   // middleware:['index']
 };
