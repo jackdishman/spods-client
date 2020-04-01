@@ -99,6 +99,7 @@
 import Spod from "../components/spod";
 import SocialContainer from "../components/SocialContainer";
 import UserService from "@/middleware/UserService";
+import url from "@/static/server"
 
 export default {
   name: "SocialSettings",
@@ -135,10 +136,15 @@ export default {
     },
     async login(platform, username, privacy) {
       const DNA = this.$auth.user._id;
-      if(platform === 'spotify'){
-        // await this.$axios.post("/api/spotify").then(res =>{
-        //   console.log(res);
-        // })
+      if(
+        platform === 'spotify' || 
+        platform === 'facebook' ||
+        platform === 'twitter' || 
+        platform === 'linkedin' ||
+        platform === 'instagram' ||
+        platform === 'snapchat'
+      ){
+        window.location.href = (url + '/api/' + platform);
       }
       try {
         await this.$axios

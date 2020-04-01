@@ -16,31 +16,31 @@ export const state = () => ({
             name: "facebook",
             url: "https://facebook.com/",
             color: "#3b5998",
-            handle: "facebook.com/"
+            handle: "Facebook username:"
         },
         {
             name: "twitter",
             url: "https://twitter.com/",
             color: "#00acee",
-            handle: "twitter.com/"
+            handle: "@"
         },
         {
             name: "linkedin",
             url: "https://linkedin.com/in/",
             color: "#0072b1",
-            handle: "linkedin.com/in/"
+            handle: "Display name:"
         },
         {
             name: "spotify",
             url: "https://open.spotify.com/user/",
             color: "#1db954",
-            handle: "spotify.com/user/"
+            handle: "Spotify username:"
         },
         {
             name: "snapchat",
             url: "https://www.snapchat.com/add/",
             color: "#fffc00",
-            handle: "snapchat.com/add/"
+            handle: "Display Name:"
         },
         {
             name: "instagram",
