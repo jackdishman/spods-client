@@ -28,13 +28,15 @@
             class="p-1"
           >
             <span v-if="platformNotEnrolled(platform.name)">
-              <Spod :platform="platform.name" />
+              <PlatformLogo :platform="platform.name" />
               <h4 class="text-md">{{ platform.name }}</h4>
             </span>
           </div>
         </div>
         <div>
-          <h2 class="text-center pb-2 text-green-500 bold text-2xl">Existing Platforms:</h2>
+          <h2 class="text-center pb-2 text-green-500 bold text-2xl">
+            Existing Platforms:
+          </h2>
           <div class="flex flex-col lg:flex-row flex-wrap justify-center">
             <div
               v-for="platform in this.$store.state.user.socialLinks"
@@ -96,13 +98,12 @@
 </template>
 
 <script>
-import Spod from "../components/spod";
-import SocialContainer from "../components/SocialContainer";
+import PlatformLogo from "@/components/platforms/PlatformLogo";
 import UserService from "@/middleware/UserService";
-import url from "@/static/server"
+import url from "@/static/server";
 
 export default {
-  name: "SocialSettings",
+  name: "PlatformsSettings",
   data() {
     return {
       step: 0,
@@ -112,8 +113,7 @@ export default {
     };
   },
   components: {
-    Spod,
-    SocialContainer
+    PlatformLogo
   },
   props: {
     existingProfileList: Array
@@ -136,16 +136,17 @@ export default {
     },
     async login(platform, username, privacy) {
       const DNA = this.$auth.user._id;
-      if(
-        platform === 'spotify' || 
-        platform === 'facebook' ||
-        platform === 'twitter' || 
-        platform === 'linkedin' ||
-        platform === 'instagram' ||
-        platform === 'snapchat'
-      ){
-        window.location.href = (url + '/api/' + platform);
-      }
+      // Disable authentication until v2.0
+      // if(
+      //   platform === 'spotify' ||
+      //   platform === 'facebook' ||
+      //   platform === 'twitter' ||
+      //   platform === 'linkedin' ||
+      //   platform === 'instagram' ||
+      //   platform === 'snapchat'
+      // ){
+      //   window.location.href = (url + '/api/' + platform);
+      // }
       try {
         await this.$axios
           .post("/api/auth/platform", {

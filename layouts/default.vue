@@ -2,7 +2,6 @@
   <div class="relative m-0 p-0 h-screen flex flex-col flex-grow">
     <!-- SPODS BRAND HEADER -->
     <div class="z-50 w-full fixed top-0 border-b border-green-500 bg-white">
-
       <!-- Logged In -->
       <div v-if="$auth.loggedIn" class="">
         <div class="flex lg:flex-row justify-between">
@@ -30,7 +29,7 @@
             >
               Community
             </nuxt-link>
-            <nuxt-link
+            <!-- <nuxt-link
               to="/web"
               class="spods text-lg pr-2 hvr-hang text-green-500"
             >
@@ -41,7 +40,7 @@
               class="spods text-lg pr-2 hvr-hang text-green-500"
             >
               Settings
-            </nuxt-link>
+            </nuxt-link> -->
             <button
               @click="$auth.logout()"
               class="hvr-grow bg-red-600 text-white font-bold border border-black rounded p-2 m-2 active:bg-red-600 hover:bg-red-400 hover:text-black focus:outline-none"
@@ -63,7 +62,7 @@
             >
               Community
             </nuxt-link>
-            <nuxt-link
+            <!-- <nuxt-link
               to="/web"
               class="w-full spods text-lg text-center p-5 hvr-hang bg-green-500 border-b border-gray-100 font-bold"
             >
@@ -74,7 +73,7 @@
               class="w-full spods text-lg text-center p-5 hvr-hang bg-green-500 border-b border-gray-100 font-bold"
             >
               Settings
-            </nuxt-link>
+            </nuxt-link> -->
             <button
               @click="$auth.logout()"
               class="w-full spods bg-red-600 text-white text-center p-5 font-bold border border-black"
@@ -171,7 +170,7 @@ export default {
       this.$store.commit("TOGGLEMOBILEMENU");
     }
   },
-  computed: mapState(["isMobileMenuOpen"]),
+  computed: mapState(["isMobileMenuOpen", "CHANGETAB"]),
   components: {
     Logo,
     SearchBar
@@ -179,5 +178,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

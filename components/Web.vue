@@ -1,18 +1,18 @@
 <template>
   <div class="border border-green-500 rounded">
     <!-- Web -->
-      <cytoscape
-        v-if="toggle"
-        :config="generateLinksData(user)"
-        :preConfig="preConfig"
-        :afterCreated="afterCreated"
-      ></cytoscape>
-      <cytoscape
-        v-else
-        :config="generateConfig(user)"
-        :preConfig="preConfig"
-        :afterCreated="afterCreated"
-      ></cytoscape>
+    <cytoscape
+      v-if="toggle"
+      :config="generateLinksData(user)"
+      :preConfig="preConfig"
+      :afterCreated="afterCreated"
+    ></cytoscape>
+    <cytoscape
+      v-else
+      :config="generateConfig(user)"
+      :preConfig="preConfig"
+      :afterCreated="afterCreated"
+    ></cytoscape>
   </div>
 </template>
 
@@ -27,15 +27,15 @@ import { mapState } from "vuex";
 export default {
   name: "Web",
   components: {
-    MenuIcon,
+    MenuIcon
   },
   props: {
-    user: Object,
+    user: Object
   },
-  data (){
+  data() {
     return {
-      toggle: false,
-    }
+      toggle: false
+    };
   },
   // computed: mapState(["user"]),
   methods: {
@@ -47,6 +47,8 @@ export default {
     generateLinksData,
     afterCreated(cy) {
       cy.resize();
+      // cy.zoomingEnabled(false);
+      cy.userZoomingEnabled(false);
       cy.fit();
     }
   }

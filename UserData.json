@@ -1,4 +1,4 @@
-{
+({
   "name": "Jack",
   "id": "1",
   "friendsList": [
@@ -29,35 +29,95 @@
   ],
   "socialList": [
     {
-          "platform": "twitter",
-          "username": "twitter_user_name",
-          "id": "twitter_id"
-      
+      "platform": "twitter",
+      "username": "twitter_user_name",
+      "id": "twitter_id"
     },
     {
-          "platform": "instagram",
-          "username": "instagram_user_name",
-          "id": "instagram_id"
+      "platform": "instagram",
+      "username": "instagram_user_name",
+      "id": "instagram_id"
     },
     {
-          "platform": "spotify",
-          "username": "spotify_username",
-          "id": "spotify_id"
+      "platform": "spotify",
+      "username": "spotify_username",
+      "id": "spotify_id"
     },
     {
-          "platform": "soundcloud",
-          "username": "soundcloud_user_name",
-          "id": "soundcloud_id"
+      "platform": "soundcloud",
+      "username": "soundcloud_user_name",
+      "id": "soundcloud_id"
     },
     {
-          "platform": "facebook",
-          "username": "facebook_user_name",
-          "id": "facebook_id"
+      "platform": "facebook",
+      "username": "facebook_user_name",
+      "id": "facebook_id"
     }
   ]
-}
-
-
-
-
-
+},
+{
+  "socialLinks": [
+    { "platform": "facebook", "username": "jackdishman", "privacy": "1" },
+    { "platform": "twitter", "username": "jackdishman", "privacy": "0" },
+    { "platform": "linkedin", "username": "jackdishman", "privacy": "2" },
+    { "platform": "spotify", "username": "jackdishman", "privacy": "0" }
+  ],
+  "following": [
+    {
+      "targetUser": {
+        "socialLinks": [
+          { "platform": "facebook", "username": "kg", "privacy": "0" },
+          { "platform": "twitter", "username": "kg", "privacy": "1" },
+          { "platform": "linkedin", "username": "kg", "privacy": "2" },
+          { "platform": "spotify", "username": "kg", "privacy": "3" }
+        ],
+        "following": [
+          {
+            "name": "Jack Dishman",
+            "username": "jackdishman",
+            "id": "5e8f210af1a2cf753f9d087a",
+            "friendsList": [],
+            "socialList": [
+              {
+                "platform": "facebook",
+                "username": "jackdishman",
+                "privacy": "1"
+              },
+              {
+                "platform": "twitter",
+                "username": "jackdishman",
+                "privacy": "0"
+              },
+              {
+                "platform": "linkedin",
+                "username": "jackdishman",
+                "privacy": "2"
+              },
+              {
+                "platform": "spotify",
+                "username": "jackdishman",
+                "privacy": "0"
+              }
+            ]
+          }
+        ],
+        "followers": [],
+        "_id": "5e8f2151f1a2cf753f9d087b",
+        "username": "kevin-garnett",
+        "name": "Kevin Garnett",
+        "password": null,
+        "createdAt": "2020-04-09T13:21:21.744Z",
+        "updatedAt": "2020-04-09T14:09:57.071Z",
+        "__v": 0
+      }
+    }
+  ],
+  "followers": [],
+  "_id": "5e8f210af1a2cf753f9d087a",
+  "username": "jackdishman",
+  "name": "Jack Dishman",
+  "password": null,
+  "createdAt": "2020-04-09T13:20:10.286Z",
+  "updatedAt": "2020-04-09T18:16:16.332Z",
+  "__v": 0
+})

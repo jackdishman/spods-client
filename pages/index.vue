@@ -1,14 +1,15 @@
 <template>
   <div class="w-full spods bg-gray-100">
-
     <!-- Logged in users -->
     <div v-if="$auth.loggedIn">
       <div class="flex flex-col lg:flex-row justify-between items-center pt-10">
         <!-- Left col -->
-        <h2 class="order-2 lg:order-first">Add Content</h2>
+        <h2 class="order-2 lg:order-first"></h2>
         <!-- Center col -->
         <nuxt-link :to="$auth.user.username">
-          <div class="border border-green-500 rounded bg-white p-3 hvr-grow order-first lg:order-2">
+          <div
+            class="border border-green-500 rounded bg-white p-3 hvr-grow order-first lg:order-2"
+          >
             <h2 class="text-3xl text-center spods">{{ $auth.user.name }}</h2>
             <p class="text-md text-center spods text-green-500">
               View your Profile
@@ -19,11 +20,10 @@
         <div></div>
       </div>
 
-      <SocialSettings
+      <PlatformSettings
         class="mt-10 p-3 animated bounceInUp flex w-full flex-row justify-around lg:fixed bottom-0 border-t border-b border-green-500 bg-white"
-        :existingProfileList="$store.state.user.socialLinks" 
+        :existingProfileList="$store.state.user.socialLinks"
       />
-
     </div>
 
     <!-- Logged out / unregistered user -->
@@ -88,31 +88,27 @@
 
 <script>
 import { mapState } from "vuex";
-import UserAuthForm from "../components/UserAuthForm";
-import SocialSettings from "../components/SocialSettings";
+import UserAuthForm from "@/components/UserAuthForm";
+import PlatformSettings from "@/components/platforms/Settings";
 import UserService from "@/middleware/UserService";
-
 
 export default {
   components: {
     UserAuthForm,
-    SocialSettings
+    PlatformSettings
   },
-  async created(){
-    if(this.$auth.loggedIn){
-    try{
-      await UserService.getUserData(this.$auth.user.username).then(res => {
-        this.$store.commit("SETUSER", res.data);
-      });
-    }catch(err) {
-      console.log(err);
-    }
-
+  async created() {
+    if (this.$auth.loggedIn) {
+      try {
+        await UserService.getUserData(this.$auth.user.username).then(res => {
+          this.$store.commit("SETUSER", res.data);
+        });
+      } catch (err) {
+        console.log(err);
+      }
     }
   },
-  computed: mapState(["user", "isLoggedIn"]),
+  computed: mapState(["user", "isLoggedIn"])
   // middleware:['index']
 };
 </script>
-
-
