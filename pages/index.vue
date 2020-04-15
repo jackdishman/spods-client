@@ -1,16 +1,18 @@
 <template>
   <div class="w-full spods bg-gray-100">
     <!-- Logged in users -->
-    <div v-if="$auth.loggedIn">
+    <div v-if="$store.state.user">
       <div class="flex flex-col lg:flex-row justify-between items-center pt-10">
         <!-- Left col -->
         <h2 class="order-2 lg:order-first"></h2>
         <!-- Center col -->
-        <nuxt-link :to="$auth.user.username">
+        <nuxt-link :to="$store.state.user.username">
           <div
             class="border border-green-500 rounded bg-white p-3 hvr-grow order-first lg:order-2"
           >
-            <h2 class="text-3xl text-center spods">{{ $auth.user.name }}</h2>
+            <h2 class="text-3xl text-center spods">
+              {{ $store.state.user.name }}
+            </h2>
             <p class="text-md text-center spods text-green-500">
               View your Profile
             </p>
@@ -98,11 +100,13 @@ export default {
     PlatformSettings
   },
   async created() {
-    if (this.$auth.loggedIn) {
+    if (this.$store.state.user) {
       try {
-        await UserService.getUserData(this.$auth.user.username).then(res => {
-          this.$store.commit("SETUSER", res.data);
-        });
+        await UserService.getUserData(this.$store.state.user.username).then(
+          res => {
+            this.$store.commit("SETUSER", res.data);
+          }
+        );
       } catch (err) {
         console.log(err);
       }

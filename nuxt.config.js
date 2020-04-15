@@ -49,7 +49,8 @@ module.exports = {
     modules: [
         '@nuxtjs/axios',
         '@nuxtjs/auth',
-        '@nuxtjs/toast'
+        '@nuxtjs/toast',
+        '@nuxtjs/proxy',
     ],
     // serverMiddleware: ['./api/auth'],
     auth: {
@@ -71,8 +72,8 @@ module.exports = {
     },
     axios: {
         // proxyHeaders: false
-        // baseURL: 'http://localhost:5000'
-        baseURL: 'https://spodserver.herokuapp.com'
+        baseURL: 'http://localhost:5000'
+        // baseURL: 'https://spodserver.herokuapp.com'
     },
     loading: {
         name: 'chasing-dots',

@@ -53,11 +53,13 @@ export default {
     Web
   },
   async created() {
-    if (this.$auth.LoggedIn) {
+    if (this.$store.state.user !== null) {
       try {
-        await UserService.getUserData(this.$auth.user.username).then(res => {
-          this.$store.commit("SETUSER", res.data);
-        });
+        await UserService.getUserData(this.$store.state.user.username).then(
+          res => {
+            this.$store.commit("SETUSER", res.data);
+          }
+        );
       } catch (err) {
         console.log(err);
       }
@@ -71,34 +73,39 @@ export default {
   methods: {
     // is actionUser isFollowing targetUser? T/F
     isFollowing() {
-      const u = this.$store.state.user.following;
-      for (const x in u) {
-        if (u[x].username === this.userData.data.username) {
-          return true;
+      if (this.$store.state.user !== null) {
+        const u = this.$store.state.user.following;
+        for (const x in u) {
+          if (u[x].username === this.userData.data.username) {
+            return true;
+          }
         }
       }
       return false;
     },
     // is targetUser following actionUser? T/F
     followsBack() {
-      const u = this.userData.data.following;
-      for (const x in u) {
-        if (u[x].username === this.$store.state.user.username) {
-          return true;
+      if (this.$store.state.user !== null) {
+        const u = this.userData.data.following;
+        for (const x in u) {
+          if (u[x].username === this.$store.state.user.username) {
+            return true;
+          }
         }
       }
       return false;
     },
     // is targetUser following someone who follows actionuser?
     isFriendOfFriend() {
-      if (!this.$auth.LoggedIn) return false;
-      const u = this.userData.data.following;
-      const username = this.$store.state.auth.user.username;
-      for (const x in u) {
-        let v = u[x].following;
-        for (const y in v) {
-          if (v[y].username === username) {
-            return true;
+      if (this.$store.state.user !== null) {
+        const u = this.userData.data.following;
+        const username = this.$store.state.user.username;
+        for (const x in u) {
+          let v = u[x].following;
+          for (const y in v) {
+            if (v[y].username === username) {
+              return true;
+            }
           }
         }
       }

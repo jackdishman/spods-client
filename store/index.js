@@ -3,7 +3,7 @@ import axios from '@nuxtjs/axios';
 export const state = () => ({
     'isSearchOpen': false,
     "token": '',
-    'user': [],
+    'user': null,
     'isMobileMenuOpen': false,
     'currentTab': '',
     "platforms": [{

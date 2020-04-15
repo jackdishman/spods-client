@@ -6,7 +6,8 @@
           x.privacy == 0 ||
             (x.privacy == 1 && isFriendOfFriend) ||
             (followsBack && (x.privacy == 2 || x.privacy == 1)) ||
-            user.name === $store.state.user.name
+            ($store.state.user !== null &&
+              user.username === $store.state.user.username)
         "
         class="p-2 border rounded"
       >
@@ -48,7 +49,7 @@ import PlatformLogo from "@/components/platforms/PlatformLogo";
 import { mapState } from "vuex";
 
 export default {
-  name: "Container",
+  name: "PlatformsContainer",
   components: {
     PlatformLogo
   },

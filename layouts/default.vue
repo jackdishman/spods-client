@@ -3,7 +3,7 @@
     <!-- SPODS BRAND HEADER -->
     <div class="z-50 w-full fixed top-0 border-b border-green-500 bg-white">
       <!-- Logged In -->
-      <div v-if="$auth.loggedIn" class="">
+      <div v-if="$store.state.user !== null" class="">
         <div class="flex lg:flex-row justify-between">
           <nuxt-link to="/" class="spods text-center text-4xl hvr-forward pl-3">
             spods
@@ -42,7 +42,7 @@
               Settings
             </nuxt-link> -->
             <button
-              @click="$auth.logout()"
+              @click="logout()"
               class="hvr-grow bg-red-600 text-white font-bold border border-black rounded p-2 m-2 active:bg-red-600 hover:bg-red-400 hover:text-black focus:outline-none"
             >
               Log Out
@@ -75,7 +75,7 @@
               Settings
             </nuxt-link> -->
             <button
-              @click="$auth.logout()"
+              @click="logout()"
               class="w-full spods bg-red-600 text-white text-center p-5 font-bold border border-black"
             >
               Log Out
@@ -168,6 +168,10 @@ export default {
   methods: {
     toggleMobileNav() {
       this.$store.commit("TOGGLEMOBILEMENU");
+    },
+    logout() {
+      this.$axios.setHeader({ Authorization: "" });
+      this.$store.commit("SETUSER", null);
     }
   },
   computed: mapState(["isMobileMenuOpen", "CHANGETAB"]),

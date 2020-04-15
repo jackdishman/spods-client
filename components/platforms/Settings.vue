@@ -135,7 +135,7 @@ export default {
       return true;
     },
     async login(platform, username, privacy) {
-      const DNA = this.$auth.user._id;
+      const DNA = this.$store.state.user._id;
       // Disable authentication until v2.0
       // if(
       //   platform === 'spotify' ||
@@ -166,7 +166,7 @@ export default {
       }
     },
     async remove(platform, username) {
-      const DNA = this.$auth.user._id;
+      const DNA = this.$store.state.user._id;
       try {
         await this.$axios
           .post("/api/auth/platform/delete", {
@@ -187,9 +187,11 @@ export default {
       this.step = 1;
     },
     async updateUser() {
-      await UserService.getUserData(this.$auth.user.username).then(res => {
-        this.$store.commit("SETUSER", res.data);
-      });
+      await UserService.getUserData(this.$store.state.user.username).then(
+        res => {
+          this.$store.commit("SETUSER", res.data);
+        }
+      );
     }
   }
 };

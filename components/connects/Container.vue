@@ -1,6 +1,7 @@
 <template>
   <div class="flex flex-row justify-center">
-    <div v-if="!$auth.loggedIn">
+    <!-- Unauthenticated Users -->
+    <div v-if="$store.state.user === null">
       <nuxt-link
         to="/"
         class="border border-black rounded bg-green-500 text-white p-3 m-1"
@@ -8,24 +9,29 @@
       >
       <button></button>
     </div>
-    <div
-      v-if="$auth.loggedIn && user._id !== $auth.user._id"
-      class="flex flex-row justify-center"
-    >
-      <button
-        v-if="this.$props.isFollowing === true"
-        @click="removeFriend()"
-        class="border border-black rounded bg-red-500 text-white p-3 m-1"
-      >
-        Remove Connect
-      </button>
-      <button
-        v-else
-        @click="addFriend()"
-        class="border border-black rounded bg-green-500 text-white p-3 m-1"
-      >
-        Add Connect
-      </button>
+    <!-- Authenticated Users -->
+    <div v-else>
+      <!-- if viewing own profile -->
+      <div v-if="user._id === $store.state.user._id">
+        This is your profile
+      </div>
+      <!-- Authenticated, viewing someone else's profile -->
+      <div v-else class="flex flex-row justify-center">
+        <button
+          v-if="this.$props.isFollowing === true"
+          @click="removeFriend()"
+          class="border border-black rounded bg-red-500 text-white p-3 m-1"
+        >
+          Remove Connect
+        </button>
+        <button
+          v-else
+          @click="addFriend()"
+          class="border border-black rounded bg-green-500 text-white p-3 m-1"
+        >
+          Add Connect
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -42,7 +48,7 @@ export default {
   },
   methods: {
     async addFriend() {
-      const actionUser = this.$auth.user;
+      const actionUser = this.$store.state.user;
       const targetUser = this.user;
       try {
         await this.$axios
@@ -61,7 +67,7 @@ export default {
       }
     },
     async removeFriend(name, username, id, friendsList, socialList) {
-      const actionUser = this.$auth.user;
+      const actionUser = this.$store.state.user;
       const targetUser = this.user;
       try {
         await this.$axios
@@ -80,7 +86,7 @@ export default {
       }
     },
     async updateUser() {
-      const u = await UserService.getUserData(this.$auth.user.username);
+      const u = await UserService.getUserData(this.$store.state.user.username);
       this.$store.commit("SETUSER", u.data);
     }
   }

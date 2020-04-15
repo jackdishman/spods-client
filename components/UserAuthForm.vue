@@ -210,18 +210,25 @@ export default {
     async submitLogin(userInfo) {
       userInfo.username = userInfo.username.toLowerCase();
       try {
-        await this.$auth
-          .loginWith("local", {
-            data: {
-              username: userInfo.username,
-              password: userInfo.password
-            }
+        await this.$axios
+          .post("/api/auth/login", {
+            username: userInfo.username,
+            password: userInfo.password
           })
+          // await this.$auth
+          //   .loginWith("local", {
+          //     data: {
+          //       username: userInfo.username,
+          //       password: userInfo.password
+          //     }
+          //   })
           .then(res => {
-            this.updateUser();
+            const token = res.data.token.accessToken;
+            this.$axios.setHeader("Authorization", "Bearer " + token);
+            this.$axios.setToken(token, "Bearer");
+            this.$store.commit("SETUSER", res.data.user);
             this.$toast.success("Logged In!");
           });
-        
       } catch (err) {
         this.$toast.error("Invalid Credentials!");
       }
@@ -236,16 +243,18 @@ export default {
           userInfo.username,
           userInfo.name,
           userInfo.password
-        )
+        );
         this.newUser = false;
         this.$toast.success("Registered!");
       }
-    },
-    async updateUser(){
-      await UserService.getUserData(this.$auth.user.username).then(res => {
-        this.$store.commit("SETUSER", res.data);
-      });
     }
+    // async updateUser() {
+    //   await UserService.getUserData(this.$store.state.user.username).then(
+    //     res => {
+    //       this.$store.commit("SETUSER", res.data);
+    //     }
+    //   );
+    // }
   }
 };
 </script>
