@@ -12,10 +12,11 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_toast_19a9c22e from 'nuxt_plugin_toast_19a9c22e' // Source: ./toast.js (mode: 'client')
-import nuxt_plugin_axios_4d79757f from 'nuxt_plugin_axios_4d79757f' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_toast_730b9fc1 from 'nuxt_plugin_toast_730b9fc1' // Source: ./toast.js (mode: 'client')
+import nuxt_plugin_axios_b24959dc from 'nuxt_plugin_axios_b24959dc' // Source: ./axios.js (mode: 'all')
 import nuxt_plugin_vuecytoscape_3ae5a3b8 from 'nuxt_plugin_vuecytoscape_3ae5a3b8' // Source: ../plugins/vue-cytoscape (mode: 'client')
-import nuxt_plugin_plugin_7b67b10a from 'nuxt_plugin_plugin_7b67b10a' // Source: ./auth/plugin.js (mode: 'all')
+import nuxt_plugin_localStorage_830ec59e from 'nuxt_plugin_localStorage_830ec59e' // Source: ../plugins/localStorage.js (mode: 'client')
+import nuxt_plugin_plugin_1f6f6a64 from 'nuxt_plugin_plugin_1f6f6a64' // Source: ./auth/plugin.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -168,20 +169,24 @@ async function createApp (ssrContext) {
 
   // Plugin execution
 
-  if (process.client && typeof nuxt_plugin_toast_19a9c22e === 'function') {
-    await nuxt_plugin_toast_19a9c22e(app.context, inject)
+  if (process.client && typeof nuxt_plugin_toast_730b9fc1 === 'function') {
+    await nuxt_plugin_toast_730b9fc1(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_axios_4d79757f === 'function') {
-    await nuxt_plugin_axios_4d79757f(app.context, inject)
+  if (typeof nuxt_plugin_axios_b24959dc === 'function') {
+    await nuxt_plugin_axios_b24959dc(app.context, inject)
   }
 
   if (process.client && typeof nuxt_plugin_vuecytoscape_3ae5a3b8 === 'function') {
     await nuxt_plugin_vuecytoscape_3ae5a3b8(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_plugin_7b67b10a === 'function') {
-    await nuxt_plugin_plugin_7b67b10a(app.context, inject)
+  if (process.client && typeof nuxt_plugin_localStorage_830ec59e === 'function') {
+    await nuxt_plugin_localStorage_830ec59e(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_plugin_1f6f6a64 === 'function') {
+    await nuxt_plugin_plugin_1f6f6a64(app.context, inject)
   }
 
   // If server-side, wait for async component to be resolved first

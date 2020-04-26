@@ -3,12 +3,12 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _36947b56 = () => interopDefault(import('../pages/community.vue' /* webpackChunkName: "pages/community" */))
-const _84cbc94e = () => interopDefault(import('../pages/login/index.vue' /* webpackChunkName: "pages/login/index" */))
-const _1a4d7146 = () => interopDefault(import('../pages/settings.vue' /* webpackChunkName: "pages/settings" */))
-const _5bd3ca3f = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
-const _59a0a4ac = () => interopDefault(import('../pages/_id/index.vue' /* webpackChunkName: "pages/_id/index" */))
-const _8546afb4 = () => interopDefault(import('../pages/_id/graph.vue' /* webpackChunkName: "pages/_id/graph" */))
+const _a8a5bcba = () => interopDefault(import('../pages/community.vue' /* webpackChunkName: "pages/community" */))
+const _4f226266 = () => interopDefault(import('../pages/login/index.vue' /* webpackChunkName: "pages/login/index" */))
+const _0d904d59 = () => interopDefault(import('../pages/settings.vue' /* webpackChunkName: "pages/settings" */))
+const _2ead9f0c = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _484853f7 = () => interopDefault(import('../pages/_id/index.vue' /* webpackChunkName: "pages/_id/index" */))
+const _32754e73 = () => interopDefault(import('../pages/_id/graph.vue' /* webpackChunkName: "pages/_id/graph" */))
 
 // TODO: remove in Nuxt 3
 const emptyFn = () => {}
@@ -28,27 +28,27 @@ export const routerOptions = {
 
   routes: [{
     path: "/community",
-    component: _36947b56,
+    component: _a8a5bcba,
     name: "community"
   }, {
     path: "/login",
-    component: _84cbc94e,
+    component: _4f226266,
     name: "login"
   }, {
     path: "/settings",
-    component: _1a4d7146,
+    component: _0d904d59,
     name: "settings"
   }, {
     path: "/",
-    component: _5bd3ca3f,
+    component: _2ead9f0c,
     name: "index"
   }, {
     path: "/:id",
-    component: _59a0a4ac,
+    component: _484853f7,
     name: "id"
   }, {
     path: "/:id/graph",
-    component: _8546afb4,
+    component: _32754e73,
     name: "id-graph"
   }],
 

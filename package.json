@@ -37,7 +37,8 @@
     "passport-instagram": "^1.0.0",
     "passport-twitter": "^1.0.4",
     "vue-cytoscape": "^1.0.6",
-    "vue-material-design-icons": "^4.1.0"
+    "vue-material-design-icons": "^4.1.0",
+    "vuex-persistedstate": "^3.0.1"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "^0.3.4",
