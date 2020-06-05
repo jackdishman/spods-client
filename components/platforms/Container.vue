@@ -1,51 +1,22 @@
 <template>
-  <div class="flex flex-col w-full">
-    <div v-for="x in this.user.socialLinks" :key="x.platform">
-      <div
-        v-if="
-          x.privacy == 0 ||
-            (x.privacy == 1 && isFriendOfFriend) ||
-            (followsBack && (x.privacy == 2 || x.privacy == 1)) ||
-            ($store.state.user !== null &&
-              user.username === $store.state.user.username)
-        "
-        class="p-2 border rounded"
-      >
-        <a
-          v-if="getGlobalConfig(x.platform).url && x.username"
-          :href="getGlobalConfig(x.platform).url + x.username"
-          target="_blank"
-          rel="noreferrer"
+  <section id="PlatformsContainer" class="bg-black">
+    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 p-4">
+      <div v-for="x in this.filteredList" :key="x.platform">
+        <article
+          class="h-24 flex flex-row items-center justify-center items-center border-t bg-white"
         >
-          <div class="flex flex-row">
-            <PlatformLogo
-              class="hvr-pulse pl-1 pr-1"
-              :platform="x.platform"
-              :privacy="x.privacy"
-            />
-            <div class="flex flex-col">
-              <h3 class="text-xs">
-                {{ getGlobalConfig(x.platform).handle + x.username }}
-              </h3>
-              <h3 class="text-sm">
-                Privacy Level:
-                <span class="text-green-500">
-                  {{ translatePrivacy(x.privacy) }}</span
-                >
-              </h3>
-              <h3 class="text-sm">
-                Clicks:
-              </h3>
-            </div>
-          </div>
-        </a>
+          <a :href="getURL(x.platform, x.username)" target="_blank" rel="noreferrer">
+            <PlatformLogo :platform="x.platform" />
+          </a>
+        </article>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
 import PlatformLogo from "@/components/platforms/PlatformLogo";
+
 import { mapState } from "vuex";
 
 export default {
@@ -57,13 +28,42 @@ export default {
     user: Object,
     isFollowing: Boolean,
     followsBack: Boolean,
-    isFriendOfFriend: Boolean
+    isFriendOfFriend: Boolean,
   },
+  data() {
+    return {
+      filteredList: []
+    };
+  },
+  created: function() {
+    for (var x in this.$props.user.socialLinks) {
+      if (
+        this.$props.user.socialLinks[x].privacy == 0 ||
+        (this.$props.user.socialLinks[x].privacy == 1 &&
+          this.$props.isFriendOfFriend) ||
+        (this.$props.followsBack &&
+          (this.$props.user.socialLinks[x].privacy == 2 ||
+            this.$props.user.socialLinks[x].privacy == 1)) ||
+        (this.$store.state.user !== null &&
+          this.$props.user.username === this.$store.state.user.username)
+      ) {
+        this.filteredList.push(this.$props.user.socialLinks[x]);
+      }
+    }
+  },
+
   methods: {
     getGlobalConfig(p) {
       let arr = this.$store.state.platforms;
       let obj = arr.find(o => o.name === p);
       return obj;
+    },
+    getURL(platform, username) {
+      // store.state.platforms url + username
+      let arr = this.$store.state.platforms;
+      let obj = arr.find(o => o.name === platform);
+      var url = obj.url + username;
+      return url;
     },
     translatePrivacy(privacyIndex) {
       switch (privacyIndex) {

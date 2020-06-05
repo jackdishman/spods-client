@@ -8,15 +8,15 @@ class AuthService {
         return axios.get(url + `/users/isExistingUser/${username}`);
     }
 
-    static login(username, password) {
-        axios.post(url + '/api/auth/login', { username, password })
-            .then(res => {
-                const token = res.data.token.accessToken;
-                if (token) {
-                    return token;
-                }
-            });
-    }
+    // static login(username, password) {
+    //     axios.post(url + '/api/auth/login', { username, password })
+    //         .then(res => {
+    //             const token = res.data.token.accessToken;
+    //             if (token) {
+    //                 return token;
+    //             }
+    //         });
+    // }
 
     // Create user
     static register(username, name, password) {

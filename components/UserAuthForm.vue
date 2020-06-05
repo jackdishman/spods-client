@@ -3,14 +3,6 @@
     class="flex flex-col self-center border border-green-500 rounded bg-white p-10 text-center"
   >
     <div class="flex flex-row justify-between">
-      <font-awesome-icon
-        class="mt-5"
-        :icon="['fas', 'undo']"
-        style="color:black"
-        v-if="newUser !== null"
-        @click="newUser = null"
-      />
-      <div v-else></div>
       <h2 class="spods text-4xl text-center mb-10 animated pulse delay-1s">
         Authenticate
       </h2>
@@ -37,9 +29,12 @@
           />
           <span
             v-else
+            @click="newUser = null"
             class="bg-gray-200 border border-green-500 rounded w-full py-2 px-4 text-gray-700 leading-tight"
           >
             {{ this.userInfo.username }}
+            
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 inline ml-1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
           </span>
         </div>
       </div>
@@ -168,6 +163,8 @@
 import AuthService from "@/middleware/AuthService";
 import UserService from "@/middleware/UserService";
 import { mapState } from "vuex";
+import url from "@/static/server.js";
+import axios from "axios";
 
 export default {
   data() {
@@ -187,45 +184,41 @@ export default {
   methods: {
     async verifyUsername() {
       var letters = /^[a-zA-Z\s\-]*$/;
+      var username = this.userInfo.username;
       if (
-        this.userInfo.username === "" ||
-        !letters.test(this.userInfo.username)
+        username === "" ||
+        !letters.test(username)
       ) {
         this.$toast.error("Only Letters and - allowed!");
         return;
       } else {
-        this.userInfo.username = this.userInfo.username.replace(/ /g, "-");
-        this.userInfo.username = this.userInfo.username.toLowerCase();
-        var res = await AuthService.isExistingUser(this.userInfo.username).then(
-          res => {
+        username = username.trim();
+        username = username.replace(/ /g, "-");
+        username = username.toLowerCase();
+        var res = await this.$axios
+          .get(url + "/users/isExistingUser/" + username)
+          .then(res => {
             if (res.data) {
               this.newUser = false;
             } else {
               this.newUser = true;
             }
-          }
-        );
+          });
       }
     },
     async submitLogin(userInfo) {
       userInfo.username = userInfo.username.toLowerCase();
       try {
         await this.$axios
-          .post("/api/auth/login", {
+          .post(url + "/api/auth/login", {
             username: userInfo.username,
             password: userInfo.password
           })
-          // await this.$auth
-          //   .loginWith("local", {
-          //     data: {
-          //       username: userInfo.username,
-          //       password: userInfo.password
-          //     }
-          //   })
           .then(res => {
             const token = res.data.token.accessToken;
             this.$axios.setHeader("Authorization", "Bearer " + token);
             this.$axios.setToken(token, "Bearer");
+            this.$store.commit("SETTOKEN",token);
             this.$store.commit("SETUSER", res.data.user);
             this.$toast.success("Logged In!");
           });
@@ -238,23 +231,19 @@ export default {
       if (userInfo.password.length < 8) {
         this.$toast.error("Password must be 8 chars long!");
         return;
-      } else {
-        await AuthService.register(
-          userInfo.username,
-          userInfo.name,
-          userInfo.password
-        );
-        this.newUser = false;
-        this.$toast.success("Registered!");
       }
+      if (userInfo.username.length < 3) {
+        this.$toast.error("Username must be at least 3 characters!");
+        return;
+      }
+      await AuthService.register(
+        userInfo.username,
+        userInfo.name,
+        userInfo.password
+      );
+      this.newUser = false;
+      this.$toast.success("Registered!");
     }
-    // async updateUser() {
-    //   await UserService.getUserData(this.$store.state.user.username).then(
-    //     res => {
-    //       this.$store.commit("SETUSER", res.data);
-    //     }
-    //   );
-    // }
   }
 };
 </script>

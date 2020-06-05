@@ -25,11 +25,6 @@ class UserService {
     });
   }
 
-  // Delete user
-  static deleteUser(id) {
-    return axios.delete(url + `/users/${id}`);
-  }
-
 }
 
 export default UserService;

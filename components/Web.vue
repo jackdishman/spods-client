@@ -2,13 +2,6 @@
   <div class="border border-green-500 rounded">
     <!-- Web -->
     <cytoscape
-      v-if="toggle"
-      :config="generateLinksData(user)"
-      :preConfig="preConfig"
-      :afterCreated="afterCreated"
-    ></cytoscape>
-    <cytoscape
-      v-else
       :config="generateConfig(user)"
       :preConfig="preConfig"
       :afterCreated="afterCreated"
@@ -17,7 +10,6 @@
 </template>
 
 <script>
-import MenuIcon from "vue-material-design-icons/Menu.vue";
 import cola from "cytoscape-cola";
 import { generateConfig } from "../assets/js/generateWebData";
 import { generateLinksData } from "../assets/js/generateLinksData";
@@ -26,18 +18,9 @@ import { mapState } from "vuex";
 
 export default {
   name: "Web",
-  components: {
-    MenuIcon
-  },
   props: {
     user: Object
   },
-  data() {
-    return {
-      toggle: false
-    };
-  },
-  // computed: mapState(["user"]),
   methods: {
     preConfig(cytoscape) {
       // cytoscape: this is the cytoscape constructor
@@ -47,18 +30,9 @@ export default {
     generateLinksData,
     afterCreated(cy) {
       cy.resize();
-      // cy.zoomingEnabled(false);
       cy.userZoomingEnabled(false);
       cy.fit();
     }
   }
 };
 </script>
-
-<style>
-#web {
-  position: absolute;
-  margin: auto;
-  text-align: center;
-}
-</style>

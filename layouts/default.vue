@@ -1,101 +1,115 @@
 <template>
-  <div class="relative m-0 p-0 h-screen flex flex-col flex-grow">
-    <!-- SPODS BRAND HEADER -->
-    <div class="z-50 w-full fixed top-0 border-b border-green-500 bg-white">
-      <!-- Logged In -->
-      <div v-if="$store.state.user !== null" class="">
-        <div class="flex lg:flex-row justify-between">
-          <nuxt-link to="/" class="spods text-center text-4xl hvr-forward pl-3">
-            spods
-          </nuxt-link>
-          <font-awesome-icon
-            v-if="!isMobileMenuOpen"
-            class="m-5 lg:hidden"
-            :icon="['fas', 'bars']"
-            style="color:black"
-            @click="toggleMobileNav()"
-          />
-          <font-awesome-icon
-            v-else
-            class="m-5 lg:hidden"
-            :icon="['fas', 'times']"
-            style="color:black"
-            @click="toggleMobileNav()"
-          />
-          <div class="hidden lg:block">
-            <nuxt-link
-              to="/community"
-              class="spods text-lg pr-2 hvr-hang text-green-500"
-            >
-              Community
-            </nuxt-link>
-            <!-- <nuxt-link
-              to="/web"
-              class="spods text-lg pr-2 hvr-hang text-green-500"
-            >
-              Web
-            </nuxt-link>
-            <nuxt-link
-              to="/settings"
-              class="spods text-lg pr-2 hvr-hang text-green-500"
-            >
-              Settings
-            </nuxt-link> -->
-            <button
-              @click="logout()"
-              class="hvr-grow bg-red-600 text-white font-bold border border-black rounded p-2 m-2 active:bg-red-600 hover:bg-red-400 hover:text-black focus:outline-none"
-            >
-              Log Out
-            </button>
-          </div>
-        </div>
-
-        <div>
-          <div
-            v-if="isMobileMenuOpen"
-            class="flex flex-col lg:hidden animated bounceInDown bg-transparent border border-gray-500"
-            @click="toggleMobileNav()"
+  <div>
+    <!-- Header -->
+    <div
+      class="w-full h-10 bg-black border-b border-gray-200 flex flex-row justify-between fixed top-0 z-50 opacity-75"
+    >
+      <!-- Profile Avatar Icon -->
+      <div class="mt-2 ml-2">
+        <nuxt-link
+          :to="$store.state.user.username"
+          class="text-white"
+          v-if="$store.state.user !== null"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-user"
           >
-            <nuxt-link
-              to="/community"
-              class="w-full spods text-lg text-center p-5 hvr-hang bg-green-500 border-b border-gray-100 font-bold"
-            >
-              Community
-            </nuxt-link>
-            <!-- <nuxt-link
-              to="/web"
-              class="w-full spods text-lg text-center p-5 hvr-hang bg-green-500 border-b border-gray-100 font-bold"
-            >
-              Web
-            </nuxt-link>
-            <nuxt-link
-              to="/settings"
-              class="w-full spods text-lg text-center p-5 hvr-hang bg-green-500 border-b border-gray-100 font-bold"
-            >
-              Settings
-            </nuxt-link> -->
-            <button
-              @click="logout()"
-              class="w-full spods bg-red-600 text-white text-center p-5 font-bold border border-black"
-            >
-              Log Out
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Logged Out -->
-      <div v-else>
-        <div></div>
-        <nuxt-link to="/" class="spods text-center">
-          <h2 class="text-4xl">spods</h2>
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
         </nuxt-link>
-        <div></div>
+        <div v-else></div>
       </div>
+      <div class="mt-1">
+        <nuxt-link to="/">
+          <h2 class="text-white spods text-lg">spods</h2>
+        </nuxt-link>
+      </div>
+      <div
+        v-if="$store.state.user !== null"
+        class="mt-2 mr-2 bg-black text-white"
+        @click="toggleMobileNav()"
+      >
+        <!-- Settings Icon -->
+        <svg
+          v-if="!isMobileMenuOpen"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="feather feather-settings"
+        >
+          <circle cx="12" cy="12" r="3"></circle>
+          <path
+            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+          ></path>
+        </svg>
+        <svg
+          v-else
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="feather feather-x-circle"
+        >
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="15" y1="9" x2="9" y2="15"></line>
+          <line x1="9" y1="9" x2="15" y2="15"></line>
+        </svg>
+      </div>
+      <div v-else></div>
     </div>
 
-    <!-- Content -->
-    <nuxt class="mt-12 pt-2 flex-grow" />
+    <div
+      v-if="isMobileMenuOpen"
+      class="w-full h-screen fixed mt-10 z-50"
+      @click="toggleMobileNav()"
+    >
+      <nuxt-link to="/edit">
+        <h3 class="w-full bg-black text-white spods p-5 text-center border-b border-white">
+          Edit Platforms
+        </h3>
+      </nuxt-link>
+
+      <nuxt-link to="/settings">
+        <h3 class="w-full bg-black text-white spods p-5 text-center border-b border-white">
+          Account Settings
+        </h3>
+      </nuxt-link>
+
+        <div @click="logout()">
+        <h3 class="w-full bg-red-500 text-black spods p-5 text-center border-b border-black">
+          Log Out
+          </h3>
+        </div>
+    </div>
+    <div v-else></div>
+
+    <!-- content -->
+    <nuxt class="pt-10 pb-12" />
+
+    <!-- Footer -->
+
+      <!-- <h4 class="text-white">{{ this.$route.params.id }}</h4> -->
   </div>
 </template>
 
@@ -105,61 +119,6 @@ import Vue from "vue";
 import SearchBar from "@/components/Search";
 import { mapState } from "vuex";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-  faSearch,
-  faTimes,
-  faUndo,
-  faBars
-} from "@fortawesome/free-solid-svg-icons";
-import {
-  faSpotify,
-  faFacebook,
-  faInstagram,
-  faLinkedin,
-  faSnapchat,
-  faTwitter,
-  faSoundcloud,
-  faGithub,
-  faQuora,
-  faReddit,
-  faSteam,
-  faTwitch,
-  faVimeo,
-  faXbox,
-  faPlaystation,
-  faYoutube
-} from "@fortawesome/free-brands-svg-icons";
-import {
-  FontAwesomeIcon,
-  FontAwesomeLayers,
-  FontAwesomeLayersText
-} from "@fortawesome/vue-fontawesome";
-
-library.add(
-  faSpotify,
-  faFacebook,
-  faInstagram,
-  faLinkedin,
-  faSnapchat,
-  faTwitter,
-  faSoundcloud,
-  faSearch,
-  faTimes,
-  faUndo,
-  faGithub,
-  faQuora,
-  faReddit,
-  faSteam,
-  faTwitch,
-  faVimeo,
-  faXbox,
-  faPlaystation,
-  faBars,
-  faYoutube
-);
-Vue.component("font-awesome-icon", FontAwesomeIcon);
-Vue.component("font-awesome-layers", FontAwesomeLayers);
-Vue.component("font-awesome-layers-text", FontAwesomeLayersText);
 
 export default {
   data() {
@@ -171,14 +130,12 @@ export default {
     },
     logout() {
       this.$axios.setHeader({ Authorization: "" });
+      this.$store.commit("SETTOKEN", null);
       this.$store.commit("SETUSER", null);
     }
   },
   computed: mapState(["isMobileMenuOpen", "CHANGETAB"]),
-  components: {
-    Logo,
-    SearchBar
-  }
+  components: {}
 };
 </script>
 

@@ -49,32 +49,14 @@ module.exports = {
      */
     modules: [
         '@nuxtjs/axios',
-        '@nuxtjs/auth',
+        // '@nuxtjs/auth',
         '@nuxtjs/toast',
-        '@nuxtjs/proxy',
+        // '@nuxtjs/proxy',
     ],
-    // serverMiddleware: ['./api/auth'],
-    auth: {
-        redirect: {
-            callback: '/callback',
-            login: '/',
-            logout: '/',
-        },
-        strategies: {
-            local: {
-                endpoints: {
-                    login: { url: '/api/auth/login', method: 'post', propertyName: 'token.accessToken' },
-                    logout: { url: '/api/auth/logout', method: 'post' },
-                    user: { url: '/api/auth/user', method: 'get', propertyName: 'authData.user' }
-                },
-                tokenType: 'Bearer',
-            }
-        }
-    },
     axios: {
-        // proxyHeaders: false
-        // baseURL: 'http://localhost:5000'
-        baseURL: 'https://spodserver.herokuapp.com'
+        proxy: true,
+        // baseURL: 'http://localhost:5000',
+        // baseURL: 'https://spodserver.herokuapp.com'
     },
     loading: {
         name: 'chasing-dots',

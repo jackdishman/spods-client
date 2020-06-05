@@ -4,11 +4,13 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _a8a5bcba = () => interopDefault(import('../pages/community.vue' /* webpackChunkName: "pages/community" */))
+const _53cf1a80 = () => interopDefault(import('../pages/edit.vue' /* webpackChunkName: "pages/edit" */))
 const _4f226266 = () => interopDefault(import('../pages/login/index.vue' /* webpackChunkName: "pages/login/index" */))
 const _0d904d59 = () => interopDefault(import('../pages/settings.vue' /* webpackChunkName: "pages/settings" */))
 const _2ead9f0c = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 const _484853f7 = () => interopDefault(import('../pages/_id/index.vue' /* webpackChunkName: "pages/_id/index" */))
 const _32754e73 = () => interopDefault(import('../pages/_id/graph.vue' /* webpackChunkName: "pages/_id/graph" */))
+const _1a1e2c84 = () => interopDefault(import('../pages/_id/share.vue' /* webpackChunkName: "pages/_id/share" */))
 
 // TODO: remove in Nuxt 3
 const emptyFn = () => {}
@@ -31,6 +33,10 @@ export const routerOptions = {
     component: _a8a5bcba,
     name: "community"
   }, {
+    path: "/edit",
+    component: _53cf1a80,
+    name: "edit"
+  }, {
     path: "/login",
     component: _4f226266,
     name: "login"
@@ -50,6 +56,10 @@ export const routerOptions = {
     path: "/:id/graph",
     component: _32754e73,
     name: "id-graph"
+  }, {
+    path: "/:id/share",
+    component: _1a1e2c84,
+    name: "id-share"
   }],
 
   fallback: false

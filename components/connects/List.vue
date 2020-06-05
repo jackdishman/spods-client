@@ -1,35 +1,40 @@
 <template>
-  <div class="border border-green-500 rounded">
+  <div class=" w-full border border-green-500 rounded">
+    <!-- Selector bar -->
     <div class="flex flex-row justify-around">
-      <span @click="tab = 'mutual'">Mutual ( {{ mutualList.length }} )</span>
-      <span @click="tab = 'following'"
+      <span v-if="tab == 'following'" class="text-green-500 text-bold text-xl"
         >Following ( {{ user.following.length }} )</span
       >
-      <span @click="tab = 'followers'"
+      <span v-else @click="tab = 'following'">Following</span>
+      <span v-if="tab == 'mutual'" class="text-green-500 text-bold text-xl"
+        >Mutual ( {{ mutualList.length }} )</span
+      >
+      <span v-else @click="tab = 'mutual'">Mutual</span>
+      <span v-if="tab == 'followers'" class="text-green-500 text-bold text-xl"
         >Followers ( {{ user.followers.length }} )</span
       >
+      <span v-else @click="tab = 'followers'">Followers </span>
     </div>
-    <div v-if="tab === 'mutual'">
-      <h3 class="text-2xl">Mutual</h3>
-      <div v-for="x in mutualList" :key="x.id">
-        <nuxt-link :to="x.username" class="hvr-forward">
-          {{ x.username }}
+
+    <!-- List -->
+    <div v-if="tab === 'mutual'" class="pl-1">
+      <div v-for="x in mutualList" :key="x">
+        <nuxt-link :to="x" class="hvr-forward">
+          {{ x }}
         </nuxt-link>
       </div>
     </div>
-    <div v-if="tab === 'following'">
-      <h3 class="text-2xl">Following</h3>
-      <div v-for="x in user.following" :key="x.id">
-        <nuxt-link :to="x.username" class="hvr-forward">
-          {{ x.username }}
+    <div v-if="tab === 'following'" class="pl-1">
+      <div v-for="x in user.following" :key="x">
+        <nuxt-link :to="x" class="hvr-forward">
+          {{ x }}
         </nuxt-link>
       </div>
     </div>
-    <div v-if="tab === 'followers'">
-      <h3 class="text-2xl">Followers</h3>
-      <div v-for="x in user.followers" :key="x.id">
-        <nuxt-link :to="x.username" class="hvr-forward">
-          {{ x.username }}
+    <div v-if="tab === 'followers'" class="pl-1">
+      <div v-for="x in user.followers" :key="x">
+        <nuxt-link :to="x" class="hvr-forward">
+          {{ x }}
         </nuxt-link>
       </div>
     </div>
@@ -54,10 +59,18 @@ export default {
   methods: {
     getMutualFollows(followers, following) {
       let mutualList = [];
-      for (const x in followers) {
-        for (const y in following) {
-          if (followers[x].username === following[y].username)
+      if(followers.length > following.length){
+        for(let x in following){
+          if(followers.includes(following[x])){
+            mutualList.push(following[x])
+          }
+        }
+      }
+      else{
+        for(let x in followers){
+          if(following.includes(followers[x])){
             mutualList.push(followers[x]);
+          }
         }
       }
       return mutualList;

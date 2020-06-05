@@ -1,11 +1,11 @@
 import axios from '@nuxtjs/axios';
 
 export const state = () => ({
-    'isSearchOpen': false,
-    "token": '',
+    "token": null,
     'user': null,
     'isMobileMenuOpen': false,
     'currentTab': '',
+    'pageHistory': [],
     "platforms": [{
         name: "email",
         url: "mailto:",
@@ -35,13 +35,13 @@ export const state = () => ({
         name: "spotify",
         url: "https://open.spotify.com/user/",
         color: "#1db954",
-        handle: "open.spotify.com/user/"
+        handle: "open.spotify.com/user/",
     },
     {
         name: "snapchat",
         url: "https://www.snapchat.com/add/",
         color: "#fffc00",
-        handle: "snapchat.com/add/"
+        handle: "snapchat.com/add/",
     },
     {
         name: "instagram",
@@ -60,7 +60,6 @@ export const state = () => ({
         url: "",
         color: "#69C9D0",
         hanndle: "@",
-        svg: true
     },
     {
         name: "venmo",
@@ -86,7 +85,6 @@ export const state = () => ({
         url: "",
         color: "#c41200",
         handle: "User ID:",
-        svg: true
     },
     {
         name: "skype",
@@ -100,7 +98,6 @@ export const state = () => ({
         url: "",
         color: "#c8232c",
         handle: "@",
-        svg: true
     },
     {
         name: "reddit",
@@ -134,22 +131,37 @@ export const state = () => ({
         handle: "twitch.tv/"
     },
     {
+        name: "applemusic",
+        url: ""
+    },
+    {
         name: "vimeo",
         url: "https://vimeo.com/",
         color: "#86c9ef",
         handle: "vimeo.com/"
     },
     {
+        name: "onlyfans",
+        url: "https://onlyfans.com/",
+        handle: ''
+    },
+    {
         name: "xbox",
         url: "",
-        handle: "Gamertag:"
+        handle: "Gamertag: "
     },
     {
         url: "",
         name: "playstation",
-        handle: "Gamertag:"
+        handle: "Gamertag: "
+    },
+    {
+        url: "https://poshmark.com/closet/",
+        name: "poshmark",
+        handle: ''
     }
     ],
+    
 });
 
 // export const actions = {
@@ -170,10 +182,10 @@ export const mutations = {
     TOGGLEMOBILEMENU(state) {
         state.isMobileMenuOpen = !state.isMobileMenuOpen
     },
-    SETTOKEN(state, { newToken }) {
+    SETTOKEN(state, newToken) {
         state.token = newToken;
     },
     SETUSER(state, list) {
         state.user = list
-    },
+    }
 }

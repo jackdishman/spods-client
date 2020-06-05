@@ -82,21 +82,22 @@ export function generateConfig(user) {
     };
 
     //generate nodes
+    // Mutual
     for (const x in user.following) {
         for (const y in user.followers) {
             if (user.following[x].username === user.followers[y].username) {
-                res.elements.nodes.push({ "data": { "type": "mutual", "id": user.following[x].username, "label": user.following[x].name, "socialList": user.following[x].socialList } });
-                res.elements.edges.push({ "data": { "type": "mutual", "id": "e-" + user.following[x].username, "source": user.following[x].username, "target": user.username } });
+                res.elements.nodes.push({ "data": { "type": "mutual", "id": user.following[x], "label": user.following[x], "socialList": user.following[x] } });
+                res.elements.edges.push({ "data": { "type": "mutual", "id": "e-" + user.following[x], "source": user.following[x], "target": user.username } });
             }
         }
     }
     for (var i = 0; i < user.following.length; i++) {
-        res.elements.nodes.push({ "data": { "type": "following", "id": user.following[i].username, "label": user.following[i].name, "socialList": user.following[i].socialList } });
-        res.elements.edges.push({ "data": { "type": "following", "id": "e-" + user.following[i].username, "source": user.following[i].username, "target": user.username } });
+        res.elements.nodes.push({ "data": { "type": "following", "id": user.following[i], "label": user.following[i], "socialList": user.following[i] } });
+        res.elements.edges.push({ "data": { "type": "following", "id": "e-" + user.following[i], "source": user.following[i], "target": user.username } });
     }
     for (var j = 0; j < user.followers.length; j++) {
-        res.elements.nodes.push({ "data": { "type": "followers", "id": user.followers[j].username, "label": user.followers[j].name } });
-        res.elements.edges.push({ "data": { "type": "followers", "id": "e-" + user.followers[j].username, "source": user.followers[j].username, "target": user.username } });
+        res.elements.nodes.push({ "data": { "type": "followers", "id": user.followers[j], "label": user.followers[j] } });
+        res.elements.edges.push({ "data": { "type": "followers", "id": "e-" + user.followers[j], "source": user.followers[j], "target": user.username } });
     }
     return res;
 }

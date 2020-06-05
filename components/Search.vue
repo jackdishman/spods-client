@@ -1,65 +1,38 @@
 <template>
-  <!-- Search User -->
   <div>
-    <div v-if="isSearchOpen" class="pt-2 relative mx-auto text-gray-600">
-      <input
-        class="spods border-2 border-gray-300 bg-white h-10 pl-2 pr-16 rounded-lg text-sm focus:outline-none focus:bg-green-100 focus:border-green-500"
-        type="search"
-        name="search"
-        v-model="target"
-        placeholder="Search spods"
-      />
-      <button
-        type="submit"
-        class="absolute right-0 top-0 mt-4 mr-4 outline-none focus:shadow-outline "
-        @click="searchUser(target)"
-      >
-        <font-awesome-icon
-          :icon="['fa', 'search']"
-          size="1x"
-          style="color:gray"
-        />
-      </button>
-
-      <font-awesome-icon
-        @click="closeSearchBar"
-        :icon="['fas', 'times']"
-        size="1x"
-        style="color:gray"
-      />
-    </div>
-    <div v-else @click="closeSearchBar">
-      <font-awesome-icon
-        :icon="['fa', 'search']"
-        size="1x"
-        style="color:gray"
-      />
-    </div>
+    <input id="searchInput" type="text" class="border shadow rounded border-0 p-3" placeholder="Search..." @keyup="">
+    <button @click="searchUser" class="p-3 border bg-green-500 rounded border">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    </button>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import url from "@/static/server.js";
 
 export default {
-  data: function() {
-    return {
-      target: "",
-      isOpen: false
-    };
-  },
+  name: 'SearchBar',
   methods: {
-    searchUser() {
-      console.log(this.target);
+    async searchUser() {
+      var letters = /^[a-zA-Z\s\-]*$/;
+      var username = document.getElementById('searchInput').value; 
+      if (
+        username === "" ||
+        !letters.test(username)
+      ) {
+        this.$toast.error("Only Letters and - allowed!");
+        return;
+      } else {
+        username = username.trim();
+        username = username.replace(/ /g, "-");
+        username = username.toLowerCase();
+        var res = await this.$axios
+          .get(url + "/users/isExistingUser/" + username)
+          .then(res => {
+            console.log(res);
+          });
+      }
     }
   },
-  computed: mapState(["isSearchOpen"]),
-  methods: {
-    closeSearchBar() {
-      this.$store.commit("TOGGLESEARCHBAR");
-    }
-  }
 };
 </script>
-
-<style lang="stylus"></style>

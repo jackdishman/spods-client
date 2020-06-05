@@ -1,52 +1,66 @@
 <template>
-  <div class="w-full spods bg-gray-100">
+  <div class="w-full bg-black">
     <!-- Logged in users -->
-    <div v-if="$store.state.user">
-      <div class="flex flex-col lg:flex-row justify-between items-center pt-10">
-        <!-- Left col -->
-        <h2 class="order-2 lg:order-first"></h2>
-        <!-- Center col -->
-        <nuxt-link :to="$store.state.user.username">
-          <div
-            class="border border-green-500 rounded bg-white p-3 hvr-grow order-first lg:order-2"
-          >
-            <h2 class="text-3xl text-center spods">
-              {{ $store.state.user.name }}
-            </h2>
-            <p class="text-md text-center spods text-green-500">
-              View your Profile
-            </p>
-          </div>
-        </nuxt-link>
-        <!-- Right col -->
-        <div></div>
-      </div>
+    <div v-if="$store.state.user" class="flex flex-col">
+      <!-- View Profile -->
+      <nuxt-link
+        :to="$store.state.user.username"
+        class="border-2 m-2 border-green-500 rounded bg-white p-3 m-5 hvr-grow"
+      >
+        <h2 class="text-3xl text-center spods text-black">
+          {{ $store.state.user.name }}
+        </h2>
+        <p class="text-md text-center spods text-green-500">
+          View your Profile
+        </p>
+      </nuxt-link>
 
-      <PlatformSettings
-        class="mt-10 p-3 animated bounceInUp flex w-full flex-row justify-around lg:fixed bottom-0 border-t border-b border-green-500 bg-white"
-        :existingProfileList="$store.state.user.socialLinks"
-      />
+      <!-- Edit Platforms -->
+      <nuxt-link
+        to="/edit"
+        class="border-2 m-2 border-green-500 rounded bg-white p-3 m-5 hvr-grow"
+      >
+        <h3 class="text-3xl text-center spods text-black">
+          Edit Platforms
+        </h3>
+      </nuxt-link>
+
+      <!-- Account Settings -->
+      <nuxt-link
+        to="/settings"
+        class="border-2 m-2 border-green-500 rounded bg-white p-3 m-5 hvr-grow"
+      >
+        <h3 class="text-3xl text-center spods text-black">
+          Account Settings
+        </h3>
+      </nuxt-link>
+
+      <!-- Log Out -->
+      <button @click="logout()" class="text-black bg-red-500 border-2 m-2 border-white rounded p-3 m-5 hvr-grow">
+        <h3 class="text-3xl text-center spods text-black">
+          Log Out
+        </h3>
+      </button>
+
+      <!-- Search Users -->
+      <!-- View Community -->
+      <!-- Questionnaire -->
     </div>
 
     <!-- Logged out / unregistered user -->
     <div v-else>
-      <p class="text-center p-5">
-        Linking all your social media accounts for one universal contact web
-      </p>
+      <section class="bg-white text-black">
+        <h1 class="spods text-3xl text-center">spods</h1>
+        <p class="text-base spods text-center">
+          Link all your social media accounts for one universal contact web
+        </p>
+        <h4 class="text-xl text-green-500 bg-black text-center m-5 rounded-t border-t-2 pt-2 border-l-2 border-r-2 border-green-500 spods">Social Platform Organizational Domain System</h4>
+      </section>
       <div
         class="flex flex-col md:flex-row flex-wrap justify-around items-center"
       >
         <div class="flex flex-col flex-shrink-0 mb-10 lg:mb-0">
           <UserAuthForm />
-        </div>
-        <div
-          class="flex flex-col spods bg-white border-green-500 border rounded p-10 "
-        >
-          <h3 class="text-xl"><span class="text-3xl">s</span>ocial</h3>
-          <h3 class="text-xl"><span class="text-3xl">p</span>latform</h3>
-          <h3 class="text-xl"><span class="text-3xl">o</span>rganization</h3>
-          <h3 class="text-xl"><span class="text-3xl">d</span>omain</h3>
-          <h3 class="text-xl"><span class="text-3xl">s</span>ystem</h3>
         </div>
       </div>
 
@@ -57,7 +71,7 @@
           class="w-full pt-2 lg:w-1/4 text-center m-2 p-2 lg:p-5 lg:m-0 border border-green-500 bg-white rounded"
         >
           <h2 class="text-2xl pt-1">Privacy</h2>
-          <p class="text-md">
+          <p class="text-sm">
             All social media credentials are verified every time you login,
             always using the present-leading technologies of web security
             (oAuth2.0)
@@ -91,13 +105,16 @@
 <script>
 import { mapState } from "vuex";
 import UserAuthForm from "@/components/UserAuthForm";
-import PlatformSettings from "@/components/platforms/Settings";
+import ExportURL from "@/components/ExportURL";
+import Search from "@/components/Search";
 import UserService from "@/middleware/UserService";
 
 export default {
+  layout: "homepage",
   components: {
     UserAuthForm,
-    PlatformSettings
+    ExportURL,
+    Search
   },
   async created() {
     if (this.$store.state.user) {
@@ -112,7 +129,14 @@ export default {
       }
     }
   },
-  computed: mapState(["user", "isLoggedIn"])
+  computed: mapState(["user", "isLoggedIn"]),
+  methods: {
+    logout() {
+      this.$axios.setHeader({ Authorization: "" });
+      this.$store.commit("SETTOKEN", null);
+      this.$store.commit("SETUSER", null);
+    }
+  }
   // middleware:['index']
 };
 </script>
