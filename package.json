@@ -1,7 +1,10 @@
 {
   "name": "spods",
   "version": "1.0.0",
-  "description": "My groundbreaking Nuxt.js project",
+  "engines": {
+    "node": "12.16.3"
+  },
+  "description": "social platform organizational domain system",
   "author": "Jack Dishman",
   "private": true,
   "scripts": {
