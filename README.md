@@ -1,6 +1,6 @@
 # spods
 
-> My groundbreaking Nuxt.js project
+> Social Platform Organizational Domain System
 
 ## Build Setup
 

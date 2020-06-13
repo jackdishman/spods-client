@@ -60,7 +60,6 @@ export default {
   components: {
     QRCode,
     ExportURL
-  },
-  layout: "profile"
+  }
 };
 </script>
