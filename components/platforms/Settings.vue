@@ -88,7 +88,10 @@
     </div>
 
     <!-- Step 2: Username field, privacy settings, add/rem -->
-    <section v-if="step === 1" class="bg-white py-5 border-b-4 border-t-4 border-green-500">
+    <section
+      v-if="step === 1"
+      class="bg-white py-5 border-b-4 border-t-4 border-green-500"
+    >
       <!-- Top Info callout -->
       <article>
         <PlatformLogo :platform="platform.name" class="items-center" />
@@ -113,7 +116,9 @@
         </div>
       </article>
       <!-- SELECT PRIVACY TIER -->
-      <article class="flex justify-center items-center my-5">
+      <article class=" my-5">
+        <p class="text-center text-green-500">Who would you like this visible to?</p>
+        <div class="flex justify-center items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -129,16 +134,33 @@
           <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
           <circle cx="12" cy="12" r="3"></circle>
         </svg>
-        <select
-          v-model="privacy"
-          class="border spods p-2 border-green-500 bg-gray-200 focus:outline-none rounded"
-        >
-          <option value="" disabled selected>Select Privacy</option>
-          <option value="0" selected>Public</option>
-          <!-- <option value="1">Friends of Friends</option> -->
-          <option value="2">Following List</option>
-          <option value="3">Private</option>
-        </select>
+          <select
+            v-model="privacy"
+            class="border spods p-2 border-green-500 bg-gray-200 focus:outline-none rounded"
+          >
+            <option value="" disabled selected>Select Privacy</option>
+            <option value="0" selected>Public</option>
+            <!-- <option value="1">Friends of Friends</option> -->
+            <option value="2">Following List</option>
+            <option value="3">Private</option>
+          </select>
+          </div>
+          <table class="m-5">
+            <tr class="border-b border-green-500">
+              <td class="border-r border-green-500 spods">Public</td>
+              <td class="p-2">Everyone who visits spods.app/{{
+                $store.state.user.username
+              }}</td>
+            </tr>
+            <tr class="border-b border-green-500">
+              <td td class="border-r border-green-500 spods">Following List</td>
+              <td class="p-2">Only people you follow on spods.app</td>
+            </tr>
+            <tr>
+              <td td class="border-r border-green-500 spods">Private</td>
+              <td class="p-2">This is only visible to you</td>
+            </tr>
+          </table>
       </article>
       <!-- BOTTOM ACTIONS BAR -->
       <article class="flex flex-row justify-around">
