@@ -35,8 +35,21 @@
         </h3>
       </nuxt-link>
 
+      <!-- Community -->
+      <nuxt-link
+        to="/community"
+        class="border-2 m-2 border-green-500 rounded bg-white p-3 m-5 hvr-grow"
+      >
+        <h3 class="text-3xl text-center spods text-black">
+          Community
+        </h3>
+      </nuxt-link>
+
       <!-- Log Out -->
-      <button @click="logout()" class="text-black bg-red-500 border-2 m-2 border-white rounded p-3 m-5 hvr-grow">
+      <button
+        @click="logout()"
+        class="text-black bg-red-500 border-2 m-2 border-white rounded p-3 m-5 hvr-grow"
+      >
         <h3 class="text-3xl text-center spods text-black">
           Log Out
         </h3>
@@ -49,23 +62,27 @@
 
     <!-- Logged out / unregistered user -->
     <div v-else>
-      <section class="bg-white text-black">
-        <h1 class="spods text-3xl text-center">spods</h1>
-        <p class="text-base spods text-center">
-          Link all your social media accounts for one universal contact web
+      <section>
+        <h1 class="spods text-5xl text-center text-green-500">spods</h1>
+        <p class="text-base spods text-center text-white p-5">
+          Link all your social media accounts for one universal contact web with
         </p>
-        <h4 class="text-xl text-green-500 bg-black text-center m-5 rounded-t border-t-2 pt-2 border-l-2 border-r-2 border-green-500 spods">Social Platform Organizational Domain System</h4>
       </section>
       <div
         class="flex flex-col md:flex-row flex-wrap justify-around items-center"
       >
-        <div class="flex flex-col flex-shrink-0 mb-10 lg:mb-0">
+        <div class="flex flex-col flex-shrink-0">
           <UserAuthForm />
         </div>
+        <h4
+          class="text-xl text-green-500 bg-black text-center m-5 rounded-t pt-2 spods"
+        >
+          Social Platform Organizational Domain System
+        </h4>
       </div>
 
       <div
-        class="flex flex-row flex-wrap justify-around items-baseline pt-5 mt-10"
+        class="flex flex-row flex-wrap justify-around items-baseline"
       >
         <div
           class="w-full pt-2 lg:w-1/4 text-center m-2 p-2 lg:p-5 lg:m-0 border border-green-500 bg-white rounded"

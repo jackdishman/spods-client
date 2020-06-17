@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="h-screen bg-black">
     <div v-if="$store.state.user !== null">
       <PlatformSettings />
     </div>

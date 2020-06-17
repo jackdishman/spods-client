@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col hvr-grow">
+  <div class="flex flex-col">
     <span v-if="this.platformConfig.svg">
       <!-- email SVG -->
       <svg

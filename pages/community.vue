@@ -1,18 +1,15 @@
 <template>
   <div class="p-10">
-    Add a Friend:
     <div
-      class="m-1 p-1 bg-gray-100 border border-black w-32"
+      class="m-1 p-1 text-center"
       v-for="(user, index) in users"
       v-bind:item="user"
       v-bind:index="index"
       v-bind:key="user._id"
       v-on:dblclick="deleteUser(user._id)"
     >
-      <nuxt-link :to="user.username" >
-        <h2 class='text-l'>
+      <nuxt-link :to="user.username" class='text-lg text-green-500'>
         {{ user.name }}
-        </h2>
       </nuxt-link>
     </div>
     <h3 v-if="error">{{ error }}</h3>

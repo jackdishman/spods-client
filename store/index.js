@@ -57,7 +57,7 @@ export const state = () => ({
     },
     {
         name: "tiktok",
-        url: "",
+        url: false,
         color: "#69C9D0",
         hanndle: "@",
     },
@@ -82,20 +82,20 @@ export const state = () => ({
     },
     {
         name: "yelp",
-        url: "",
+        url: false,
         color: "#c41200",
         handle: "User ID:",
     },
     {
         name: "skype",
-        url: "",
+        url: false,
         color: "#00aff0",
         handle: "User ID:",
         svg: true
     },
     {
         name: "pinterest",
-        url: "",
+        url: false,
         color: "#c8232c",
         handle: "@",
     },
@@ -132,7 +132,7 @@ export const state = () => ({
     },
     {
         name: "applemusic",
-        url: ""
+        url: false
     },
     {
         name: "vimeo",
@@ -147,11 +147,11 @@ export const state = () => ({
     },
     {
         name: "xbox",
-        url: "",
+        url: false,
         handle: "Gamertag: "
     },
     {
-        url: "",
+        url: false,
         name: "playstation",
         handle: "Gamertag: "
     },

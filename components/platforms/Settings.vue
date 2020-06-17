@@ -6,15 +6,36 @@
         Add Platform:
       </h2>
       <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 p-4">
-        <button
+        <span
           v-for="platform in getUnenrolledPlatforms"
           :key="platform.name"
-          class="p-1 border bg-white"
-          @click="selectPlatform(platform)"
+          class="p-1 border bg-white flex flex-col items-center"
         >
           <PlatformLogo :platform="platform.name" />
           <h4 class="text-md">{{ platform.name }}</h4>
-        </button>
+          <button
+            @click="selectPlatform(platform)"
+            class="shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white rounded hvr-grow"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-plus-square"
+            >
+              <title>Add {{ platform.name }} Button</title>
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="12" y1="8" x2="12" y2="16"></line>
+              <line x1="8" y1="12" x2="16" y2="12"></line>
+            </svg>
+          </button>
+        </span>
       </div>
 
       <!-- Remove Platforms -->
@@ -22,91 +43,150 @@
         <h2 class="text-center pb-2 text-green-500 bold text-2xl">
           Existing Platforms:
         </h2>
-        <div class="flex flex-col lg:flex-row flex-wrap justify-center">
+        <div class="">
           <div
             v-for="platform in this.$store.state.user.socialLinks"
             :key="platform.name"
-            class="grid grid-cols-4 bg-gray-100 px-5 py-1 m-1 border border-green-500 rounded justify-between"
+            class="bg-gray-100 pl-5 py-1 m-2 border border-green-500 rounded grid grid-cols-3"
           >
             <span>
               <PlatformLogo :platform="platform.platform" />
             </span>
-            <h6 class="text-lg">{{ platform.username }}</h6>
-            <h6 class="text-lg">
-              {{ translatePrivacy(platform.privacy) }}
-            </h6>
-            <button
-              @click="remove(platform.platform, platform.username)"
-              class="shadow bg-red-500 hover:bg-red-400 focus:shadow-outline focus:outline-none text-white hover:text-black font-bold py-1 px-2 rounded hvr-grow"
-            >
-              Remove
-            </button>
+            <span>
+              <h6 class="text-lg">{{ platform.username }}</h6>
+              <h6 class="text-lg">
+                {{ translatePrivacy(platform.privacy) }}
+              </h6>
+            </span>
+            <span class="p-5">
+              <button
+                @click="remove(platform.platform, platform.username)"
+                class="float-right shadow bg-red-500 hover:bg-red-400 focus:shadow-outline focus:outline-none text-white rounded hvr-grow"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feather feather-x-square"
+                >
+                  <title>Remove Platform</title>
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="9" y1="9" x2="15" y2="15"></line>
+                  <line x1="15" y1="9" x2="9" y2="15"></line>
+                </svg>
+              </button>
+            </span>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Step 2: Username field, privacy settings, add/rem -->
-    <div v-if="step === 1">
-      <!-- Back Button -->
-      <svg
-        @click="handleBack()"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="feather feather-rotate-ccw"
-      >
-        <polyline points="1 4 1 10 7 10"></polyline>
-        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
-      </svg>
-
-      <h2 class="text-center pb-2">Add your {{ platform.name }} handle:</h2>
-      <div
-        class="text-lg bg-gray-200 border rounded p-2 text-gray-700 leading-tight border-green-500 m-2"
-      >
-        <span class="">
-          {{ this.platform.handle }}
-        </span>
-        <input
-          class="focus:outline-none bg-gray-200 border-green-500"
-          type="text"
-          placeholder="username"
-          v-model="username"
-        />
-      </div>
-      <div class="inline-block">
+    <section v-if="step === 1" class="bg-white py-5 border-b-4 border-t-4 border-green-500">
+      <!-- Top Info callout -->
+      <article>
+        <PlatformLogo :platform="platform.name" class="items-center" />
+        <h2 class="text-center pb-2 text-lg text-green-500">
+          Add your {{ platform.name }} handle:
+        </h2>
+      </article>
+      <!-- Input Field -->
+      <article class="flex justify-center">
+        <div
+          class="text-lg bg-gray-200 border rounded p-2 text-gray-700 leading-tight border-green-500 mx-5"
+        >
+          <span class="text-sm sm:text-base">
+            {{ this.platform.handle }}
+          </span>
+          <input
+            class="focus:outline-none bg-gray-200 border-green-500 w-32"
+            type="text"
+            placeholder="username"
+            v-model="username"
+          />
+        </div>
+      </article>
+      <!-- SELECT PRIVACY TIER -->
+      <article class="flex justify-center items-center my-5">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="feather feather-eye mr-3"
+        >
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
         <select
           v-model="privacy"
-          class="border border-green-500 bg-gray-200 focus:outline-none"
+          class="border spods p-2 border-green-500 bg-gray-200 focus:outline-none rounded"
         >
+          <option value="" disabled selected>Select Privacy</option>
           <option value="0" selected>Public</option>
           <!-- <option value="1">Friends of Friends</option> -->
           <option value="2">Following List</option>
           <option value="3">Private</option>
         </select>
-      </div>
-      <a
-        v-if="platform.url && username"
-        :href="platform.url + username"
-        target="_blank"
-        rel="noreferrer"
-        class="shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white hover:text-black font-bold py-2 px-4 rounded hvr-grow"
-      >
-        Test Link
-      </a>
-      <button
-        @click="login(platform.name, username, privacy)"
-        class="shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white hover:text-black font-bold py-2 px-4 rounded hvr-grow"
-      >
-        Add
-      </button>
-    </div>
+      </article>
+      <!-- BOTTOM ACTIONS BAR -->
+      <article class="flex flex-row justify-around">
+        <!-- Back Button -->
+        <button
+          @click="handleBack()"
+          class="shadow bg-black hover:bg-gray-500 focus:shadow-outline focus:outline-none text-white hover:text-black font-bold py-2 px-4 rounded hvr-grow"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-rotate-ccw"
+          >
+            <title>Back button to Edit Platforms</title>
+            <polyline points="1 4 1 10 7 10"></polyline>
+            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+          </svg>
+        </button>
+        <a
+          v-if="platform.url && username"
+          :href="platform.url + username"
+          target="_blank"
+          rel="noreferrer"
+          class="shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white hover:text-black font-bold py-2 px-4 rounded hvr-grow"
+        >
+          Test Link
+        </a>
+        <button
+          v-else-if="platform.url"
+          class="opacity-50 cursor-not-allowed shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white hover:text-black font-bold py-2 px-4 rounded"
+        >
+          Test Link
+        </button>
+        <button
+          @click="login(platform.name, username, privacy)"
+          class="shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white hover:text-black font-bold py-2 px-4 rounded hvr-grow"
+        >
+          Add
+        </button>
+      </article>
+    </section>
     <!-- 2b. Add a new social media section -->
   </section>
 </template>
@@ -166,36 +246,44 @@ export default {
       return true;
     },
     async login(platform, username, privacy) {
-      const DNA = this.$store.state.user._id;
-      // Disable authentication until v2.0
-      // if(
-      //   platform === 'spotify' ||
-      //   platform === 'facebook' ||
-      //   platform === 'twitter' ||
-      //   platform === 'linkedin' ||
-      //   platform === 'instagram' ||
-      //   platform === 'snapchat'
-      // ){
-      //   window.location.href = (url + '/api/' + platform);
-      // }
-      this.$axios.setHeader("Authorization", this.$store.state.token);
-      this.$axios.setToken(this.$store.state.token, "Bearer");
-      try {
-        await this.$axios
-          .post(url + "/api/auth/platform", {
-            DNA,
-            platform,
-            username,
-            privacy
-          })
-          .then(res => {
-            this.updateUser();
-            this.$toast.success("Platform Added!");
-            this.step = 0;
-            // this.$router.push("/");
-          });
-      } catch (err) {
-        this.$toast.error("Couldn't add Platform");
+      if (username === "") {
+        this.$toast.error("Username contains Invalid Characters!");
+        return;
+      } else if (privacy === "") {
+        this.$toast.error("Select Privacy Level!");
+        return;
+      } else {
+        const DNA = this.$store.state.user._id;
+        // Disable authentication until v2.0
+        // if(
+        //   platform === 'spotify' ||
+        //   platform === 'facebook' ||
+        //   platform === 'twitter' ||
+        //   platform === 'linkedin' ||
+        //   platform === 'instagram' ||
+        //   platform === 'snapchat'
+        // ){
+        //   window.location.href = (url + '/api/' + platform);
+        // }
+        this.$axios.setHeader("Authorization", this.$store.state.token);
+        this.$axios.setToken(this.$store.state.token, "Bearer");
+        try {
+          await this.$axios
+            .post(url + "/api/auth/platform", {
+              DNA,
+              platform,
+              username,
+              privacy
+            })
+            .then(res => {
+              this.updateUser();
+              this.$toast.success("Platform Added!");
+              this.step = 0;
+              // this.$router.push("/");
+            });
+        } catch (err) {
+          this.$toast.error("Couldn't add Platform");
+        }
       }
     },
     async remove(platform, username) {

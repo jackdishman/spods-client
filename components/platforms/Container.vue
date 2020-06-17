@@ -5,9 +5,15 @@
         <article
           class="h-24 flex flex-row items-center justify-center items-center border-t bg-white"
         >
-          <a :href="getURL(x.platform, x.username)" target="_blank" rel="noreferrer">
-            <PlatformLogo :platform="x.platform" />
-          </a>
+          <div v-if="!getURL(x.platform, x.username) == false">
+            <a :href="getURL(x.platform, x.username)" target="_blank" rel="noreferrer">
+              <PlatformLogo :platform="x.platform" class="hvr-grow" />
+            </a>
+          </div>
+          <div v-else class="flex flex-col items-center">
+            <PlatformLogo :platform="x.platform" class="hvr-grow" />
+            <h4 class="text-center spods text-xs">{{ x.username }}</h4>
+          </div>
         </article>
       </div>
     </div>
@@ -62,8 +68,12 @@ export default {
       // store.state.platforms url + username
       let arr = this.$store.state.platforms;
       let obj = arr.find(o => o.name === platform);
-      var url = obj.url + username;
-      return url;
+      if(obj.url == false){
+        return false;
+      }else{
+        var url = obj.url + username;
+        return url;
+      }
     },
     translatePrivacy(privacyIndex) {
       switch (privacyIndex) {

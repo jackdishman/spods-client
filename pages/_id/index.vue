@@ -1,27 +1,20 @@
 <template>
-  <div class="w-full h-full">
+  <div class="w-full h-screen">
     <!-- LOGGED IN -->
     <div v-if="userData">
       <!-- HEADER -->
-      <div class="pt-5 pb-5 sticky top-0">
+      <div class="pt-5 pb-5 sticky top-0 flex flex-row justify-center">
         <!-- User Name -->
-        <h1 class="text-3xl text-center spods">
+        <h1 class="text-3xl text-white text-center spods mr-5">
           {{ userData.name }}
         </h1>
-      </div>
-
-      <!-- Connect / Share -->
-      <div class="flex flex-row">
-        <span class="w-1/2">
-          <div class="w-full">
-            <ConnectsContainer
-              :user="userData"
-              :isFollowing="isFollowing()"
-              :followsBack="followsBack()"
-              @update="fetchTargetUser"
-            />
-          </div>
-        </span>
+        <!-- Connect / Share -->
+        <ConnectsContainer
+          :user="userData"
+          :isFollowing="isFollowing()"
+          :followsBack="followsBack()"
+          @update="fetchTargetUser"
+        />
       </div>
 
       <!-- MAIN CONTAINER -->
@@ -82,7 +75,7 @@
           <button
             v-else
             @click="connectionTab = 'list'"
-            class="w-1/2 px-5 text-white py-2 flex justify-center"
+            class="w-1/2 px-5 text-white py-2 flex justify-center focus:outline-none"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -130,7 +123,7 @@
           <button
             v-else
             @click="connectionTab = 'web'"
-            class="w-1/2 px-5 text-white py-2 flex justify-center"
+            class="w-1/2 px-5 text-white py-2 flex justify-center focus:outline-none"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

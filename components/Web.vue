@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-green-500 rounded">
+  <div class="border-t-4 border-green-500 bg-white">
     <!-- Web -->
     <cytoscape
       :config="generateConfig(user)"

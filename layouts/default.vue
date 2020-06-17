@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="bg-black">
     <!-- Header -->
     <div
       class="w-full h-10 bg-black border-b border-gray-200 flex flex-row justify-between fixed top-0 z-50 opacity-75"
     >
       <!-- Profile Avatar Icon -->
-      <div class="mt-2 ml-2">
+      <div class="m-2">
         <nuxt-link
           :to="$store.state.user.username"
           class="text-white"
@@ -29,14 +29,14 @@
         </nuxt-link>
         <div v-else></div>
       </div>
-      <div class="mt-1">
+      <div class="m-2">
         <nuxt-link to="/">
           <h2 class="text-white spods text-lg">spods</h2>
         </nuxt-link>
       </div>
-      <div
+      <button
         v-if="$store.state.user !== null"
-        class="mt-2 mr-2 bg-black text-white"
+        class="m-2 bg-black text-white"
         @click="toggleMobileNav()"
       >
         <!-- Settings Icon -->
@@ -75,7 +75,7 @@
           <line x1="15" y1="9" x2="9" y2="15"></line>
           <line x1="9" y1="9" x2="15" y2="15"></line>
         </svg>
-      </div>
+      </button>
       <div v-else></div>
     </div>
 
@@ -97,9 +97,9 @@
       </nuxt-link>
 
         <div @click="logout()">
-        <h3 class="w-full bg-red-500 text-black spods p-5 text-center border-b border-black">
+        <button class="w-full bg-red-500 text-black spods p-5 text-center border-b border-black">
           Log Out
-          </h3>
+          </button>
         </div>
     </div>
     <div v-else></div>
