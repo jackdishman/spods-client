@@ -96,6 +96,12 @@
         </h3>
       </nuxt-link>
 
+      <nuxt-link to="/community">
+        <h3 class="w-full bg-black text-white spods p-5 text-center border-b border-white">
+          Community
+        </h3>
+      </nuxt-link>
+
         <div @click="logout()">
         <button class="w-full bg-red-500 text-black spods p-5 text-center border-b border-black">
           Log Out

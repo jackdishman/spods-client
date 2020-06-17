@@ -30,7 +30,7 @@ export default {
     generateLinksData,
     afterCreated(cy) {
       cy.resize();
-      cy.userZoomingEnabled(false);
+      // cy.userZoomingEnabled(false);
       cy.fit();
     }
   }
