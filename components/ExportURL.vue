@@ -46,7 +46,6 @@ export default {
       document.execCommand("copy");
       copyText.type = "hidden";
       this.$toast.success("Profile URL copied!");
-      console.log(copyText.value);
     }
   }
 };

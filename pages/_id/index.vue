@@ -388,7 +388,6 @@ export default {
     },
     toggleContainer(tab) {
       this.currentContainer = tab;
-      console.log(tab);
     },
     fetchTargetUser(update) {
       if (update === "addFriend") {
