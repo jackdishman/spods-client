@@ -1,13 +1,10 @@
 <template>
   <div
-    class="flex flex-col self-center border border-green-500 rounded bg-white p-10 text-center"
+    class="flex flex-col self-center border-4 border-green-500 rounded-lg bg-white p-10 text-center"
   >
-    <div class="flex flex-row justify-between">
-      <h2 class="spods text-4xl text-center mb-10 animated pulse delay-1s">
-        Authenticate
-      </h2>
-      <div></div>
-    </div>
+    <h2 class="spods text-4xl text-center mb-10 animated pulse delay-1s">
+      Authenticate
+    </h2>
 
     <div class="w-full max-w-sm p-1">
       <!-- Page 1 - Who is logging in? -->

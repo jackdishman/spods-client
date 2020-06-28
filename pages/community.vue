@@ -1,5 +1,5 @@
 <template>
-  <div class="p-10">
+  <div class="p-10 h-screen h-auto ">
     <div
       class="m-1 p-1 text-center"
       v-for="(user, index) in users"

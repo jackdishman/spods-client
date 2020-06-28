@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-black">
+  <div class="bg-black h-auto min-h-full">
     <!-- Header -->
     <div
       class="w-full h-10 bg-black border-b border-gray-200 flex flex-row justify-between fixed top-0 z-50 opacity-75"
