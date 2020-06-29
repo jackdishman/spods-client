@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-screen h-auto bg-black">
+  <div class="w-full h-auto bg-black">
     <!-- Logged in users -->
     <section v-if="$store.state.user" class="flex flex-col p-5">
       <!-- View Profile -->
