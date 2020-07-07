@@ -138,6 +138,14 @@ import Search from "@/components/Search";
 import UserService from "@/middleware/UserService";
 
 export default {
+      head () {
+    return {
+      title: 'spods - social media contact directory platform to organize online profiles',
+      meta: [
+        { hid: 'description', name: 'description', content: 'Explore the spods community by searching for user social media profiles' }
+      ]
+    }
+  },
   layout: "homepage",
   components: {
     UserAuthForm,

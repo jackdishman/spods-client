@@ -3,14 +3,14 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _a8a5bcba = () => interopDefault(import('../pages/community.vue' /* webpackChunkName: "pages/community" */))
-const _53cf1a80 = () => interopDefault(import('../pages/edit.vue' /* webpackChunkName: "pages/edit" */))
-const _4f226266 = () => interopDefault(import('../pages/login/index.vue' /* webpackChunkName: "pages/login/index" */))
-const _0d904d59 = () => interopDefault(import('../pages/settings.vue' /* webpackChunkName: "pages/settings" */))
-const _2ead9f0c = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
-const _484853f7 = () => interopDefault(import('../pages/_id/index.vue' /* webpackChunkName: "pages/_id/index" */))
-const _32754e73 = () => interopDefault(import('../pages/_id/graph.vue' /* webpackChunkName: "pages/_id/graph" */))
-const _1a1e2c84 = () => interopDefault(import('../pages/_id/share.vue' /* webpackChunkName: "pages/_id/share" */))
+const _38c3e7fa = () => interopDefault(import('../pages/community.vue' /* webpackChunkName: "pages/community" */))
+const _54b6d209 = () => interopDefault(import('../pages/edit.vue' /* webpackChunkName: "pages/edit" */))
+const _1cbe2206 = () => interopDefault(import('../pages/login/index.vue' /* webpackChunkName: "pages/login/index" */))
+const _4bebe022 = () => interopDefault(import('../pages/settings.vue' /* webpackChunkName: "pages/settings" */))
+const _f849ae3a = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _5541cb64 = () => interopDefault(import('../pages/_id/index.vue' /* webpackChunkName: "pages/_id/index" */))
+const _80e7d66c = () => interopDefault(import('../pages/_id/graph.vue' /* webpackChunkName: "pages/_id/graph" */))
+const _b1961a4a = () => interopDefault(import('../pages/_id/share.vue' /* webpackChunkName: "pages/_id/share" */))
 
 // TODO: remove in Nuxt 3
 const emptyFn = () => {}
@@ -30,35 +30,35 @@ export const routerOptions = {
 
   routes: [{
     path: "/community",
-    component: _a8a5bcba,
+    component: _38c3e7fa,
     name: "community"
   }, {
     path: "/edit",
-    component: _53cf1a80,
+    component: _54b6d209,
     name: "edit"
   }, {
     path: "/login",
-    component: _4f226266,
+    component: _1cbe2206,
     name: "login"
   }, {
     path: "/settings",
-    component: _0d904d59,
+    component: _4bebe022,
     name: "settings"
   }, {
     path: "/",
-    component: _2ead9f0c,
+    component: _f849ae3a,
     name: "index"
   }, {
     path: "/:id",
-    component: _484853f7,
+    component: _5541cb64,
     name: "id"
   }, {
     path: "/:id/graph",
-    component: _32754e73,
+    component: _80e7d66c,
     name: "id-graph"
   }, {
     path: "/:id/share",
-    component: _1a1e2c84,
+    component: _b1961a4a,
     name: "id-share"
   }],
 

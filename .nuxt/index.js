@@ -12,8 +12,8 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_toast_730b9fc1 from 'nuxt_plugin_toast_730b9fc1' // Source: ./toast.js (mode: 'client')
-import nuxt_plugin_axios_b24959dc from 'nuxt_plugin_axios_b24959dc' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_toast_1cac01ec from 'nuxt_plugin_toast_1cac01ec' // Source: ./toast.js (mode: 'client')
+import nuxt_plugin_axios_2579b25b from 'nuxt_plugin_axios_2579b25b' // Source: ./axios.js (mode: 'all')
 import nuxt_plugin_vuecytoscape_3ae5a3b8 from 'nuxt_plugin_vuecytoscape_3ae5a3b8' // Source: ../plugins/vue-cytoscape (mode: 'client')
 import nuxt_plugin_localStorage_830ec59e from 'nuxt_plugin_localStorage_830ec59e' // Source: ../plugins/localStorage.js (mode: 'client')
 
@@ -44,7 +44,7 @@ Vue.component(Nuxt.name, Nuxt)
 
 Vue.use(Meta, {"keyName":"head","attribute":"data-n-head","ssrAttribute":"data-n-head-ssr","tagIDKeyName":"hid"})
 
-const defaultTransition = {"name":"page","mode":"out-in","appear":true,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}
+const defaultTransition = {"name":"page","mode":"out-in","appear":false,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}
 
 async function createApp (ssrContext) {
   const router = await createRouter(ssrContext)
@@ -52,6 +52,10 @@ async function createApp (ssrContext) {
   const store = createStore(ssrContext)
   // Add this.$router into store actions/mutations
   store.$router = router
+
+  // Fix SSR caveat https://github.com/nuxt/nuxt.js/issues/3757#issuecomment-414689141
+  const registerModule = store.registerModule
+  store.registerModule = (path, rawModule, options) => registerModule.call(store, path, rawModule, Object.assign({ preserveState: process.client }, options))
 
   // Create Root instance
 
@@ -168,12 +172,12 @@ async function createApp (ssrContext) {
 
   // Plugin execution
 
-  if (process.client && typeof nuxt_plugin_toast_730b9fc1 === 'function') {
-    await nuxt_plugin_toast_730b9fc1(app.context, inject)
+  if (process.client && typeof nuxt_plugin_toast_1cac01ec === 'function') {
+    await nuxt_plugin_toast_1cac01ec(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_axios_b24959dc === 'function') {
-    await nuxt_plugin_axios_b24959dc(app.context, inject)
+  if (typeof nuxt_plugin_axios_2579b25b === 'function') {
+    await nuxt_plugin_axios_2579b25b(app.context, inject)
   }
 
   if (process.client && typeof nuxt_plugin_vuecytoscape_3ae5a3b8 === 'function') {

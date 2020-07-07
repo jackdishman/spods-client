@@ -19,6 +19,14 @@
 <script>
 import UserService from "@/middleware/UserService";
 export default {
+    head () {
+    return {
+      title: 'spods - community',
+      meta: [
+        { hid: 'description', name: 'description', content: 'Explore the spods community by searching for user social media profiles' }
+      ]
+    }
+  },
   data() {
     return {
       users: [],

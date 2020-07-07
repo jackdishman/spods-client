@@ -308,6 +308,15 @@ import QRCode from "@/components/QRCode";
 import ExportURL from "@/components/ExportURL";
 
 export default {
+  head () {
+    let user = this.$route.params.id
+    return {
+      title: `spods - ${user}`,
+      meta: [
+        { hid: 'description', name: 'description', content: 'Explore the spods community by searching for user social media profiles' }
+      ]
+    }
+  },
   data() {
     return {
       userData: null,

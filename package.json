@@ -4,7 +4,7 @@
   "engines": {
     "node": "12.16.3"
   },
-  "description": "social platform organizational domain system",
+  "description": "spods - A Social Platform Organizational Domain System",
   "author": "Jack Dishman",
   "private": true,
   "scripts": {
