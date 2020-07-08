@@ -14,6 +14,7 @@ import { createStore } from './store.js'
 
 import nuxt_plugin_toast_1cac01ec from 'nuxt_plugin_toast_1cac01ec' // Source: ./toast.js (mode: 'client')
 import nuxt_plugin_axios_2579b25b from 'nuxt_plugin_axios_2579b25b' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_googleanalytics_79d02eeb from 'nuxt_plugin_googleanalytics_79d02eeb' // Source: ./google-analytics.js (mode: 'client')
 import nuxt_plugin_vuecytoscape_3ae5a3b8 from 'nuxt_plugin_vuecytoscape_3ae5a3b8' // Source: ../plugins/vue-cytoscape (mode: 'client')
 import nuxt_plugin_localStorage_830ec59e from 'nuxt_plugin_localStorage_830ec59e' // Source: ../plugins/localStorage.js (mode: 'client')
 
@@ -178,6 +179,10 @@ async function createApp (ssrContext) {
 
   if (typeof nuxt_plugin_axios_2579b25b === 'function') {
     await nuxt_plugin_axios_2579b25b(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_googleanalytics_79d02eeb === 'function') {
+    await nuxt_plugin_googleanalytics_79d02eeb(app.context, inject)
   }
 
   if (process.client && typeof nuxt_plugin_vuecytoscape_3ae5a3b8 === 'function') {

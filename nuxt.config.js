@@ -42,8 +42,12 @@ module.exports = {
         // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
         '@nuxtjs/tailwindcss',
         '@nuxt/typescript-build',
+        '@nuxtjs/google-analytics',
         // '@nuxtjs/vuetify',
     ],
+    googleAnalytics: {
+        id: 'UA-172035861-1'
+    },
     /*
      ** Nuxt.js modules
      */
