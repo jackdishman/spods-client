@@ -8,7 +8,7 @@
         - Spotify
      -->
 
-    <article class="flex flex-col md:flex-row justify-between items-center">
+    <article class="flex flex-col md:flex-row justify-around items-center">
       <div v-for="x in this.verifiedPlatforms" :key="x.platform" class="p-2">
         <Spotify v-if="x.platform === 'spotify'" :verified="x.verified" :config="getGlobalConfig('spotify')" />
         <Twitter v-if="x.platform === 'twitter'" :verified="x.verified" :config="getGlobalConfig('twitter')" />
