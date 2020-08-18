@@ -73,7 +73,6 @@
     <div v-else>
       <!-- Header: Title, subheading -->
       <section>
-        <h1 class="spods text-5xl text-center text-green-500">spods</h1>
         <h2 class="text-base spods text-center text-white p-5">
           Link all your social media accounts for one universal contact web
         </h2>

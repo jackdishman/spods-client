@@ -134,9 +134,10 @@
             />
             <span class="text-sm">
               Accept our
-              <nuxt-link to="/legal" class="underline"
-                >Terms & Conditions</nuxt-link
-              >
+              <nuxt-link to="/terms" class="underline"
+                >Terms of Use</nuxt-link
+              > and 
+              <nuxt-link to="/privacy" class="underline">Privacy Policy</nuxt-link>
             </span>
           </label>
         </div>

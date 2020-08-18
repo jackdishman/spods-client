@@ -6,7 +6,9 @@ import scrollBehavior from './router.scrollBehavior.js'
 const _38c3e7fa = () => interopDefault(import('../pages/community.vue' /* webpackChunkName: "pages/community" */))
 const _54b6d209 = () => interopDefault(import('../pages/edit.vue' /* webpackChunkName: "pages/edit" */))
 const _1cbe2206 = () => interopDefault(import('../pages/login/index.vue' /* webpackChunkName: "pages/login/index" */))
+const _42311e59 = () => interopDefault(import('../pages/privacy.vue' /* webpackChunkName: "pages/privacy" */))
 const _4bebe022 = () => interopDefault(import('../pages/settings.vue' /* webpackChunkName: "pages/settings" */))
+const _2dd8e718 = () => interopDefault(import('../pages/terms.vue' /* webpackChunkName: "pages/terms" */))
 const _f849ae3a = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 const _5541cb64 = () => interopDefault(import('../pages/_id/index.vue' /* webpackChunkName: "pages/_id/index" */))
 const _80e7d66c = () => interopDefault(import('../pages/_id/graph.vue' /* webpackChunkName: "pages/_id/graph" */))
@@ -41,9 +43,17 @@ export const routerOptions = {
     component: _1cbe2206,
     name: "login"
   }, {
+    path: "/privacy",
+    component: _42311e59,
+    name: "privacy"
+  }, {
     path: "/settings",
     component: _4bebe022,
     name: "settings"
+  }, {
+    path: "/terms",
+    component: _2dd8e718,
+    name: "terms"
   }, {
     path: "/",
     component: _f849ae3a,

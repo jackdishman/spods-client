@@ -17,17 +17,28 @@
         />
       </div>
 
+
       <!-- MAIN CONTAINER -->
       <div>
-        <!-- Platforms  -->
-        <PlatformsContainer
-          v-if="this.currentContainer === 'platforms'"
-          class="h-auto bg-black"
-          :user="userData"
-          :isFollowing="isFollowing()"
-          :followsBack="followsBack()"
-          :isFriendOfFriend="isFriendOfFriend()"
-        />
+
+        <!-- SQUARE TAB -->
+        <article v-if="this.currentContainer === 'platforms'">
+          <!-- Platforms  -->
+          <PlatformsContainer
+            class="h-auto bg-black"
+            :user="userData"
+            :isFollowing="isFollowing()"
+            :followsBack="followsBack()"
+            :isFriendOfFriend="isFriendOfFriend()"
+          />
+          <!-- Tunnels -->
+          <!-- <Tunnel 
+            :viewingSelf="this.$route.params.id == this.$store.state.user.username"
+            :followsBack="followsBack()"
+          /> -->
+
+        </article>
+
         <!-- Connections -->
         <section v-if="this.currentContainer === 'connections'">
           <FriendsList v-if="connectionTab == 'list'" :user="userData" />
@@ -306,6 +317,7 @@ import FriendsList from "@/components/connects/List";
 import Web from "@/components/Web";
 import QRCode from "@/components/QRCode";
 import ExportURL from "@/components/ExportURL";
+import Tunnel from "@/components/Tunnel";
 
 export default {
   head () {
@@ -331,7 +343,8 @@ export default {
     FriendsList,
     Web,
     QRCode,
-    ExportURL
+    ExportURL,
+    Tunnel
   },
   async created() {
     // Refresh Main User

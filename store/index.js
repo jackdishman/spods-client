@@ -23,19 +23,24 @@ export const state = () => ({
         name: "twitter",
         url: "https://twitter.com/",
         color: "#00acee",
-        handle: "@"
+        handle: "(Case Sensitive) @",
+        verified: true
     },
     {
         name: "linkedin",
-        url: "https://linkedin.com/in/",
+        // url: "https://linkedin.com/in/",
+        // handle: "linkedin.com/in/",
+        url: false,
+        handle: "Enter Display Name:",
         color: "#0072b1",
-        handle: "linkedin.com/in/"
+        verified: true
     },
     {
         name: "spotify",
         url: "https://open.spotify.com/user/",
         color: "#1db954",
         handle: "open.spotify.com/user/",
+        verified: true
     },
     {
         name: "snapchat",

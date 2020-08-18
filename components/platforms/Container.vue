@@ -1,6 +1,25 @@
 <template>
   <section id="PlatformsContainer" class="bg-black">
-    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 p-4">
+
+    <!-- 
+      Verified Section
+        - Twitter
+        - LinkedIn
+        - Spotify
+     -->
+
+    <article class="flex flex-col md:flex-row justify-between items-center">
+      <div v-for="x in this.verifiedPlatforms" :key="x.platform" class="p-2">
+        <Spotify v-if="x.platform === 'spotify'" :verified="x.verified" :config="getGlobalConfig('spotify')" />
+        <Twitter v-if="x.platform === 'twitter'" :verified="x.verified" :config="getGlobalConfig('twitter')" />
+        <Linkedin v-if="x.platform === 'linkedin'" :verified="x.verified" :config="getGlobalConfig('linkedin')" />
+        <!-- <Snapchat v-if="x.platform === 'snapchat'" :verified="x.verified" />
+        <Facebook v-if="x.platform === 'facebook'" :verified="x.verified" /> -->
+        
+      </div>
+    </article>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
       <div v-for="x in this.filteredList" :key="x.platform">
         <article
           class="h-24 flex flex-row items-center justify-center items-center border-t bg-white"
@@ -22,13 +41,22 @@
 
 <script>
 import PlatformLogo from "@/components/platforms/PlatformLogo";
-
+import Spotify from "@/components/platforms/Spotify";
+import Twitter from "@/components/platforms/Twitter";
+import Linkedin from "@/components/platforms/Linkedin";
+import Snapchat from "@/components/platforms/Snapchat";
+import Facebook from "@/components/platforms/Facebook";
 import { mapState } from "vuex";
 
 export default {
   name: "PlatformsContainer",
   components: {
-    PlatformLogo
+    PlatformLogo,
+    Spotify,
+    Twitter,
+    Linkedin,
+    Snapchat,
+    Facebook
   },
   props: {
     user: Object,
@@ -38,22 +66,32 @@ export default {
   },
   data() {
     return {
-      filteredList: []
+      // List of privacy-filtered social link data.
+      filteredList: [],
+      verifiedPlatforms: [],
     };
   },
   created: function() {
+    // Populates filteredList in data()
     for (var x in this.$props.user.socialLinks) {
+      // Check if privacy of targetUser allows access to actionUser
+      let platformObj = this.$props.user.socialLinks[x];
       if (
-        this.$props.user.socialLinks[x].privacy == 0 ||
-        (this.$props.user.socialLinks[x].privacy == 1 &&
+        platformObj.privacy == 0 ||
+        (platformObj.privacy == 1 &&
           this.$props.isFriendOfFriend) ||
         (this.$props.followsBack &&
-          (this.$props.user.socialLinks[x].privacy == 2 ||
-            this.$props.user.socialLinks[x].privacy == 1)) ||
+          (platformObj.privacy == 2 ||
+            platformObj.privacy == 1)) ||
         (this.$store.state.user !== null &&
           this.$props.user.username === this.$store.state.user.username)
       ) {
-        this.filteredList.push(this.$props.user.socialLinks[x]);
+        let platformConfig = this.getGlobalConfig(platformObj.platform);
+        if(platformConfig.verified === true){
+          this.verifiedPlatforms.push(platformObj);
+        }else{
+          this.filteredList.push(platformObj);
+        }
       }
     }
   },
@@ -93,4 +131,3 @@ export default {
 };
 </script>
 
-<style></style>

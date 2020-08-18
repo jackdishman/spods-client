@@ -92,48 +92,74 @@
       v-if="step === 1"
       class="bg-white py-5 border-b-4 border-t-4 border-green-500"
     >
-      <!-- Top Info callout -->
-      <article>
-        <PlatformLogo :platform="platform.name" class="items-center" />
-        <h2 class="text-center pb-2 text-lg text-green-500">
-          Add your {{ platform.name }} handle:
-        </h2>
+      <PlatformLogo :platform="platform.name" class="items-center" />
+
+      <!-- Add new Platform Form -->
+      <article class="">
+        <form class="mt-2">
+          <label for="handle" >
+            <h5 class="pb-2 text-green-500 text-center">
+              Add your {{ platform.name }} account
+            </h5>
+          </label>
+          <section class="flex justify-center">
+            <div class="text-lg bg-gray-200 border rounded p-2 text-gray-700 leading-tight border-green-500 mx-5">
+              <span class="text-sm sm:text-base">
+                {{ this.platform.handle }}
+              </span>
+              <input
+                id="handle"
+                class="focus:outline-none bg-gray-200 border-green-500 w-48"
+                type="text"
+                placeholder="username"
+                v-model="username"
+              />
+            </div>
+          </section>
+
+          <!-- 
+
+            Place where I would implement the URL instead of display name
+            
+            <label v-if="platform.name === 'linkedin'" for="displayName">
+            Add your {{ platform.name }} Display Name:
+          </label>
+          <div
+            v-if="platform.name === 'linkedin'"
+            class="text-lg bg-gray-200 border rounded p-2 text-gray-700 leading-tight border-green-500 mx-5"
+          >
+            <input
+              id="displayName"
+              class="focus:outline-none bg-gray-200 border-green-500 w-32"
+              type="text"
+              placeholder="Display Name"
+              v-model="displayName"
+            />
+          </div> -->
+        </form>
       </article>
-      <!-- Input Field -->
-      <article class="flex justify-center">
-        <div
-          class="text-lg bg-gray-200 border rounded p-2 text-gray-700 leading-tight border-green-500 mx-5"
-        >
-          <span class="text-sm sm:text-base">
-            {{ this.platform.handle }}
-          </span>
-          <input
-            class="focus:outline-none bg-gray-200 border-green-500 w-32"
-            type="text"
-            placeholder="username"
-            v-model="username"
-          />
-        </div>
-      </article>
+
       <!-- SELECT PRIVACY TIER -->
       <article class=" my-5">
-        <p class="text-center text-green-500">Who would you like this visible to?</p>
+        <p class="text-center text-green-500">
+          Who would you like this visible to?
+        </p>
         <div class="flex justify-center items-center">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="feather feather-eye mr-3"
-        >
-          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-          <circle cx="12" cy="12" r="3"></circle>
-        </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-eye mr-3"
+          >
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
           <select
             v-model="privacy"
             class="border spods p-2 border-green-500 bg-gray-200 focus:outline-none rounded"
@@ -144,13 +170,14 @@
             <option value="2">Following List</option>
             <option value="3">Private</option>
           </select>
-          </div>
+        </div>
+        <div class="flex flex-row flex-wrap">
           <table class="m-5">
             <tr class="border-b border-green-500">
               <td class="border-r border-green-500 spods">Public</td>
-              <td class="p-2">Everyone who visits spods.app/{{
-                $store.state.user.username
-              }}</td>
+              <td class="p-2">
+                Everyone who visits spods.app/{{ $store.state.user.username }}
+              </td>
             </tr>
             <tr class="border-b border-green-500">
               <td td class="border-r border-green-500 spods">Following List</td>
@@ -161,9 +188,13 @@
               <td class="p-2">This is only visible to you</td>
             </tr>
           </table>
+
+
+
+        </div>
       </article>
       <!-- BOTTOM ACTIONS BAR -->
-      <article class="flex flex-row justify-around">
+      <div class="flex flex-row justify-around">
         <!-- Back Button -->
         <button
           @click="handleBack()"
@@ -191,23 +222,23 @@
           :href="platform.url + username"
           target="_blank"
           rel="noreferrer"
-          class="shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white hover:text-black font-bold py-2 px-4 rounded hvr-grow"
+          class="shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white hover:text-black font-bold py-2 px-4 rounded hvr-grow w-32"
         >
           Test Link
         </a>
         <button
           v-else-if="platform.url"
-          class="opacity-50 cursor-not-allowed shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white hover:text-black font-bold py-2 px-4 rounded"
+          class="opacity-50 cursor-not-allowed shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white hover:text-black font-bold py-2 px-4 rounded w-32"
         >
           Test Link
         </button>
         <button
           @click="login(platform.name, username, privacy)"
-          class="shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white hover:text-black font-bold py-2 px-4 rounded hvr-grow"
+          class="shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white hover:text-black font-bold py-2 px-4 rounded hvr-grow w-32"
         >
           Add
         </button>
-      </article>
+      </div>
     </section>
     <!-- 2b. Add a new social media section -->
   </section>
@@ -226,7 +257,8 @@ export default {
       step: 0,
       platform: "",
       username: "",
-      privacy: ""
+      privacy: "",
+      displayName: ""
     };
   },
   components: {
@@ -267,6 +299,7 @@ export default {
       }
       return true;
     },
+
     async login(platform, username, privacy) {
       if (username === "") {
         this.$toast.error("Username contains Invalid Characters!");
@@ -276,17 +309,18 @@ export default {
         return;
       } else {
         const DNA = this.$store.state.user._id;
-        // Disable authentication until v2.0
-        // if(
-        //   platform === 'spotify' ||
-        //   platform === 'facebook' ||
-        //   platform === 'twitter' ||
-        //   platform === 'linkedin' ||
-        //   platform === 'instagram' ||
-        //   platform === 'snapchat'
-        // ){
-        //   window.location.href = (url + '/api/' + platform);
-        // }
+        if (
+          platform === "spotify" ||
+          platform === "twitter" ||
+          platform === "linkedin"
+          // platform === 'facebook' ||
+          // platform === 'snapchat' ||
+          // platform === 'instagram' || invalid callback?
+          // platform === 'pinterest' application pending
+        ) {
+          // oAuth happens
+          window.location.href = url + "/api/" + platform;
+        }
         this.$axios.setHeader("Authorization", this.$store.state.token);
         this.$axios.setToken(this.$store.state.token, "Bearer");
         try {
@@ -295,7 +329,7 @@ export default {
               DNA,
               platform,
               username,
-              privacy
+              privacy,
             })
             .then(res => {
               this.updateUser();
@@ -308,6 +342,7 @@ export default {
         }
       }
     },
+
     async remove(platform, username) {
       const DNA = this.$store.state.user._id;
       this.$axios.setHeader("Authorization", this.$store.state.token);
