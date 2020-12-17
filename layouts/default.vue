@@ -4,31 +4,6 @@
     <div
       class="w-full h-10 bg-black border-b border-gray-200 flex flex-row justify-between fixed top-0 z-50 opacity-75"
     >
-      <!-- Profile Avatar Icon -->
-      <div class="m-2">
-        <nuxt-link
-          :to="$store.state.user.username"
-          class="text-white"
-          v-if="$store.state.user !== null"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="feather feather-user"
-          >
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-          </svg>
-        </nuxt-link>
-        <div v-else></div>
-      </div>
       <div class="m-2">
         <nuxt-link to="/">
           <h2 class="text-white spods text-lg">spods</h2>
@@ -39,25 +14,13 @@
         class="m-2 bg-black text-white"
         @click="toggleMobileNav()"
       >
-        <!-- Settings Icon -->
-        <svg
-          v-if="!isMobileMenuOpen"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="feather feather-settings"
-        >
-          <circle cx="12" cy="12" r="3"></circle>
-          <path
-            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
-          ></path>
-        </svg>
+        <!-- SPODS Icon -->
+        <div class="hvr-icon-spin pt-1" v-if="!isMobileMenuOpen">
+          <img
+            src="/images/spods-logo.png"
+            class="w-10 h-10 bg-white rounded-full hvr-icon"
+          />
+        </div>
         <svg
           v-else
           xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +39,9 @@
           <line x1="9" y1="9" x2="15" y2="15"></line>
         </svg>
       </button>
-      <div v-else></div>
+      <div v-else>
+        <nuxt-link to="/"><button class="text-white bg-green-500">Log In</button></nuxt-link>
+      </div>
     </div>
 
     <div
@@ -84,38 +49,82 @@
       class="w-full h-screen fixed mt-10 z-50"
       @click="toggleMobileNav()"
     >
+      <!-- Profile Avatar Icon -->
+      <nuxt-link
+        :to="$store.state.user.username"
+        class="w-full bg-black text-white text-center border-b border-white flex flex-row"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="feather feather-user"
+        >
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        <h3 class="spods">Visit Profile</h3>
+      </nuxt-link>
+
       <nuxt-link to="/edit">
-        <h3 class="w-full bg-black text-white spods p-5 text-center border-b border-white">
+        <h3
+          class="w-full bg-black text-white spods text-center border-b border-white"
+        >
           Edit Platforms
         </h3>
       </nuxt-link>
 
-      <nuxt-link to="/settings">
-        <h3 class="w-full bg-black text-white spods p-5 text-center border-b border-white">
+      <nuxt-link to="/settings" class="w-full bg-black text-white text-center border-b border-white p-5 flex flex-row">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="feather feather-settings"
+        >
+          <circle cx="12" cy="12" r="3"></circle>
+          <path
+            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+          ></path>
+        </svg>
+        <h3
+          class="spods"
+        >
           Account Settings
         </h3>
       </nuxt-link>
 
       <nuxt-link to="/community">
-        <h3 class="w-full bg-black text-white spods p-5 text-center border-b border-white">
+        <h3
+          class="w-full bg-black text-white spods p-5 text-center border-b border-white"
+        >
           Community
         </h3>
       </nuxt-link>
 
-        <div @click="logout()">
-        <button class="w-full bg-red-500 text-black spods p-5 text-center border-b border-black">
+      <div @click="logout()">
+        <button
+          class="w-full bg-red-500 text-black spods p-5 text-center border-b border-black"
+        >
           Log Out
-          </button>
-        </div>
+        </button>
+      </div>
     </div>
     <div v-else></div>
 
     <!-- content -->
     <nuxt class="pt-10 pb-12" />
-
-    <!-- Footer -->
-
-      <!-- <h4 class="text-white">{{ this.$route.params.id }}</h4> -->
   </div>
 </template>
 
@@ -138,10 +147,10 @@ export default {
       this.$axios.setHeader({ Authorization: "" });
       this.$store.commit("SETTOKEN", null);
       this.$store.commit("SETUSER", null);
-    }
+    },
   },
   computed: mapState(["isMobileMenuOpen", "CHANGETAB"]),
-  components: {}
+  components: {},
 };
 </script>
 

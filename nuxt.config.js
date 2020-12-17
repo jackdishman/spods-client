@@ -1,5 +1,5 @@
 module.exports = {
-    mode: 'spa',
+    ssr: true,
     /*
      ** Headers of the page
      */
@@ -9,6 +9,10 @@ module.exports = {
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
             { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+        ],
+        script: [
+            { src: "https://share.spods.app/core.js", async: true },
+            { src: "https://jack-dishman-test.extole.io/core.js", async: true }
         ],
         link: [
             { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -83,6 +87,8 @@ module.exports = {
         /*
          ** You can extend webpack config here
          */
-        extend(config, ctx) { }
+        extend(config, ctx) { 
+            config.resolve.alias['vue'] = 'vue/dist/vue.common'
+        }
     }
 };

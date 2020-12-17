@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import Vuex from 'vuex'
 import Meta from 'vue-meta'
 import ClientOnly from 'vue-client-only'
 import NoSsr from 'vue-no-ssr'
@@ -12,9 +13,9 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_toast_1cac01ec from 'nuxt_plugin_toast_1cac01ec' // Source: ./toast.js (mode: 'client')
-import nuxt_plugin_axios_2579b25b from 'nuxt_plugin_axios_2579b25b' // Source: ./axios.js (mode: 'all')
-import nuxt_plugin_googleanalytics_79d02eeb from 'nuxt_plugin_googleanalytics_79d02eeb' // Source: ./google-analytics.js (mode: 'client')
+import nuxt_plugin_toast_63c49154 from 'nuxt_plugin_toast_63c49154' // Source: ./toast.js (mode: 'client')
+import nuxt_plugin_axios_01ed6aa7 from 'nuxt_plugin_axios_01ed6aa7' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_googleanalytics_5f168f1f from 'nuxt_plugin_googleanalytics_5f168f1f' // Source: ./google-analytics.js (mode: 'client')
 import nuxt_plugin_vuecytoscape_3ae5a3b8 from 'nuxt_plugin_vuecytoscape_3ae5a3b8' // Source: ../plugins/vue-cytoscape (mode: 'client')
 import nuxt_plugin_localStorage_830ec59e from 'nuxt_plugin_localStorage_830ec59e' // Source: ../plugins/localStorage.js (mode: 'client')
 
@@ -43,22 +44,41 @@ Vue.component('NChild', NuxtChild)
 // Component: <Nuxt>
 Vue.component(Nuxt.name, Nuxt)
 
+Object.defineProperty(Vue.prototype, '$nuxt', {
+  get() {
+    return this.$root.$options.$nuxt
+  },
+  configurable: true
+})
+
 Vue.use(Meta, {"keyName":"head","attribute":"data-n-head","ssrAttribute":"data-n-head-ssr","tagIDKeyName":"hid"})
 
-const defaultTransition = {"name":"page","mode":"out-in","appear":true,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}
+const defaultTransition = {"name":"page","mode":"out-in","appear":false,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}
 
-async function createApp (ssrContext) {
+const originalRegisterModule = Vuex.Store.prototype.registerModule
+const baseStoreOptions = { preserveState: process.client }
+
+function registerModule (path, rawModule, options = {}) {
+  return originalRegisterModule.call(this, path, rawModule, { ...baseStoreOptions, ...options })
+}
+
+async function createApp(ssrContext, config = {}) {
   const router = await createRouter(ssrContext)
 
   const store = createStore(ssrContext)
   // Add this.$router into store actions/mutations
   store.$router = router
 
+  // Fix SSR caveat https://github.com/nuxt/nuxt.js/issues/3757#issuecomment-414689141
+  store.registerModule = registerModule
+
   // Create Root instance
 
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
+    head: {"title":"spods","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"spods - A Social Platform Organizational Domain System"}],"script":[{"src":"https:\u002F\u002Fshare.spods.app\u002Fcore.js","async":true},{"src":"https:\u002F\u002Fjack-dishman-test.extole.io\u002Fcore.js","async":true}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Orbitron:500&display=swap"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Comfortaa&display=swap"}],"style":[]},
+
     store,
     router,
     nuxt: {
@@ -88,7 +108,10 @@ async function createApp (ssrContext) {
         err = err || null
         app.context._errored = Boolean(err)
         err = err ? normalizeError(err) : null
-        const nuxt = this.nuxt || this.$options.nuxt
+        let nuxt = app.nuxt // to work with @vue/composition-api, see https://github.com/nuxt/nuxt.js/issues/6517#issuecomment-573280207
+        if (this) {
+          nuxt = this.nuxt || this.$options.nuxt
+        }
         nuxt.dateErr = Date.now()
         nuxt.err = err
         // Used in src/server.js
@@ -127,17 +150,21 @@ async function createApp (ssrContext) {
     ssrContext
   })
 
-  const inject = function (key, value) {
+  function inject(key, value) {
     if (!key) {
       throw new Error('inject(key, value) has no key provided')
     }
     if (value === undefined) {
-      throw new Error('inject(key, value) has no value provided')
+      throw new Error(`inject('${key}', value) has no value provided`)
     }
 
     key = '$' + key
     // Add into app
     app[key] = value
+    // Add into context
+    if (!app.context[key]) {
+      app.context[key] = value
+    }
 
     // Add into store
     store[key] = app[key]
@@ -150,7 +177,7 @@ async function createApp (ssrContext) {
     Vue[installKey] = true
     // Call Vue.use() to install the plugin into vm
     Vue.use(() => {
-      if (!Object.prototype.hasOwnProperty.call(Vue, key)) {
+      if (!Object.prototype.hasOwnProperty.call(Vue.prototype, key)) {
         Object.defineProperty(Vue.prototype, key, {
           get () {
             return this.$root.$options[key]
@@ -160,6 +187,9 @@ async function createApp (ssrContext) {
     })
   }
 
+  // Inject runtime config as $config
+  inject('config', config)
+
   if (process.client) {
     // Replace store state before plugins execution
     if (window.__NUXT__ && window.__NUXT__.state) {
@@ -167,18 +197,25 @@ async function createApp (ssrContext) {
     }
   }
 
+  // Add enablePreview(previewData = {}) in context for plugins
+  if (process.static && process.client) {
+    app.context.enablePreview = function (previewData = {}) {
+      app.previewData = Object.assign({}, previewData)
+      inject('preview', previewData)
+    }
+  }
   // Plugin execution
 
-  if (process.client && typeof nuxt_plugin_toast_1cac01ec === 'function') {
-    await nuxt_plugin_toast_1cac01ec(app.context, inject)
+  if (process.client && typeof nuxt_plugin_toast_63c49154 === 'function') {
+    await nuxt_plugin_toast_63c49154(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_axios_2579b25b === 'function') {
-    await nuxt_plugin_axios_2579b25b(app.context, inject)
+  if (typeof nuxt_plugin_axios_01ed6aa7 === 'function') {
+    await nuxt_plugin_axios_01ed6aa7(app.context, inject)
   }
 
-  if (process.client && typeof nuxt_plugin_googleanalytics_79d02eeb === 'function') {
-    await nuxt_plugin_googleanalytics_79d02eeb(app.context, inject)
+  if (process.client && typeof nuxt_plugin_googleanalytics_5f168f1f === 'function') {
+    await nuxt_plugin_googleanalytics_5f168f1f(app.context, inject)
   }
 
   if (process.client && typeof nuxt_plugin_vuecytoscape_3ae5a3b8 === 'function') {
@@ -189,12 +226,23 @@ async function createApp (ssrContext) {
     await nuxt_plugin_localStorage_830ec59e(app.context, inject)
   }
 
+  // Lock enablePreview in context
+  if (process.static && process.client) {
+    app.context.enablePreview = function () {
+      console.warn('You cannot call enablePreview() outside a plugin.')
+    }
+  }
+
   // If server-side, wait for async component to be resolved first
   if (process.server && ssrContext && ssrContext.url) {
     await new Promise((resolve, reject) => {
-      router.push(ssrContext.url, resolve, () => {
+      router.push(ssrContext.url, resolve, (err) => {
+        // https://github.com/vuejs/vue-router/blob/v3.4.3/src/util/errors.js
+        if (!err._isRouter) return reject(err)
+        if (err.type !== 2 /* NavigationFailureType.redirected */) return resolve()
+
         // navigated to a different route in router guard
-        const unregister = router.afterEach(async (to, from, next) => {
+        const unregister = router.afterEach(async (to, from) => {
           ssrContext.url = to.fullPath
           app.context.route = await getRouteData(to)
           app.context.params = to.params || {}

@@ -30,8 +30,23 @@
             class="bg-gray-200 border border-green-500 rounded w-full py-2 px-4 text-gray-700 leading-tight"
           >
             {{ this.userInfo.username }}
-            
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 inline ml-1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-edit-2 inline ml-1"
+            >
+              <path
+                d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"
+              ></path>
+            </svg>
           </span>
         </div>
       </div>
@@ -104,6 +119,26 @@
           </div>
         </div>
 
+        <!-- Email -->
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+            <label
+              for="email"
+              class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              >Email Address</label
+            >
+          </div>
+          <div class="md:w-2/3">
+            <input
+              class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500"
+              id="email"
+              type="text"
+              v-model="userInfo.email"
+              placeholder="your@email.com"
+            />
+          </div>
+        </div>
+
         <!-- Password -->
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
@@ -124,6 +159,7 @@
           </div>
         </div>
 
+        <!-- Terms & Privacy -->
         <div class="md:flex md:items-center mb-6">
           <label class="w-full block text-gray-500 font-bold">
             <input
@@ -134,13 +170,16 @@
             />
             <span class="text-sm">
               Accept our
-              <nuxt-link to="/terms" class="underline"
-                >Terms of Use</nuxt-link
-              > and 
-              <nuxt-link to="/privacy" class="underline">Privacy Policy</nuxt-link>
+              <nuxt-link to="/terms" class="underline">Terms of Use</nuxt-link>
+              and
+              <nuxt-link to="/privacy" class="underline"
+                >Privacy Policy</nuxt-link
+              >
             </span>
           </label>
         </div>
+
+        <!-- Register Button -->
         <div class="md:flex md:items-center">
           <div class="w-full">
             <button
@@ -173,20 +212,17 @@ export default {
       legal: false,
       userInfo: {
         username: "",
+        email: "",
         name: "",
-        phone: "",
-        password: ""
-      }
+        password: "",
+      },
     };
   },
   methods: {
     async verifyUsername() {
       var letters = /^[a-zA-Z\s\-]*$/;
       var username = this.userInfo.username;
-      if (
-        username === "" ||
-        !letters.test(username)
-      ) {
+      if (username === "" || !letters.test(username)) {
         this.$toast.error("Only Letters and - allowed!");
         return;
       } else {
@@ -195,7 +231,7 @@ export default {
         username = username.toLowerCase();
         var res = await this.$axios
           .get(url + "/users/isExistingUser/" + username)
-          .then(res => {
+          .then((res) => {
             if (res.data) {
               this.newUser = false;
             } else {
@@ -210,13 +246,13 @@ export default {
         await this.$axios
           .post(url + "/api/auth/login", {
             username: userInfo.username,
-            password: userInfo.password
+            password: userInfo.password,
           })
-          .then(res => {
+          .then((res) => {
             const token = res.data.token.accessToken;
             this.$axios.setHeader("Authorization", "Bearer " + token);
             this.$axios.setToken(token, "Bearer");
-            this.$store.commit("SETTOKEN",token);
+            this.$store.commit("SETTOKEN", token);
             this.$store.commit("SETUSER", res.data.user);
             this.$toast.success("Logged In!");
           });
@@ -234,14 +270,48 @@ export default {
         this.$toast.error("Username must be at least 3 characters!");
         return;
       }
-      await AuthService.register(
-        userInfo.username,
-        userInfo.name,
-        userInfo.password
-      );
-      this.newUser = false;
-      this.$toast.success("Registered!");
-    }
-  }
+      try {
+        await this.$axios
+          .post(url + "/api/auth/register", {
+            username: userInfo.username,
+            email: userInfo.email,
+            name: userInfo.name,
+            password: userInfo.password,
+          })
+          .then((res) => {
+            console.log(res);
+
+            this.newUser = false;
+            this.$toast.success("Registered!");
+            (function (c, b, f, k, a) {
+              c[b] = c[b] || {};
+              for (c[b].q = c[b].q || []; a < k.length; ) f(k[a++], c[b]);
+            })(
+              window,
+              "extole",
+              function (c, b) {
+                b[c] =
+                  b[c] ||
+                  function () {
+                    b.q.push([c, arguments]);
+                  };
+              },
+              ["createZone"],
+              0
+            );
+            extole.createZone({
+              name: "registered",
+              data: {
+                email: userInfo.email,
+                username: userInfo.username,
+                name: userInfo.name,
+              },
+            });
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  },
 };
 </script>

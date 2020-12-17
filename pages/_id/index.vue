@@ -8,6 +8,7 @@
         <h1 class="text-3xl text-white text-center spods mr-5">
           {{ userData.name }}
         </h1>
+        <nuxt-link v-if="isViewingSelf()" :to="$route.params.id+'/edit'"><button class="bg-white">Edit</button></nuxt-link>
         <!-- Connect / Share -->
         <ConnectsContainer
           :user="userData"
@@ -20,7 +21,6 @@
 
       <!-- MAIN CONTAINER -->
       <div>
-
         <!-- SQUARE TAB -->
         <article v-if="this.currentContainer === 'platforms'">
           <!-- Platforms  -->
@@ -31,6 +31,9 @@
             :followsBack="followsBack()"
             :isFriendOfFriend="isFriendOfFriend()"
           />
+
+          <ContentContainer :content="userData.content" :isViewingSelf="isViewingSelf()" />
+
           <!-- Tunnels -->
           <!-- <Tunnel 
             :viewingSelf="this.$route.params.id == this.$store.state.user.username"
@@ -318,12 +321,13 @@ import Web from "@/components/Web";
 import QRCode from "@/components/QRCode";
 import ExportURL from "@/components/ExportURL";
 import Tunnel from "@/components/Tunnel";
+import ContentContainer from "@/components/content/Container";
 
 export default {
   head () {
     let user = this.$route.params.id
     return {
-      title: `spods - ${user}`,
+      title: `spods/${user}`,
       meta: [
         { hid: 'description', name: 'description', content: 'Explore the spods community by searching for user social media profiles' }
       ]
@@ -344,7 +348,8 @@ export default {
     Web,
     QRCode,
     ExportURL,
-    Tunnel
+    Tunnel,
+    ContentContainer,
   },
   async created() {
     // Refresh Main User
@@ -368,6 +373,11 @@ export default {
     }
   },
   methods: {
+    isViewingSelf(){
+      if(this.$store.state.user === null) return false
+      else if(this.$store.state.user.username === this.userData.username) return true
+      else return false
+    },
     // is actionUser isFollowing targetUser? T/F
     isFollowing() {
       if (this.$store.state.user !== null) {

@@ -20,9 +20,7 @@
         to="/edit"
         class="border-2 m-2 border-green-500 rounded bg-white p-3 m-5 hvr-grow"
       >
-        <h3 class="text-3xl text-center spods text-black">
-          Edit Platforms
-        </h3>
+        <h3 class="text-3xl text-center spods text-black">Edit Platforms</h3>
         <p class="text-md text-center spods text-green-500">
           Add or remove existing social media platforms
         </p>
@@ -33,9 +31,7 @@
         to="/settings"
         class="border-2 m-2 border-green-500 rounded bg-white p-3 m-5 hvr-grow"
       >
-        <h3 class="text-3xl text-center spods text-black">
-          Account Settings
-        </h3>
+        <h3 class="text-3xl text-center spods text-black">Account Settings</h3>
         <p class="text-md text-center spods text-green-500">
           Update account settings
         </p>
@@ -46,22 +42,22 @@
         to="/community"
         class="border-2 m-2 border-green-500 rounded bg-white p-3 m-5 hvr-grow"
       >
-        <h3 class="text-3xl text-center spods text-black">
-          Community
-        </h3>
+        <h3 class="text-3xl text-center spods text-black">Community</h3>
         <p class="text-md text-center spods text-green-500">
           Explore the community around you through a list of all accounts
         </p>
       </nuxt-link>
+
+      <div class="bg-white">
+        <span id="extole_zone_mobile_footer"></span>
+      </div>
 
       <!-- Log Out -->
       <button
         @click="logout()"
         class="text-black bg-red-500 border-2 m-2 border-white rounded p-3 m-5 hvr-grow"
       >
-        <h3 class="text-3xl text-center spods text-black">
-          Log Out
-        </h3>
+        <h3 class="text-3xl text-center spods text-black">Log Out</h3>
       </button>
 
       <!-- Search Users -->
@@ -78,9 +74,7 @@
         </h2>
       </section>
 
-      <section
-        class="flex flex-col justify-around items-center"
-      >
+      <section class="flex flex-col justify-around items-center">
         <article class="flex flex-col flex-shrink-0">
           <UserAuthForm />
         </article>
@@ -91,9 +85,7 @@
         </h4>
       </section>
 
-      <div
-        class="flex flex-row flex-wrap justify-around items-baseline"
-      >
+      <div class="flex flex-row flex-wrap justify-around items-baseline">
         <div
           class="w-full pt-2 lg:w-1/4 text-center m-2 p-2 lg:p-5 lg:m-0 border border-green-500 bg-white rounded"
         >
@@ -126,6 +118,9 @@
         </div>
       </div>
     </div>
+
+    <span id="extole_zone_overlay"></span>
+  
   </div>
 </template>
 
@@ -137,25 +132,31 @@ import Search from "@/components/Search";
 import UserService from "@/middleware/UserService";
 
 export default {
-      head () {
+  head() {
     return {
-      title: 'spods - social media contact directory platform to organize online profiles',
+      title:
+        "spods - social media contact directory platform to organize online profiles",
       meta: [
-        { hid: 'description', name: 'description', content: 'Explore the spods community by searching for user social media profiles' }
-      ]
-    }
+        {
+          hid: "description",
+          name: "description",
+          content:
+            "Explore the spods community by searching for user social media profiles",
+        },
+      ],
+    };
   },
   layout: "homepage",
   components: {
     UserAuthForm,
     ExportURL,
-    Search
+    Search,
   },
   async created() {
     if (this.$store.state.user) {
       try {
         await UserService.getUserData(this.$store.state.user.username).then(
-          res => {
+          (res) => {
             this.$store.commit("SETUSER", res.data);
           }
         );
@@ -170,7 +171,24 @@ export default {
       this.$axios.setHeader({ Authorization: "" });
       this.$store.commit("SETTOKEN", null);
       this.$store.commit("SETUSER", null);
-    }
+    },
+  },
+  mounted (){
+    // (function(c,b,f,k,a){c[b]=c[b]||{};for(c[b].q=c[b].q||[];a<k.length;)f(k[a++],c[b])})(window,"extole",function (c,b){b[c]=b[c]||function (){b.q.push([c,arguments])}},["createZone"],0);
+    // extole.createZone({
+    //     name: "overlay",
+    //     element_id: 'extole_zone_overlay',
+    //     data: {
+
+    //     }
+    // });
+    (function(c,b,f,k,a){c[b]=c[b]||{};for(c[b].q=c[b].q||[];a<k.length;)f(k[a++],c[b])})(window,"extole",function (c,b){b[c]=b[c]||function (){b.q.push([c,arguments])}},["createZone"],0);
+    extole.createZone({
+        name: "mobile_footer",
+        element_id: 'extole_zone_mobile_footer',
+        data: {
+        }
+    });
   }
   // middleware:['index']
 };
