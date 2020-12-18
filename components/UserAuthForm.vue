@@ -279,7 +279,6 @@ export default {
             password: userInfo.password,
           })
           .then((res) => {
-            console.log(res);
 
             this.newUser = false;
             this.$toast.success("Registered!");
@@ -300,7 +299,7 @@ export default {
               0
             );
             extole.createZone({
-              name: "registered",
+              name: "signed_up",
               data: {
                 email: userInfo.email,
                 username: userInfo.username,
