@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-white w-64">
+  <section class="bg-white w-64" v-if="this.$props.verified !== undefined">
     <article class="relative">
       <img
         :src="this.$props.verified.profile_banner_url"

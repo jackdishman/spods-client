@@ -1,6 +1,8 @@
 <template>
   <section class="h-screen bg-black">
     <div v-if="$store.state.user !== null">
+
+      <nuxt-link :to="$route.params" class="text-white">Back</nuxt-link>
       
       <button @click="toggle('platforms')" class="bg-yellow-500">Social Profiles</button>
       <button @click="toggle('content')" class="bg-yellow-500">Embed Content</button>

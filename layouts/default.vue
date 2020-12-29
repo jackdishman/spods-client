@@ -2,7 +2,7 @@
   <div class="bg-black h-auto min-h-full">
     <!-- Header -->
     <div
-      class="w-full h-10 bg-black border-b border-gray-200 flex flex-row justify-between fixed top-0 z-50 opacity-75"
+      class="w-full h-10 bg-black border-b border-gray-200 flex flex-row justify-between fixed top-0 z-20"
     >
       <div class="m-2">
         <nuxt-link to="/">
@@ -11,14 +11,14 @@
       </div>
       <button
         v-if="$store.state.user !== null"
-        class="m-2 bg-black text-white"
+        class=" mr-2 mt-0 pb-1 bg-black text-white"
         @click="toggleMobileNav()"
       >
         <!-- SPODS Icon -->
         <div class="hvr-icon-spin pt-1" v-if="!isMobileMenuOpen">
           <img
             src="/images/spods-logo.png"
-            class="w-10 h-10 bg-white rounded-full hvr-icon"
+            class="w-6 h-6 bg-white rounded-full hvr-icon"
           />
         </div>
         <svg
@@ -46,13 +46,13 @@
 
     <div
       v-if="isMobileMenuOpen"
-      class="w-full h-screen fixed mt-10 z-50"
+      class="w-full h-screen fixed z-40 pt-10"
       @click="toggleMobileNav()"
     >
       <!-- Profile Avatar Icon -->
       <nuxt-link
         :to="$store.state.user.username"
-        class="w-full bg-black text-white text-center border-b border-white flex flex-row"
+        class="w-full bg-black text-white border-b border-white p-5 flex flex-row"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -72,15 +72,7 @@
         <h3 class="spods">Visit Profile</h3>
       </nuxt-link>
 
-      <nuxt-link to="/edit">
-        <h3
-          class="w-full bg-black text-white spods text-center border-b border-white"
-        >
-          Edit Platforms
-        </h3>
-      </nuxt-link>
-
-      <nuxt-link to="/settings" class="w-full bg-black text-white text-center border-b border-white p-5 flex flex-row">
+      <nuxt-link to="/settings" class="w-full bg-black text-white border-b border-white p-5 flex flex-row">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -105,9 +97,10 @@
         </h3>
       </nuxt-link>
 
-      <nuxt-link to="/community">
+      <nuxt-link to="/community" class="w-full bg-black text-white border-b border-white p-5 flex flex-row">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
         <h3
-          class="w-full bg-black text-white spods p-5 text-center border-b border-white"
+          class="spods"
         >
           Community
         </h3>

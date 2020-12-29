@@ -19,7 +19,7 @@
       </div>
     </article>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+    <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
       <div v-for="x in this.filteredList" :key="x.platform">
         <article
           class="h-24 flex flex-row items-center justify-center items-center border-t bg-white"

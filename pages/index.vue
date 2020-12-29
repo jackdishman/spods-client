@@ -15,17 +15,6 @@
         </p>
       </nuxt-link>
 
-      <!-- Edit Platforms -->
-      <nuxt-link
-        to="/edit"
-        class="border-2 m-2 border-green-500 rounded bg-white p-3 m-5 hvr-grow"
-      >
-        <h3 class="text-3xl text-center spods text-black">Edit Platforms</h3>
-        <p class="text-md text-center spods text-green-500">
-          Add or remove existing social media platforms
-        </p>
-      </nuxt-link>
-
       <!-- Account Settings -->
       <nuxt-link
         to="/settings"

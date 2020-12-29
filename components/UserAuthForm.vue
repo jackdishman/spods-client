@@ -299,7 +299,7 @@ export default {
               0
             );
             extole.createZone({
-              name: "signed_up",
+              name: "registered",
               data: {
                 email: userInfo.email,
                 username: userInfo.username,

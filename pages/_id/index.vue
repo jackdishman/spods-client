@@ -3,12 +3,14 @@
     <!-- LOGGED IN -->
     <div v-if="userData">
       <!-- HEADER -->
-      <div class="pt-5 pb-5 sticky top-0 flex flex-row justify-center">
+      <div class="pt-5 pb-5 sticky top-0 flex flex-row justify-center bg-black z-30">
         <!-- User Name -->
         <h1 class="text-3xl text-white text-center spods mr-5">
           {{ userData.name }}
         </h1>
-        <nuxt-link v-if="isViewingSelf()" :to="$route.params.id+'/edit'"><button class="bg-white">Edit</button></nuxt-link>
+
+        <nuxt-link v-if="isViewingSelf()" :to="$route.params.id+'/edit'"><button class="bg-white border rounded-full px-2 py-1">Edit</button></nuxt-link>
+
         <!-- Connect / Share -->
         <ConnectsContainer
           :user="userData"

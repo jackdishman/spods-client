@@ -1,16 +1,17 @@
 <template>
   <section class="bg-black text-white">
+      <article class="flex justify-center">
+        <button @click="toggle()" class="bg-green-500 rounded p-2 text-2xl">Embed Content</button>
+      </article>
 
-      <button @click="toggle()" class="bg-yellow-500">Embed Content</button>
-      
-      <article v-if="activeEdit">
+      <article v-if="activeEdit" class="flex flex-col items-center p-3">
         <textarea
-        v-model="contentCode"
-        class="w-full text-black"
-        rows="4"
-        placeholder="Paste code here"
-      ></textarea>
-      <button @click="submitNewContent">Add new Content</button>
+          v-model="contentCode"
+          class="w-full text-black p-2 border-2 border-green-500 rounded "
+          rows="4"
+          placeholder="Paste code here"
+        ></textarea>
+        <button @click="submitNewContent" class="bg-green-500 rounded p-2 text-xl m-2">Add new Content</button>
       </article>
      
   </section>
