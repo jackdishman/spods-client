@@ -109,7 +109,6 @@
     </div>
 
     <span id="extole_zone_overlay"></span>
-  
   </div>
 </template>
 
@@ -130,22 +129,22 @@ export default {
           hid: "description",
           name: "description",
           content:
-            "Explore the spods community by searching for user social media profiles",
-        },
-      ],
+            "Explore the spods community by searching for user social media profiles"
+        }
+      ]
     };
   },
-  layout: "homepage",
+  layout: "external",
   components: {
     UserAuthForm,
     ExportURL,
-    Search,
+    Search
   },
   async created() {
     if (this.$store.state.user) {
       try {
         await UserService.getUserData(this.$store.state.user.username).then(
-          (res) => {
+          res => {
             this.$store.commit("SETUSER", res.data);
           }
         );
@@ -160,9 +159,9 @@ export default {
       this.$axios.setHeader({ Authorization: "" });
       this.$store.commit("SETTOKEN", null);
       this.$store.commit("SETUSER", null);
-    },
+    }
   },
-  mounted (){
+  mounted() {
     // (function(c,b,f,k,a){c[b]=c[b]||{};for(c[b].q=c[b].q||[];a<k.length;)f(k[a++],c[b])})(window,"extole",function (c,b){b[c]=b[c]||function (){b.q.push([c,arguments])}},["createZone"],0);
     // extole.createZone({
     //     name: "overlay",
@@ -171,12 +170,26 @@ export default {
 
     //     }
     // });
-    (function(c,b,f,k,a){c[b]=c[b]||{};for(c[b].q=c[b].q||[];a<k.length;)f(k[a++],c[b])})(window,"extole",function (c,b){b[c]=b[c]||function (){b.q.push([c,arguments])}},["createZone"],0);
+    (function(c, b, f, k, a) {
+      c[b] = c[b] || {};
+      for (c[b].q = c[b].q || []; a < k.length; ) f(k[a++], c[b]);
+    })(
+      window,
+      "extole",
+      function(c, b) {
+        b[c] =
+          b[c] ||
+          function() {
+            b.q.push([c, arguments]);
+          };
+      },
+      ["createZone"],
+      0
+    );
     extole.createZone({
-        name: "mobile_footer",
-        element_id: 'extole_zone_mobile_footer',
-        data: {
-        }
+      name: "mobile_footer",
+      element_id: "extole_zone_mobile_footer",
+      data: {}
     });
   }
   // middleware:['index']

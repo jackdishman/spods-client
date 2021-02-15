@@ -1,7 +1,6 @@
 <template>
   <div class="flex flex-row justify-center align-middle bg-gray-100">
-
-      <UserAuthForm />
+    <UserAuthForm />
   </div>
 </template>
 
@@ -11,6 +10,7 @@ import Logo from "@/components/Logo";
 
 export default {
   name: "Login",
+  layout: "external",
   components: {
     Logo,
     UserAuthForm

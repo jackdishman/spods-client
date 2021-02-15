@@ -13,9 +13,9 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_toast_63c49154 from 'nuxt_plugin_toast_63c49154' // Source: ./toast.js (mode: 'client')
-import nuxt_plugin_axios_01ed6aa7 from 'nuxt_plugin_axios_01ed6aa7' // Source: ./axios.js (mode: 'all')
-import nuxt_plugin_googleanalytics_5f168f1f from 'nuxt_plugin_googleanalytics_5f168f1f' // Source: ./google-analytics.js (mode: 'client')
+import nuxt_plugin_toast_217e4c48 from 'nuxt_plugin_toast_217e4c48' // Source: ./toast.js (mode: 'client')
+import nuxt_plugin_axios_23108d2d from 'nuxt_plugin_axios_23108d2d' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_googleanalytics_4df2864e from 'nuxt_plugin_googleanalytics_4df2864e' // Source: ./google-analytics.js (mode: 'client')
 import nuxt_plugin_vuecytoscape_3ae5a3b8 from 'nuxt_plugin_vuecytoscape_3ae5a3b8' // Source: ../plugins/vue-cytoscape (mode: 'client')
 import nuxt_plugin_localStorage_830ec59e from 'nuxt_plugin_localStorage_830ec59e' // Source: ../plugins/localStorage.js (mode: 'client')
 
@@ -56,14 +56,18 @@ Vue.use(Meta, {"keyName":"head","attribute":"data-n-head","ssrAttribute":"data-n
 const defaultTransition = {"name":"page","mode":"out-in","appear":false,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}
 
 const originalRegisterModule = Vuex.Store.prototype.registerModule
-const baseStoreOptions = { preserveState: process.client }
 
 function registerModule (path, rawModule, options = {}) {
-  return originalRegisterModule.call(this, path, rawModule, { ...baseStoreOptions, ...options })
+  const preserveState = process.client && (
+    Array.isArray(path)
+      ? !!path.reduce((namespacedState, path) => namespacedState && namespacedState[path], this.state)
+      : path in this.state
+  )
+  return originalRegisterModule.call(this, path, rawModule, { preserveState, ...options })
 }
 
 async function createApp(ssrContext, config = {}) {
-  const router = await createRouter(ssrContext)
+  const router = await createRouter(ssrContext, config)
 
   const store = createStore(ssrContext)
   // Add this.$router into store actions/mutations
@@ -77,7 +81,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"spods","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"spods - A Social Platform Organizational Domain System"}],"script":[{"src":"https:\u002F\u002Fshare.spods.app\u002Fcore.js","async":true},{"src":"https:\u002F\u002Fjack-dishman-test.extole.io\u002Fcore.js","async":true}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Orbitron:500&display=swap"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Comfortaa&display=swap"}],"style":[]},
+    head: {"title":"spods","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":""}],"script":[{"src":"https:\u002F\u002Fshare.spods.app\u002Fcore.js","async":true},{"src":"https:\u002F\u002Fjack-dishman-test.extole.io\u002Fcore.js","async":true}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Orbitron:500&display=swap"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Comfortaa&display=swap"}],"style":[]},
 
     store,
     router,
@@ -206,16 +210,16 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (process.client && typeof nuxt_plugin_toast_63c49154 === 'function') {
-    await nuxt_plugin_toast_63c49154(app.context, inject)
+  if (process.client && typeof nuxt_plugin_toast_217e4c48 === 'function') {
+    await nuxt_plugin_toast_217e4c48(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_axios_01ed6aa7 === 'function') {
-    await nuxt_plugin_axios_01ed6aa7(app.context, inject)
+  if (typeof nuxt_plugin_axios_23108d2d === 'function') {
+    await nuxt_plugin_axios_23108d2d(app.context, inject)
   }
 
-  if (process.client && typeof nuxt_plugin_googleanalytics_5f168f1f === 'function') {
-    await nuxt_plugin_googleanalytics_5f168f1f(app.context, inject)
+  if (process.client && typeof nuxt_plugin_googleanalytics_4df2864e === 'function') {
+    await nuxt_plugin_googleanalytics_4df2864e(app.context, inject)
   }
 
   if (process.client && typeof nuxt_plugin_vuecytoscape_3ae5a3b8 === 'function') {

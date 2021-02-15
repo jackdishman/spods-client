@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import { decode, parsePath, withoutBase, withoutTrailingSlash, normalizeURL } from 'ufo'
 
 import { getMatchedComponentsInstances, getChildrenComponentInstancesUsingFetch, promisify, globalHandleError, urlJoin, sanitizeComponent } from './utils'
 import NuxtError from '../layouts/error.vue'
@@ -13,9 +14,9 @@ import '../assets/css/hover.css'
 import '../assets/css/platforms.css'
 
 import _6f6c098b from '../layouts/default.vue'
-import _3ac005e4 from '../layouts/homepage.vue'
+import _29b0cc7e from '../layouts/external.vue'
 
-const layouts = { "_default": sanitizeComponent(_6f6c098b),"_homepage": sanitizeComponent(_3ac005e4) }
+const layouts = { "_default": sanitizeComponent(_6f6c098b),"_external": sanitizeComponent(_29b0cc7e) }
 
 export default {
   render (h, props) {
