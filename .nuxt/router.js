@@ -4,10 +4,10 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
+const _482f1d79 = () => interopDefault(import('../pages/auth.vue' /* webpackChunkName: "pages/auth" */))
 const _a081ff30 = () => interopDefault(import('../pages/community.vue' /* webpackChunkName: "pages/community" */))
-const _02c74b68 = () => interopDefault(import('../pages/login.vue' /* webpackChunkName: "pages/login" */))
+const _1269751f = () => interopDefault(import('../pages/manifesto.vue' /* webpackChunkName: "pages/manifesto" */))
 const _8f590b72 = () => interopDefault(import('../pages/privacy.vue' /* webpackChunkName: "pages/privacy" */))
-const _14713474 = () => interopDefault(import('../pages/register.vue' /* webpackChunkName: "pages/register" */))
 const _cbd5fc18 = () => interopDefault(import('../pages/settings.vue' /* webpackChunkName: "pages/settings" */))
 const _39c532f4 = () => interopDefault(import('../pages/terms.vue' /* webpackChunkName: "pages/terms" */))
 const _391fa851 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
@@ -28,21 +28,21 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
+    path: "/auth",
+    component: _482f1d79,
+    name: "auth"
+  }, {
     path: "/community",
     component: _a081ff30,
     name: "community"
   }, {
-    path: "/login",
-    component: _02c74b68,
-    name: "login"
+    path: "/manifesto",
+    component: _1269751f,
+    name: "manifesto"
   }, {
     path: "/privacy",
     component: _8f590b72,
     name: "privacy"
-  }, {
-    path: "/register",
-    component: _14713474,
-    name: "register"
   }, {
     path: "/settings",
     component: _cbd5fc18,
