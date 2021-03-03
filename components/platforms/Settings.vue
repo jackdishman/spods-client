@@ -1,5 +1,5 @@
 <template>
-  <section v-if="$store.state.user !== null" class="bg-black">
+  <section v-if="$store.state.user !== null">
     <!-- Step 1: Add platform -->
     <div v-if="step === 0">
       <h2 class="text-center text-green-500 pt-4 bold text-2xl">
@@ -43,6 +43,10 @@
         <h2 class="text-center pb-2 text-green-500 bold text-2xl">
           Existing Platforms:
         </h2>
+
+
+
+
         <div class="">
           <div
             v-for="platform in this.$store.state.user.socialLinks"
@@ -84,6 +88,12 @@
             </span>
           </div>
         </div>
+
+
+
+
+
+        
       </div>
     </div>
 

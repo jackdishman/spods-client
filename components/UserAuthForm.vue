@@ -12,14 +12,14 @@
         <div class="md:w-1/3">
           <label
             for="username"
-            class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+            class="block text-color-med font-bold md:text-right mb-1 md:mb-0 pr-4"
             >spods.app/</label
           >
         </div>
         <div>
           <input
             v-if="this.newUser === null"
-            class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500"
+            class="bg-color-light appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-green-500"
             id="username"
             v-model="userInfo.username"
             placeholder="username"
@@ -69,7 +69,7 @@
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
             <label
-              class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              class="block text-color-med font-bold md:text-right mb-1 md:mb-0 pr-4"
               for="password"
               >Password</label
             >
@@ -255,6 +255,7 @@ export default {
             this.$store.commit("SETTOKEN", token);
             this.$store.commit("SETUSER", res.data.user);
             this.$toast.success("Logged In!");
+            this.$router.push(res.data.user.username);
           });
       } catch (err) {
         this.$toast.error("Invalid Credentials!");

@@ -81,7 +81,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"spods","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":""}],"script":[{"src":"https:\u002F\u002Fwww.share.spods.app\u002Fcore.js","async":true},{"src":"https:\u002F\u002Fjack-dishman-test.extole.io\u002Fcore.js","async":true}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Orbitron:500&display=swap"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Comfortaa&display=swap"}],"style":[]},
+    head: {"title":"spods","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":""}],"script":[{"src":"https:\u002F\u002Fshare.spods.app\u002Fcore.js","async":true},{"src":"https:\u002F\u002Fjack-dishman-test.extole.io\u002Fcore.js","async":true}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Orbitron:500&display=swap"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss?family=Comfortaa&display=swap"}],"style":[]},
 
     store,
     router,

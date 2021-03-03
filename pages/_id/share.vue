@@ -53,10 +53,11 @@
 </template>
 
 <script>
-import QRCode from "@/components/QRCode";
-import ExportURL from "@/components/ExportURL";
+import QRCode from "@/components/share/QRCode";
+import ExportURL from "@/components/share/ExportURL";
 
 export default {
+  
   components: {
     QRCode,
     ExportURL

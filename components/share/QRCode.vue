@@ -1,5 +1,5 @@
 <template>
-  <div :id="'QRContainer-' + this.$props.username">
+  <div :id="'QRContainer-' + this.$props.username" class="p-10">
     <vue-qr
       :text="'https://www.spods.app/' + this.$props.username"
       :qid="'QR-' + this.$props.username"
