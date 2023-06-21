@@ -34,7 +34,7 @@
     "loglevel": "^1.7.1",
     "mongoose": "^5.11.16",
     "net": "^1.0.2",
-    "nuxt": "^2.15.0",
+    "nuxt": "^3.4.3",
     "passport-facebook": "^3.0.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-instagram": "^1.0.0",
